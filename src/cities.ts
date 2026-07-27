@@ -23,8 +23,13 @@ export interface CityConfig {
    * Points par type de contrat. Volontairement différent selon la ville :
    * à Lyon (objectif d'installation) le CDI prime ; à Annecy (solution de repli)
    * le CDD est préférable car il ne bloque pas le départ.
+   *
+   * `unknown` est appliqué quand la source ne publie pas le type de contrat
+   * (cas courant sur Welcome to the Jungle). Sans cette valeur neutre, ces
+   * offres perdraient 15 points pour une simple absence d'information et
+   * seraient artificiellement classées derrière celles de France Travail.
    */
-  contractPoints: { CDI: number; CDD: number };
+  contractPoints: { CDI: number; CDD: number; unknown: number };
 }
 
 export const CITIES: Record<string, CityConfig> = {
@@ -45,9 +50,16 @@ export const CITIES: Record<string, CityConfig> = {
       "genas", "saint-genis-laval", "beynost", "neuville-sur-saône", "neuville-sur-saone",
       "jonage", "limonest"
     ],
-    postalPrefixes: ["69", "01700"],
+    // Codes postaux explicites : le préfixe "69" laissait passer tout le Rhône
+    // (Villefranche, Anse...), bien au-delà des 45 min en transport.
+    postalPrefixes: [
+      "69001", "69002", "69003", "69004", "69005", "69006", "69007", "69008", "69009",
+      "69100", "69200", "69500", "69120", "69300", "69600", "69310", "69190", "69140",
+      "69150", "69330", "69130", "69160", "69110", "69800", "69680", "69960", "69320",
+      "69350", "69340", "69290", "69740", "69230", "69760", "69250", "01700"
+    ],
     notionDbEnv: "NOTION_DATABASE_ID",
-    contractPoints: { CDI: 15, CDD: 8 }
+    contractPoints: { CDI: 15, CDD: 8, unknown: 8 }
   },
 
   annecy: {
@@ -67,7 +79,7 @@ export const CITIES: Record<string, CityConfig> = {
     postalPrefixes: ["74000", "74940", "74960", "74600", "74370", "74330", "74650"],
     notionDbEnv: "NOTION_DATABASE_ID_ANNECY",
     // CDD privilégié : un contrat court n'enferme pas à Annecy.
-    contractPoints: { CDI: 5, CDD: 15 }
+    contractPoints: { CDI: 5, CDD: 15, unknown: 8 }
   }
 };
 

@@ -43,13 +43,28 @@ export const QUERIES: Record<JobType, string[]> = {
 };
 
 /**
- * Alternance / apprentissage : non recherché. Détecté aussi dans le texte, car les
- * sources ne typent pas toujours le contrat (Adzuna renvoie souvent un type vide
- * alors que le titre annonce "Alternance – ..."). Malus volontairement fort : il
- * fait passer ces offres sous LIMITS.minScore, donc elles sortent du tracker.
+ * Contrats non recherchés (alternance, apprentissage, stage, freelance, VIE).
+ * Détectés aussi dans le texte, car les sources ne typent pas toujours le contrat
+ * (Adzuna renvoie souvent un type vide alors que le titre annonce "Alternance – ...").
  */
-export const ALTERNANCE_RE = /alternan|apprentissage|apprenti\b|contrat pro|professionnalisation/i;
-export const ALTERNANCE_MALUS = 25;
+export const UNWANTED_CONTRACT_RE =
+  /alternan|apprentissage|apprenti\b|contrat pro|professionnalisation|\bstages?\b|stagiaire|freelance|ind[ée]pendant|\bv\.?i\.?e\.?\b/i;
+export const UNWANTED_CONTRACT_MALUS = 25;
+
+/**
+ * Postes d'encadrement : hors cible pour un emploi alimentaire (exigent de
+ * l'expérience managériale) comme pour un profil dev junior.
+ */
+export const MANAGEMENT_RE = /\b(responsable|manager|directeur|directrice|chef de|superviseur|encadrant)\b/i;
+export const MANAGEMENT_MALUS = 20;
+
+/**
+ * Postes commerciaux terrain / B2B : hors expérience de Lucas (call center,
+ * retail, usine) et souvent conditionnés à un véhicule personnel, qu'il n'a pas.
+ */
+export const FIELD_SALES_RE =
+  /itin[ée]rant|b2b|business developer|technico-commercial|n[ée]gociateur|porte[- ]?[àa][- ]?porte|prospection terrain|permis b (exig|obligatoire)|v[ée]hicule (personnel|obligatoire)/i;
+export const FIELD_SALES_MALUS = 20;
 
 /** Détection de pertinence dev et de correspondance avec la stack de Lucas. */
 export const DEV_RELEVANT = /développ|integrat|intégrat|front|full[- ]?stack|back[- ]?end|web|logiciel|software|react|vue|angular|php|wordpress|javascript|typescript|node/i;

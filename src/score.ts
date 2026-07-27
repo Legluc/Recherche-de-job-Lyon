@@ -1,11 +1,16 @@
 import type { NormalizedOffer, ScoredOffer } from "./types";
-import { FILTERS, DEV_RELEVANT, DEV_STACK, SECTOR_KEYWORDS, ALTERNANCE_RE, ALTERNANCE_MALUS } from "./config";
+import {
+  FILTERS, DEV_RELEVANT, DEV_STACK, SECTOR_KEYWORDS,
+  UNWANTED_CONTRACT_RE, UNWANTED_CONTRACT_MALUS, MANAGEMENT_RE, MANAGEMENT_MALUS,
+  FIELD_SALES_RE, FIELD_SALES_MALUS
+} from "./config";
 import type { CityConfig } from "./cities";
 
-function daysAgo(iso?: string): number {
-  if (!iso) return 99;
+/** Âge de l'offre en jours, ou null si la source ne publie pas de date. */
+function daysAgo(iso?: string): number | null {
+  if (!iso) return null;
   const t = Date.parse(iso);
-  return isNaN(t) ? 99 : (Date.now() - t) / 86_400_000;
+  return isNaN(t) ? null : (Date.now() - t) / 86_400_000;
 }
 
 /** Vérifie que l'offre est dans la zone accessible de la ville (commune OU code postal). */
@@ -33,23 +38,37 @@ export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | 
   const full = `${o.title} ${o.description}`.toLowerCase();
 
   if (!inGeo(o, city)) return null;
-  if (daysAgo(o.createdAt) > FILTERS.maxDaysOld) return null;
+
+  // Date absente (Indeed n'en publie pas sur ses cartes) : on ne rejette pas et
+  // on n'accorde pas de bonus. Rejeter reviendrait à écarter toute une source
+  // pour une information manquante ; la fraîcheur est alors garantie en amont
+  // par le filtre de la requête de collecte.
+  const cd = daysAgo(o.createdAt);
+  if (cd !== null && cd > FILTERS.maxDaysOld) return null;
 
   let score = 50;
-  const cd = daysAgo(o.createdAt);
-  if (cd <= 3) score += 15;
-  else if (cd <= 7) score += 8;
+  if (cd !== null && cd <= 3) score += 15;
+  else if (cd !== null && cd <= 7) score += 8;
 
   if (o.contract === "CDI") score += city.contractPoints.CDI;
   else if (o.contract === "CDD") score += city.contractPoints.CDD;
+  // Contrat non publié par la source : valeur neutre plutôt que zéro, sinon
+  // l'offre est pénalisée pour une absence d'information (cf. WTTJ).
+  else if (!o.contract) score += city.contractPoints.unknown;
 
-  // Alternance/apprentissage : non souhaité.
+  // Contrats non souhaités (alternance, stage, freelance...).
   // - Titre ou type de contrat explicite -> rejet ferme (un malus laissait passer
   //   certaines offres pile au seuil : filtrage plus fiable que pondération).
   // - Mention uniquement dans la description -> simple malus, car il peut s'agir
-  //   d'un CDI qui évoque l'alternance en passant ("alternance possible").
-  if (o.contract === "Alternance" || ALTERNANCE_RE.test(title)) return null;
-  if (ALTERNANCE_RE.test(full)) score -= ALTERNANCE_MALUS;
+  //   d'un CDI qui l'évoque en passant ("alternance possible").
+  if (o.contract === "Alternance" || UNWANTED_CONTRACT_RE.test(title)) return null;
+  if (UNWANTED_CONTRACT_RE.test(full)) score -= UNWANTED_CONTRACT_MALUS;
+
+  // Encadrement : hors cible (profil junior, sans expérience managériale).
+  if (MANAGEMENT_RE.test(title)) score -= MANAGEMENT_MALUS;
+
+  // Commercial terrain / B2B : hors expérience, et souvent véhicule requis.
+  if (FIELD_SALES_RE.test(full)) score -= FIELD_SALES_MALUS;
 
   if (o.salary) score += 5;
   // Bonus centre-ville : trajet plus court depuis le domicile.
