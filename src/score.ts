@@ -1,5 +1,5 @@
 import type { NormalizedOffer, ScoredOffer } from "./types";
-import { FILTERS, DEV_RELEVANT, DEV_STACK, SECTOR_KEYWORDS } from "./config";
+import { FILTERS, DEV_RELEVANT, DEV_STACK, SECTOR_KEYWORDS, ALTERNANCE_RE, ALTERNANCE_MALUS } from "./config";
 
 function daysAgo(iso?: string): number {
   if (!iso) return 99;
@@ -40,7 +40,14 @@ export function scoreOffer(o: NormalizedOffer): ScoredOffer | null {
 
   if (o.contract === "CDI") score += 15;
   else if (o.contract === "CDD") score += 8;
-  else if (o.contract === "Alternance") score += 4;
+
+  // Alternance/apprentissage : non souhaité.
+  // - Titre ou type de contrat explicite -> rejet ferme (un malus laissait passer
+  //   certaines offres pile au seuil : filtrage plus fiable que pondération).
+  // - Mention uniquement dans la description -> simple malus, car il peut s'agir
+  //   d'un CDI qui évoque l'alternance en passant ("alternance possible").
+  if (o.contract === "Alternance" || ALTERNANCE_RE.test(title)) return null;
+  if (ALTERNANCE_RE.test(full)) score -= ALTERNANCE_MALUS;
 
   if (o.salary) score += 5;
   score += /lyon/.test((o.location || "").toLowerCase()) ? 5 : 2;
@@ -50,7 +57,7 @@ export function scoreOffer(o: NormalizedOffer): ScoredOffer | null {
     if (!DEV_RELEVANT.test(full)) return null; // écarte le bruit non-dev
     sector = "Dév web";
     if (DEV_STACK.test(full)) score += 15; // correspondance stack
-    if (/junior|débutant|alternance|apprenti/.test(full)) score += 8;
+    if (/junior|débutant|premier emploi/.test(full)) score += 8; // sans alternance/apprenti
     if (/senior|lead|confirmé|principal|architecte/.test(title)) score -= 12; // profil junior
   } else {
     if (FILTERS.alimentaireExclude.some((k) => full.includes(k))) return null; // nuit/resto/BTP...

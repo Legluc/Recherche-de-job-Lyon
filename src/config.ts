@@ -32,6 +32,16 @@ export const FILTERS: Filters = {
   ]
 };
 
+/**
+ * Garde-fous de volume. Sans plafond, une recherche large (vendeur, préparateur…)
+ * insère des centaines d'offres par run et sature le tracker. On ne garde que les
+ * meilleures par score, au-dessus d'un seuil minimal.
+ */
+export const LIMITS = {
+  minScore: 60, // en-dessous : écarté (offres peu pertinentes / trop anciennes)
+  maxInsert: 40 // plafond d'insertions par run (surchargeable via MAX_INSERT)
+};
+
 /** Requêtes (mots-clés) par type. Dérivées du profil de Lucas (stack + expériences). */
 export const QUERIES: Record<JobType, string[]> = {
   Dev: [
@@ -43,6 +53,15 @@ export const QUERIES: Record<JobType, string[]> = {
     "préparateur de commandes", "manutentionnaire", "hôte d'accueil", "agent de production"
   ]
 };
+
+/**
+ * Alternance / apprentissage : non recherché. Détecté aussi dans le texte, car les
+ * sources ne typent pas toujours le contrat (Adzuna renvoie souvent un type vide
+ * alors que le titre annonce "Alternance – ..."). Malus volontairement fort : il
+ * fait passer ces offres sous LIMITS.minScore, donc elles sortent du tracker.
+ */
+export const ALTERNANCE_RE = /alternan|apprentissage|apprenti\b|contrat pro|professionnalisation/i;
+export const ALTERNANCE_MALUS = 25;
 
 /** Détection de pertinence dev et de correspondance avec la stack de Lucas. */
 export const DEV_RELEVANT = /développ|integrat|intégrat|front|full[- ]?stack|back[- ]?end|web|logiciel|software|react|vue|angular|php|wordpress|javascript|typescript|node/i;

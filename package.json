@@ -6,6 +6,7 @@
   "description": "Collecte automatisée d'offres d'emploi (France Travail + Adzuna) vers Notion, ciblée sur Lyon et sa périphérie.",
   "scripts": {
     "start": "tsx src/main.ts",
+    "cleanup": "tsx src/cleanup.ts",
     "typecheck": "tsc --noEmit",
     "selftest": "tsx src/selftest.ts"
   },

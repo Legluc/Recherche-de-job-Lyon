@@ -3,6 +3,7 @@
  * Lancer avec : npm run selftest
  */
 import { scoreOffer } from "./score";
+import { LIMITS } from "./config";
 import type { NormalizedOffer } from "./types";
 
 const now = new Date().toISOString();
@@ -32,6 +33,22 @@ const cases: Array<{ o: NormalizedOffer; expect: "keep" | "drop"; note: string; 
   {
     o: { ...base, ref: "adzuna:6", type: "Alimentaire", title: "Agent de production de nuit", company: "U", location: "Bron", description: "équipe de nuit 3x8" },
     expect: "drop", note: "travail de nuit -> exclusion"
+  },
+  {
+    // Cas réel : Adzuna ne type pas le contrat, seul le titre annonce l'alternance.
+    o: { ...base, ref: "adzuna:7", type: "Dev", title: "Alternance – Développeur Web & Mobile", company: "T", location: "Lyon", description: "contrat d'apprentissage, React" },
+    expect: "drop", note: "alternance dans le titre -> rejet ferme"
+  },
+  {
+    // Le mot n'apparaît que dans la description : on garde, avec malus.
+    o: { ...base, ref: "adzuna:9", type: "Dev", title: "Développeur Web H/F", company: "R", location: "Lyon", contract: "CDI", description: "Vue.js ; alternance possible" },
+    expect: "keep", note: "alternance en description seule -> conservé avec malus",
+    check: (s) => s.score >= LIMITS.minScore
+  },
+  {
+    o: { ...base, ref: "adzuna:8", type: "Dev", title: "Développeur web junior", company: "S", location: "Lyon", contract: "CDI", description: "Vue.js, WordPress, PHP" },
+    expect: "keep", note: "CDI junior avec stack -> au-dessus du seuil",
+    check: (s) => s.score >= LIMITS.minScore
   }
 ];
 

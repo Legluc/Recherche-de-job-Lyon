@@ -2,6 +2,7 @@ import { fetchAdzuna } from "./sources/adzuna";
 import { fetchFranceTravail } from "./sources/francetravail";
 import { scoreOffer } from "./score";
 import { getExistingRefs, insertOffers } from "./notion";
+import { LIMITS } from "./config";
 import type { JobType, NormalizedOffer, ScoredOffer } from "./types";
 
 function requireEnv(keys: string[]): Record<string, string> {
@@ -50,14 +51,19 @@ async function main(): Promise<void> {
   }
   console.log(`${scored.length} offres retenues après filtrage/scoring.`);
 
-  // Dédup contre l'existant Notion.
+  // Dédup contre l'existant Notion. getExistingRefs lève une erreur si la lecture
+  // échoue : on préfère abandonner le run plutôt qu'insérer à l'aveugle (anti-flood).
   const existing = await getExistingRefs(env);
+  const maxInsert = Number(process.env.MAX_INSERT) || LIMITS.maxInsert;
   const fresh = scored
-    .filter((o) => !existing.has(o.ref))
+    .filter((o) => !existing.has(o.ref) && o.score >= LIMITS.minScore)
     .sort((a, b) => b.score - a.score);
-  console.log(`${fresh.length} nouvelles offres à insérer (après dédup Notion).`);
+  const toInsert = fresh.slice(0, maxInsert);
+  console.log(
+    `${fresh.length} nouvelles offres (score >= ${LIMITS.minScore}) ; insertion des ${toInsert.length} meilleures (plafond ${maxInsert}).`
+  );
 
-  const inserted = await insertOffers(env, fresh);
+  const inserted = await insertOffers(env, toInsert);
   console.log(`OK : ${inserted} offres insérées dans Notion.`);
 }
 

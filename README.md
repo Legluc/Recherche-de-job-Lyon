@@ -60,9 +60,16 @@ Onglet **Actions** → activer les workflows. Le job tourne automatiquement en s
 cp .env.example .env   # renseigner les valeurs
 npm install
 npm start              # collecte réelle -> Notion
+npm run cleanup        # archive les offres "À traiter" (corbeille) après une sur-collecte
 npm run selftest       # tests de scoring (hors-ligne)
 npm run typecheck      # vérification des types
 ```
+
+## Volume & nettoyage
+
+Chaque run n'insère que les **`MAX_INSERT` meilleures offres** (défaut 40) au-dessus de `LIMITS.minScore` — sans ce plafond, une recherche large sature vite le tracker. La dédup s'appuie sur les `Réf source` : si la lecture Notion échoue, le run **s'arrête** au lieu d'insérer à l'aveugle (anti-doublon).
+
+Après une sur-collecte, `npm run cleanup` archive les offres « À traiter » (corbeille Notion, réversible) en préservant celles déjà triées ; relancer ensuite `npm start`.
 
 ## Scoring (résumé)
 

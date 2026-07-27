@@ -11,23 +11,32 @@ function headers(token: string): Record<string, string> {
   };
 }
 
+/** fetch avec retry sur 429 (rate limit) et 5xx : évite les faux échecs transitoires. */
+async function fetchWithRetry(url: string, init: RequestInit, tries = 4): Promise<Response> {
+  let res!: Response;
+  for (let i = 0; i < tries; i++) {
+    res = await fetch(url, init);
+    if (res.status !== 429 && res.status < 500) return res;
+    await new Promise((r) => setTimeout(r, 600 * (i + 1)));
+  }
+  return res;
+}
+
 /**
- * Récupère toutes les "Réf source" déjà présentes dans la base : c'est la source de
- * vérité pour la déduplication (idempotence, pas d'état local à maintenir).
+ * Récupère toutes les "Réf source" déjà présentes : source de vérité pour la dédup.
+ * Lève une erreur si une page de résultats échoue — indispensable, car une lecture
+ * partielle ferait ré-insérer des doublons (le tracker se noierait).
  */
 export async function getExistingRefs(env: Record<string, string>): Promise<Set<string>> {
   const refs = new Set<string>();
   let cursor: string | undefined;
   do {
-    const res = await fetch(`${API}/databases/${env.NOTION_DATABASE_ID}/query`, {
+    const res = await fetchWithRetry(`${API}/databases/${env.NOTION_DATABASE_ID}/query`, {
       method: "POST",
       headers: headers(env.NOTION_TOKEN),
       body: JSON.stringify({ page_size: 100, start_cursor: cursor })
     });
-    if (!res.ok) {
-      console.warn(`[notion] query -> HTTP ${res.status}: ${await res.text()}`);
-      break;
-    }
+    if (!res.ok) throw new Error(`[notion] query -> HTTP ${res.status}: ${await res.text()}`);
     const data = (await res.json()) as {
       results?: Array<{ properties?: Record<string, any> }>;
       has_more?: boolean;
@@ -67,7 +76,7 @@ function toProperties(o: ScoredOffer): Record<string, unknown> {
 export async function insertOffers(env: Record<string, string>, offers: ScoredOffer[]): Promise<number> {
   let n = 0;
   for (const o of offers) {
-    const res = await fetch(`${API}/pages`, {
+    const res = await fetchWithRetry(`${API}/pages`, {
       method: "POST",
       headers: headers(env.NOTION_TOKEN),
       body: JSON.stringify({ parent: { database_id: env.NOTION_DATABASE_ID }, properties: toProperties(o) })
@@ -75,6 +84,40 @@ export async function insertOffers(env: Record<string, string>, offers: ScoredOf
     if (res.ok) n++;
     else console.warn(`[notion] insert "${o.title}" -> HTTP ${res.status}: ${await res.text()}`);
     await new Promise((r) => setTimeout(r, 350)); // ~3 req/s (limite Notion)
+  }
+  return n;
+}
+
+/**
+ * Archive (corbeille Notion, réversible) toutes les offres au statut "À traiter".
+ * Sert au nettoyage ponctuel après une sur-collecte. Préserve les offres déjà
+ * triées (Postulé, Entretien…). Renvoie le nombre archivé.
+ */
+export async function archivePending(env: Record<string, string>): Promise<number> {
+  let n = 0;
+  // On re-interroge depuis le début à chaque tour : les pages archivées sortent du
+  // filtre "À traiter", donc les 100 suivantes remontent naturellement. On s'arrête
+  // quand il n'y a plus rien à archiver (pas de pagination par curseur sur un
+  // ensemble qui change sous nos pieds).
+  for (;;) {
+    const res = await fetchWithRetry(`${API}/databases/${env.NOTION_DATABASE_ID}/query`, {
+      method: "POST",
+      headers: headers(env.NOTION_TOKEN),
+      body: JSON.stringify({ page_size: 100, filter: { property: "Statut", select: { equals: "À traiter" } } })
+    });
+    if (!res.ok) throw new Error(`[notion] query -> HTTP ${res.status}: ${await res.text()}`);
+    const data = (await res.json()) as { results?: Array<{ id: string }> };
+    const pages = data.results ?? [];
+    if (pages.length === 0) break;
+    for (const page of pages) {
+      const del = await fetchWithRetry(`${API}/pages/${page.id}`, {
+        method: "PATCH",
+        headers: headers(env.NOTION_TOKEN),
+        body: JSON.stringify({ archived: true })
+      });
+      if (del.ok) n++;
+      await new Promise((r) => setTimeout(r, 350));
+    }
   }
   return n;
 }
