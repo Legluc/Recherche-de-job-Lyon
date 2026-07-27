@@ -27,7 +27,7 @@ export const FILTERS: Filters = {
  */
 export const LIMITS = {
   minScore: 60, // en-dessous : écarté (offres peu pertinentes / trop anciennes)
-  maxInsert: 40 // plafond d'insertions par run (surchargeable via MAX_INSERT)
+  maxInsert: 60 // plafond d'insertions par run et par ville (surchargeable via MAX_INSERT)
 };
 
 /** Requêtes (mots-clés) par type. Dérivées du profil de Lucas (stack + expériences). */

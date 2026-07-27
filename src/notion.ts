@@ -22,13 +22,21 @@ async function fetchWithRetry(url: string, init: RequestInit, tries = 4): Promis
   return res;
 }
 
+export interface ExistingIndex {
+  /** Références de source déjà connues ("adzuna:123", "ft:456"...). */
+  refs: Set<string>;
+  /** Titre / entreprise / lieu des offres présentes, pour la dédup floue. */
+  offers: Array<{ title: string; company: string; location: string }>;
+}
+
 /**
- * Récupère toutes les "Réf source" déjà présentes : source de vérité pour la dédup.
+ * Récupère l'existant Notion : source de vérité pour la dédup.
  * Lève une erreur si une page de résultats échoue — indispensable, car une lecture
  * partielle ferait ré-insérer des doublons (le tracker se noierait).
  */
-export async function getExistingRefs(env: Record<string, string>, databaseId: string): Promise<Set<string>> {
+export async function getExistingIndex(env: Record<string, string>, databaseId: string): Promise<ExistingIndex> {
   const refs = new Set<string>();
+  const offers: ExistingIndex["offers"] = [];
   let cursor: string | undefined;
   do {
     const res = await fetchWithRetry(`${API}/databases/${databaseId}/query`, {
@@ -43,12 +51,18 @@ export async function getExistingRefs(env: Record<string, string>, databaseId: s
       next_cursor?: string;
     };
     for (const page of data.results ?? []) {
-      const rt = page.properties?.["Réf source"]?.rich_text?.[0]?.plain_text;
+      const props = page.properties ?? {};
+      const rt = props["Réf source"]?.rich_text?.[0]?.plain_text;
       if (rt) refs.add(rt);
+      offers.push({
+        title: props["Poste"]?.title?.[0]?.plain_text ?? "",
+        company: props["Entreprise"]?.rich_text?.[0]?.plain_text ?? "",
+        location: props["Lieu"]?.rich_text?.[0]?.plain_text ?? ""
+      });
     }
     cursor = data.has_more ? data.next_cursor : undefined;
   } while (cursor);
-  return refs;
+  return { refs, offers };
 }
 
 function toProperties(o: ScoredOffer): Record<string, unknown> {

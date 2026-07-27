@@ -35,4 +35,4 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           NOTION_DATABASE_ID_ANNECY: ${{ secrets.NOTION_DATABASE_ID_ANNECY }}
-          MAX_INSERT: "40" # plafond d'insertions par run
+          MAX_INSERT: "60" # plafond d'insertions par run et par ville

@@ -5,6 +5,7 @@
 import { scoreOffer } from "./score";
 import { LIMITS } from "./config";
 import { CITIES } from "./cities";
+import { DedupIndex, type OfferLike } from "./dedup";
 import type { NormalizedOffer } from "./types";
 
 const now = new Date().toISOString();
@@ -81,8 +82,49 @@ const cases: Array<{ o: NormalizedOffer; expect: "keep" | "drop"; note: string; 
   }
 ];
 
-let pass = 0;
-let fail = 0;
+// --- Tests de déduplication floue (cas réels observés lors des collectes) ---
+const dedupCases: Array<{ note: string; a: OfferLike; b: OfferLike; expectDup: boolean }> = [
+  {
+    note: "même annonce, deux IDs, libellés de lieu différents",
+    a: { title: "Développeur Web senior H/F", company: "Groupe Martin Belaysoud", location: "Lyon, Rhône" },
+    b: { title: "Développeur WEB senior (F/H)", company: "Groupe Martin Belaysoud", location: "1er-Arrondissement, Lyon" },
+    expectDup: true
+  },
+  {
+    note: "même annonce republiée par deux intermédiaires",
+    a: { title: "LEAD DÉVELOPPEUR WEB (F/H)", company: "Direct Emploi", location: "Jonage, Lyon" },
+    b: { title: "Lead développeur web F/H", company: "Randstad professional", location: "Jonage" },
+    expectDup: true
+  },
+  {
+    note: "titre générique, employeurs directs distincts -> pas un doublon",
+    a: { title: "Préparateur de commandes", company: "Carrefour", location: "Vénissieux" },
+    b: { title: "Préparateur de commandes", company: "Intermarché", location: "Vénissieux" },
+    expectDup: false
+  },
+  {
+    note: "même enseigne, communes différentes -> pas un doublon",
+    a: { title: "Employé libre service", company: "E.Leclerc", location: "Meyzieu, Lyon" },
+    b: { title: "Employé libre service", company: "E.Leclerc", location: "Beynost (Ain)" },
+    expectDup: false
+  }
+];
+
+let dedupPass = 0;
+let dedupFail = 0;
+for (const c of dedupCases) {
+  const idx = new DedupIndex(CITIES.lyon);
+  idx.add(c.a);
+  const got = idx.isDuplicate(c.b);
+  if (got === c.expectDup) dedupPass++;
+  else {
+    dedupFail++;
+    console.error(`FAIL (dédup): ${c.note} (attendu ${c.expectDup}, obtenu ${got})`);
+  }
+}
+
+let pass = dedupPass;
+let fail = dedupFail;
 for (const c of cases) {
   const s = scoreOffer(c.o, c.city ?? CITIES.lyon);
   const got: "keep" | "drop" = s ? "keep" : "drop";
