@@ -4,12 +4,13 @@
  */
 import { scoreOffer } from "./score";
 import { LIMITS } from "./config";
+import { CITIES } from "./cities";
 import type { NormalizedOffer } from "./types";
 
 const now = new Date().toISOString();
 const base = { source: "Adzuna", url: "u", createdAt: now, description: "" } as const;
 
-const cases: Array<{ o: NormalizedOffer; expect: "keep" | "drop"; note: string; check?: (s: any) => boolean }> = [
+const cases: Array<{ o: NormalizedOffer; expect: "keep" | "drop"; note: string; check?: (s: any) => boolean; city?: typeof CITIES[string] }> = [
   {
     o: { ...base, ref: "adzuna:1", type: "Dev", title: "Intégrateur web H/F", company: "X", location: "Lyon", contract: "CDI", description: "Vue.js Tailwind WordPress" },
     expect: "keep", note: "intégrateur web Lyon + stack -> score élevé", check: (s) => s.score >= 80 && s.sector === "Dév web"
@@ -49,13 +50,41 @@ const cases: Array<{ o: NormalizedOffer; expect: "keep" | "drop"; note: string; 
     o: { ...base, ref: "adzuna:8", type: "Dev", title: "Développeur web junior", company: "S", location: "Lyon", contract: "CDI", description: "Vue.js, WordPress, PHP" },
     expect: "keep", note: "CDI junior avec stack -> au-dessus du seuil",
     check: (s) => s.score >= LIMITS.minScore
+  },
+
+  // --- Annecy (alimentaire seulement, CDD privilégié sur CDI) ---
+  {
+    o: { ...base, ref: "adzuna:10", type: "Alimentaire", title: "Préparateur de commandes", company: "Q", location: "Annecy", contract: "CDD", description: "entrepôt" },
+    city: CITIES.annecy, expect: "keep", note: "Annecy : CDD alimentaire retenu",
+    check: (s) => s.score >= LIMITS.minScore
+  },
+  {
+    o: { ...base, ref: "adzuna:11", type: "Alimentaire", title: "Préparateur de commandes", company: "P", location: "Annecy", contract: "CDI", description: "entrepôt" },
+    city: CITIES.annecy, expect: "keep", note: "Annecy : CDD mieux noté que CDI",
+    // Comparaison directe avec le CDD équivalent : le test reste valable si les
+    // pondérations changent.
+    check: (s) => {
+      const cdd = scoreOffer(
+        { ...base, ref: "cmp", type: "Alimentaire", title: "Préparateur de commandes", company: "P", location: "Annecy", contract: "CDD", description: "entrepôt" },
+        CITIES.annecy
+      );
+      return cdd !== null && s.score < cdd.score;
+    }
+  },
+  {
+    o: { ...base, ref: "adzuna:12", type: "Alimentaire", title: "Vendeur en boulangerie", company: "O", location: "Chambéry", contract: "CDD", description: "vente" },
+    city: CITIES.annecy, expect: "drop", note: "Annecy : hors zone (Chambéry) -> écarté"
+  },
+  {
+    o: { ...base, ref: "adzuna:13", type: "Alimentaire", title: "Employé libre service", company: "N", location: "Poisy", contract: "CDD", description: "rayon" },
+    city: CITIES.annecy, expect: "keep", note: "Annecy : couronne bus (Poisy) -> retenu"
   }
 ];
 
 let pass = 0;
 let fail = 0;
 for (const c of cases) {
-  const s = scoreOffer(c.o);
+  const s = scoreOffer(c.o, c.city ?? CITIES.lyon);
   const got: "keep" | "drop" = s ? "keep" : "drop";
   const ok = got === c.expect && (!c.check || (s !== null && c.check(s)));
   if (ok) {

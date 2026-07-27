@@ -1,5 +1,6 @@
 import type { JobType, NormalizedOffer, Contract } from "../types";
 import { QUERIES } from "../config";
+import type { CityConfig } from "../cities";
 
 const TOKEN_URL = "https://entreprise.francetravail.fr/connexion/oauth2/access_token?realm=%2Fpartenaire";
 const SEARCH_URL = "https://api.francetravail.io/partenaire/offresdemploi/v2/offres/search";
@@ -43,8 +44,12 @@ async function getToken(env: Record<string, string>): Promise<string> {
   return j.access_token;
 }
 
-/** Récupère et normalise les offres France Travail pour un type donné (département 69). */
-export async function fetchFranceTravail(env: Record<string, string>, type: JobType): Promise<NormalizedOffer[]> {
+/** Récupère et normalise les offres France Travail pour un type et une ville donnés. */
+export async function fetchFranceTravail(
+  env: Record<string, string>,
+  type: JobType,
+  city: CityConfig
+): Promise<NormalizedOffer[]> {
   let token: string;
   try {
     token = await getToken(env);
@@ -59,7 +64,7 @@ export async function fetchFranceTravail(env: Record<string, string>, type: JobT
   for (const q of QUERIES[type]) {
     const params = new URLSearchParams({
       motsCles: q,
-      departement: "69",
+      departement: city.ftDepartement,
       typeContrat: "CDI,CDD",
       sort: "1", // tri par date décroissante
       range: "0-49"

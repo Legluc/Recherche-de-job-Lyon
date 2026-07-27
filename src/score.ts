@@ -1,5 +1,6 @@
 import type { NormalizedOffer, ScoredOffer } from "./types";
 import { FILTERS, DEV_RELEVANT, DEV_STACK, SECTOR_KEYWORDS, ALTERNANCE_RE, ALTERNANCE_MALUS } from "./config";
+import type { CityConfig } from "./cities";
 
 function daysAgo(iso?: string): number {
   if (!iso) return 99;
@@ -7,12 +8,12 @@ function daysAgo(iso?: string): number {
   return isNaN(t) ? 99 : (Date.now() - t) / 86_400_000;
 }
 
-/** Vérifie que l'offre est dans la zone accessible (whitelist commune OU préfixe postal). */
-function inGeo(o: NormalizedOffer): boolean {
+/** Vérifie que l'offre est dans la zone accessible de la ville (commune OU code postal). */
+function inGeo(o: NormalizedOffer, city: CityConfig): boolean {
   const loc = (o.location || "").toLowerCase();
   if (!loc && !o.postalCode) return true; // pas d'info exploitable : on ne rejette pas
-  const byCommune = FILTERS.communesWhitelist.some((c) => loc.includes(c));
-  const byPostal = !!o.postalCode && FILTERS.postalPrefixes.some((p) => o.postalCode!.startsWith(p));
+  const byCommune = city.communesWhitelist.some((c) => loc.includes(c));
+  const byPostal = !!o.postalCode && city.postalPrefixes.some((p) => o.postalCode!.startsWith(p));
   return byCommune || byPostal;
 }
 
@@ -25,12 +26,13 @@ function sectorOf(text: string): string {
  * Score l'offre (0–100) ou renvoie null si elle doit être écartée.
  * Règles alignées sur les critères de Lucas : trajet, contrat, fraîcheur,
  * correspondance sectorielle (alimentaire) ou stack (dev).
+ * La pondération des contrats dépend de la ville (voir CityConfig.contractPoints).
  */
-export function scoreOffer(o: NormalizedOffer): ScoredOffer | null {
+export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | null {
   const title = (o.title || "").toLowerCase();
   const full = `${o.title} ${o.description}`.toLowerCase();
 
-  if (!inGeo(o)) return null;
+  if (!inGeo(o, city)) return null;
   if (daysAgo(o.createdAt) > FILTERS.maxDaysOld) return null;
 
   let score = 50;
@@ -38,8 +40,8 @@ export function scoreOffer(o: NormalizedOffer): ScoredOffer | null {
   if (cd <= 3) score += 15;
   else if (cd <= 7) score += 8;
 
-  if (o.contract === "CDI") score += 15;
-  else if (o.contract === "CDD") score += 8;
+  if (o.contract === "CDI") score += city.contractPoints.CDI;
+  else if (o.contract === "CDD") score += city.contractPoints.CDD;
 
   // Alternance/apprentissage : non souhaité.
   // - Titre ou type de contrat explicite -> rejet ferme (un malus laissait passer
@@ -50,7 +52,8 @@ export function scoreOffer(o: NormalizedOffer): ScoredOffer | null {
   if (ALTERNANCE_RE.test(full)) score -= ALTERNANCE_MALUS;
 
   if (o.salary) score += 5;
-  score += /lyon/.test((o.location || "").toLowerCase()) ? 5 : 2;
+  // Bonus centre-ville : trajet plus court depuis le domicile.
+  score += (o.location || "").toLowerCase().includes(city.key) ? 5 : 2;
 
   let sector: string;
   if (o.type === "Dev") {

@@ -1,4 +1,4 @@
-name: Collecte offres Lyon
+name: Collecte offres
 
 on:
   schedule:
@@ -10,6 +10,13 @@ on:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    strategy:
+      # Une ville par job : logs séparés, et un échec sur une ville n'empêche
+      # pas l'autre de tourner (fail-fast désactivé).
+      fail-fast: false
+      matrix:
+        city: [lyon, annecy]
+    name: Collecte ${{ matrix.city }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,10 +27,12 @@ jobs:
       - name: Lancer la collecte
         run: npm start
         env:
+          CITY: ${{ matrix.city }}
           FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
           FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_DATABASE_ID_ANNECY: ${{ secrets.NOTION_DATABASE_ID_ANNECY }}
           MAX_INSERT: "40" # plafond d'insertions par run

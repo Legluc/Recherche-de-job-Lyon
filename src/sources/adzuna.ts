@@ -1,5 +1,6 @@
 import type { JobType, NormalizedOffer, Contract } from "../types";
 import { QUERIES } from "../config";
+import type { CityConfig } from "../cities";
 
 const BASE = "https://api.adzuna.com/v1/api/jobs/fr/search/1";
 
@@ -29,8 +30,12 @@ function formatSalary(min?: number, max?: number): string | undefined {
   return `${min}${max && max !== min ? "–" + max : ""} €/an`;
 }
 
-/** Récupère et normalise les offres Adzuna pour un type donné. */
-export async function fetchAdzuna(env: Record<string, string>, type: JobType): Promise<NormalizedOffer[]> {
+/** Récupère et normalise les offres Adzuna pour un type et une ville donnés. */
+export async function fetchAdzuna(
+  env: Record<string, string>,
+  type: JobType,
+  city: CityConfig
+): Promise<NormalizedOffer[]> {
   const { ADZUNA_APP_ID, ADZUNA_APP_KEY } = env;
   const out: NormalizedOffer[] = [];
   const seen = new Set<string>();
@@ -38,11 +43,12 @@ export async function fetchAdzuna(env: Record<string, string>, type: JobType): P
   for (const q of QUERIES[type]) {
     const url =
       `${BASE}?app_id=${ADZUNA_APP_ID}&app_key=${ADZUNA_APP_KEY}` +
-      `&results_per_page=50&what=${encodeURIComponent(q)}&where=Lyon&distance=15&max_days_old=14&sort_by=date`;
+      `&results_per_page=50&what=${encodeURIComponent(q)}&where=${encodeURIComponent(city.adzunaWhere)}` +
+      `&distance=${city.adzunaDistance}&max_days_old=14&sort_by=date`;
     try {
       const res = await fetch(url, { headers: { Accept: "application/json" } });
       if (!res.ok) {
-        console.warn(`[adzuna] ${type} "${q}" -> HTTP ${res.status}`);
+        console.warn(`[adzuna] ${city.label} ${type} "${q}" -> HTTP ${res.status}`);
         continue;
       }
       const data = (await res.json()) as { results?: AdzunaJob[] };
@@ -66,7 +72,7 @@ export async function fetchAdzuna(env: Record<string, string>, type: JobType): P
         });
       }
     } catch (e) {
-      console.warn(`[adzuna] ${type} "${q}" -> ${String(e)}`);
+      console.warn(`[adzuna] ${city.label} ${type} "${q}" -> ${String(e)}`);
     }
     await new Promise((r) => setTimeout(r, 250)); // politesse / rate limit
   }

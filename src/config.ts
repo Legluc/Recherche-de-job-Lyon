@@ -1,30 +1,18 @@
 import type { JobType } from "./types";
 
 /**
- * Filtres métier. La zone "≤ 45 min en transport sans voiture" est approximée par une
- * liste de communes bien desservies (TCL/TER) + préfixes de code postal, plutôt qu'un
- * vrai calcul d'isochrone (compromis simplicité / maintenabilité pour la v1).
+ * Filtres métier communs à toutes les villes. La zone géographique, elle, est
+ * définie par ville dans cities.ts (approximation par whitelist de communes +
+ * préfixes postaux, plutôt qu'un vrai calcul d'isochrone : compromis simplicité /
+ * maintenabilité).
  */
 export interface Filters {
   maxDaysOld: number;
-  communesWhitelist: string[]; // en minuscules
-  postalPrefixes: string[];
   alimentaireExclude: string[]; // mots-clés éliminatoires pour l'alimentaire
 }
 
 export const FILTERS: Filters = {
   maxDaysOld: 14,
-  communesWhitelist: [
-    "lyon", "villeurbanne", "vénissieux", "venissieux", "bron", "vaulx-en-velin",
-    "caluire-et-cuire", "caluire", "oullins", "pierre-bénite", "pierre-benite",
-    "saint-fons", "rillieux-la-pape", "rillieux", "décines-charpieu", "décines", "decines",
-    "meyzieu", "écully", "ecully", "tassin-la-demi-lune", "tassin",
-    "sainte-foy-lès-lyon", "sainte-foy-les-lyon", "saint-priest", "chassieu", "corbas",
-    "feyzin", "la mulatière", "la mulatiere", "francheville", "craponne",
-    "genas", "saint-genis-laval", "beynost", "neuville-sur-saône", "neuville-sur-saone",
-    "jonage", "limonest"
-  ],
-  postalPrefixes: ["69", "01700"], // Rhône + Beynost (Ain, accessible en TER)
   alimentaireExclude: [
     "nuit", "de nuit", "3x8", "2x8", "posté", "week-end", "weekend", "dimanche",
     "btp", "chantier", "maçon", "macon", "couvreur", "restauration", "cuisinier",

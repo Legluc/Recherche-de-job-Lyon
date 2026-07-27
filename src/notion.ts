@@ -27,11 +27,11 @@ async function fetchWithRetry(url: string, init: RequestInit, tries = 4): Promis
  * Lève une erreur si une page de résultats échoue — indispensable, car une lecture
  * partielle ferait ré-insérer des doublons (le tracker se noierait).
  */
-export async function getExistingRefs(env: Record<string, string>): Promise<Set<string>> {
+export async function getExistingRefs(env: Record<string, string>, databaseId: string): Promise<Set<string>> {
   const refs = new Set<string>();
   let cursor: string | undefined;
   do {
-    const res = await fetchWithRetry(`${API}/databases/${env.NOTION_DATABASE_ID}/query`, {
+    const res = await fetchWithRetry(`${API}/databases/${databaseId}/query`, {
       method: "POST",
       headers: headers(env.NOTION_TOKEN),
       body: JSON.stringify({ page_size: 100, start_cursor: cursor })
@@ -73,13 +73,13 @@ function toProperties(o: ScoredOffer): Record<string, unknown> {
 }
 
 /** Insère les offres (une page par offre). Renvoie le nombre inséré. */
-export async function insertOffers(env: Record<string, string>, offers: ScoredOffer[]): Promise<number> {
+export async function insertOffers(env: Record<string, string>, databaseId: string, offers: ScoredOffer[]): Promise<number> {
   let n = 0;
   for (const o of offers) {
     const res = await fetchWithRetry(`${API}/pages`, {
       method: "POST",
       headers: headers(env.NOTION_TOKEN),
-      body: JSON.stringify({ parent: { database_id: env.NOTION_DATABASE_ID }, properties: toProperties(o) })
+      body: JSON.stringify({ parent: { database_id: databaseId }, properties: toProperties(o) })
     });
     if (res.ok) n++;
     else console.warn(`[notion] insert "${o.title}" -> HTTP ${res.status}: ${await res.text()}`);
@@ -93,14 +93,14 @@ export async function insertOffers(env: Record<string, string>, offers: ScoredOf
  * Sert au nettoyage ponctuel après une sur-collecte. Préserve les offres déjà
  * triées (Postulé, Entretien…). Renvoie le nombre archivé.
  */
-export async function archivePending(env: Record<string, string>): Promise<number> {
+export async function archivePending(env: Record<string, string>, databaseId: string): Promise<number> {
   let n = 0;
   // On re-interroge depuis le début à chaque tour : les pages archivées sortent du
   // filtre "À traiter", donc les 100 suivantes remontent naturellement. On s'arrête
   // quand il n'y a plus rien à archiver (pas de pagination par curseur sur un
   // ensemble qui change sous nos pieds).
   for (;;) {
-    const res = await fetchWithRetry(`${API}/databases/${env.NOTION_DATABASE_ID}/query`, {
+    const res = await fetchWithRetry(`${API}/databases/${databaseId}/query`, {
       method: "POST",
       headers: headers(env.NOTION_TOKEN),
       body: JSON.stringify({ page_size: 100, filter: { property: "Statut", select: { equals: "À traiter" } } })
