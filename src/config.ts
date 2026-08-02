@@ -26,8 +26,8 @@ export const FILTERS: Filters = {
  * meilleures par score, au-dessus d'un seuil minimal.
  */
 export const LIMITS = {
-  minScore: 60, // en-dessous : écarté (offres peu pertinentes / trop anciennes)
-  maxInsert: 30 // plafond d'insertions par run et par ville (surchargeable via MAX_INSERT)
+  minScore: 70, // en-dessous : écarté (offres peu pertinentes / trop anciennes)
+  maxInsert: 20 // plafond d'insertions par run et par ville (surchargeable via MAX_INSERT)
 };
 
 /** Requêtes (mots-clés) par type. Dérivées du profil de Lucas (stack + expériences). */
