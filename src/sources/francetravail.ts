@@ -95,7 +95,7 @@ export async function fetchFranceTravail(
           url: o.origineOffre?.urlOrigine ?? `https://candidat.francetravail.fr/offres/recherche/detail/${o.id}`,
           createdAt: o.dateCreation,
           salary: o.salaire?.libelle,
-          description: (o.description ?? "").slice(0, 400),
+          description: (o.description ?? "").slice(0, 1900),
           contact: courriel,
           channel: courriel ? "Email" : o.contact?.urlPostulation ? "Formulaire" : "Plateforme"
         });

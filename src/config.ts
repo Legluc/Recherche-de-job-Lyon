@@ -27,7 +27,7 @@ export const FILTERS: Filters = {
  */
 export const LIMITS = {
   minScore: 60, // en-dessous : écarté (offres peu pertinentes / trop anciennes)
-  maxInsert: 60 // plafond d'insertions par run et par ville (surchargeable via MAX_INSERT)
+  maxInsert: 30 // plafond d'insertions par run et par ville (surchargeable via MAX_INSERT)
 };
 
 /** Requêtes (mots-clés) par type. Dérivées du profil de Lucas (stack + expériences). */
@@ -60,10 +60,11 @@ export const MANAGEMENT_MALUS = 20;
 
 /**
  * Postes commerciaux terrain / B2B : hors expérience de Lucas (call center,
- * retail, usine) et souvent conditionnés à un véhicule personnel, qu'il n'a pas.
+ * retail, usine). Note : Lucas a le permis B mais pas de véhicule — on ne
+ * pénalise donc que l'exigence d'un véhicule personnel, pas celle du permis.
  */
 export const FIELD_SALES_RE =
-  /itin[ée]rant|b2b|business developer|technico-commercial|n[ée]gociateur|porte[- ]?[àa][- ]?porte|prospection terrain|permis b (exig|obligatoire)|v[ée]hicule (personnel|obligatoire)/i;
+  /itin[ée]rant|b2b|business developer|technico-commercial|n[ée]gociateur|porte[- ]?[àa][- ]?porte|prospection terrain|v[ée]hicule (personnel|obligatoire|de fonction exig)/i;
 export const FIELD_SALES_MALUS = 20;
 
 /** Détection de pertinence dev et de correspondance avec la stack de Lucas. */

@@ -85,7 +85,7 @@ npm run typecheck      # vérification des types
 
 ## Volume & nettoyage
 
-Chaque run n'insère que les **`MAX_INSERT` meilleures offres** par ville (défaut 60) au-dessus de `LIMITS.minScore` — sans ce plafond, une recherche large sature vite le tracker. La dédup s'appuie sur les `Réf source` : si la lecture Notion échoue, le run **s'arrête** au lieu d'insérer à l'aveugle (anti-doublon).
+Chaque run n'insère que les **`MAX_INSERT` meilleures offres** par ville (défaut 30) au-dessus de `LIMITS.minScore` — sans ce plafond, une recherche large sature vite le tracker. La dédup s'appuie sur les `Réf source` : si la lecture Notion échoue, le run **s'arrête** au lieu d'insérer à l'aveugle (anti-doublon).
 
 Après une sur-collecte, `npm run cleanup` archive les offres « À traiter » (corbeille Notion, réversible) en préservant celles déjà triées ; relancer ensuite `npm start`.
 

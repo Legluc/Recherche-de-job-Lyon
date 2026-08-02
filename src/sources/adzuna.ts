@@ -67,7 +67,7 @@ export async function fetchAdzuna(
           url: `https://www.adzuna.fr/details/${j.id}`,
           createdAt: j.created,
           salary: formatSalary(j.salary_min, j.salary_max),
-          description: (j.description ?? "").slice(0, 400),
+          description: (j.description ?? "").slice(0, 1900),
           channel: "Plateforme"
         });
       }

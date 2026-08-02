@@ -83,6 +83,9 @@ function toProperties(o: ScoredOffer): Record<string, unknown> {
   if (o.salary) p["Salaire"] = { rich_text: [{ text: { content: o.salary.slice(0, 200) } }] };
   if (o.channel) p["Canal"] = { select: { name: o.channel } };
   if (o.contact) p["Contact"] = { rich_text: [{ text: { content: o.contact.slice(0, 200) } }] };
+  // Texte de l'offre : indispensable au triage (jugement d'accessibilité sur
+  // preuve explicite). Notion limite un rich_text à 2000 caractères.
+  if (o.description) p["Description"] = { rich_text: [{ text: { content: o.description.slice(0, 1900) } }] };
   return p;
 }
 
