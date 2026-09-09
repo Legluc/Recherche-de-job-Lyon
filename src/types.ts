@@ -8,8 +8,15 @@ export type WorkRhythm = "Week-ends libres" | "Week-end travaillé" | "Non préc
 
 /** Offre normalisée, format pivot commun à toutes les sources. */
 export interface NormalizedOffer {
-  source: "France Travail" | "Adzuna";
-  ref: string; // identifiant unique stable : "ft:<id>" ou "adzuna:<id>"
+  /**
+   * Origine de l'offre. Les deux premières valeurs viennent des API, les autres
+   * de la passe navigateur, qui alimente le même pipeline via `ingest-file.ts` /
+   * `select-web.ts`. La liste reproduit exactement les options de la propriété
+   * `Source` du tracker : une valeur hors liste ferait rejeter la page entière
+   * par l'API Notion.
+   */
+  source: "France Travail" | "Adzuna" | "Indeed" | "WTTJ" | "HelloWork" | "Agence web";
+  ref: string; // identifiant unique stable : "ft:<id>", "adzuna:<id>", "indeed:<id>", "wttj:<slug>"
   type: JobType;
   title: string;
   company: string;

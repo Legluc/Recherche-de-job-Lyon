@@ -8,6 +8,7 @@
     "start": "tsx src/main.ts",
     "cleanup": "tsx src/cleanup.ts",
     "ingest": "tsx src/ingest-file.ts",
+    "select-web": "tsx src/select-web.ts",
     "typecheck": "tsc --noEmit",
     "selftest": "tsx src/selftest.ts"
   },

@@ -28,6 +28,7 @@ src/
   notion.ts           Dédup (lecture "Réf source") + insertion des pages
   main.ts             Run automatique (APIs) : collecte -> pipeline -> insertion
   ingest-file.ts      Ingestion d'un JSON collecté via navigateur (Indeed, WTTJ)
+  select-web.ts       Sélection de la passe navigateur quand Notion n'est joignable que par le connecteur
   cleanup.ts          Archivage des offres "À traiter" (nettoyage)
   selftest.ts         Tests hors-ligne (scoring, salaires, dédup, quotas)
 .github/workflows/collect.yml   Cron GitHub Actions
@@ -41,6 +42,8 @@ Flux : chaque source renvoie un `NormalizedOffer[]` (format pivot). `score.ts` f
 - **Déduplication côté Notion (pas d'état local).** La source de vérité est la base elle-même : on lit les `Réf source` existantes à chaque run. Avantage : idempotence et pas de dérive d'état (contrairement à un ledger local qu'il faudrait committer). Coût : une requête paginée à chaque exécution — négligeable à l'échelle d'un suivi personnel.
 - **`CityConfig` conservé malgré la ville unique.** L'objet isole tout ce qui dépend du territoire (zone, département, base Notion, pondération des contrats). Le démonter toucherait huit fichiers pour zéro gain fonctionnel ; ajouter une ville reste une entrée dans `CITIES`.
 - **Sources sans API : le navigateur collecte, le repo décide.** Indeed et Welcome to the Jungle n'ont pas d'API exploitable ; ils sont parcourus à vitesse humaine via le navigateur, qui produit un JSON brut. Ce fichier passe ensuite par `ingest-file.ts`, qui réutilise **le même** `pipeline.ts` que le run automatique. On évite ainsi une seconde implémentation du scoring qui divergerait à la première modification.
+- **Deux chemins d'entrée pour la passe navigateur, un seul moteur de sélection.** `ingest-file.ts` suppose le `NOTION_TOKEN` disponible et écrit lui-même dans Notion ; il sert au lancement local. La tâche planifiée, elle, ne dispose que du connecteur Notion (le token ne vit que dans les secrets GitHub Actions) : elle passe donc par `select-web.ts`, qui lit l'existant depuis un fichier, appelle le **même** `selectOffers` et rend les retenues dans `data/web-selected.json`, à charge pour le connecteur de les insérer. Deux orchestrations, aucune règle de scoring dupliquée.
+- **Priorité dev depuis septembre 2026.** L'emploi alimentaire ayant été trouvé à Annecy, le revenu n'est plus l'urgence. La passe navigateur applique donc des quotas étanches (14 dev, 6 alimentaire) au lieu de la redistribution de `INSERT_SHARE`, qui rendait au vivier alimentaire les places non consommées par le dev. Elle relève aussi le seuil alimentaire à 84 et écarte d'emblée intérim, temps partiel et salaires sous le SMIC : ces cas ne valent plus un déménagement, et les écarter avant scoring libère des places du quota. Le run automatique, lui, garde ses barèmes.
 - **Information absente ≠ information mauvaise.** Contrat non publié, date non publiée : ces sources (WTTJ, cartes Indeed) reçoivent une valeur neutre, pas zéro. Sans cela, une source entière passe sous le seuil pour une lacune de format, pas pour un défaut d'offre.
 - **Déduplication floue à deux niveaux.** L'ID de source ne détecte pas une annonce republiée ailleurs. On compare donc des clés normalisées (accents, ponctuation et mentions H/F retirés) : `titre+entreprise+commune` toujours, et `titre+commune` uniquement quand l'un des deux côtés est un intermédiaire (intérim, jobboard). Le tri par score précède la dédup : on conserve la variante la mieux notée.
 - **`Promise.allSettled` sur les sources.** Une panne de France Travail ne doit pas empêcher Adzuna d'alimenter la base (et inversement). Résilience > atomicité ici.
@@ -81,6 +84,7 @@ npm start              # collecte réelle -> Notion
 npm run cleanup        # archive les offres "À traiter" (corbeille) après une sur-collecte
 DRY_RUN=1 npm run ingest -- offres.json   # aperçu d'un lot collecté au navigateur
 npm run ingest -- offres.json             # puis insertion réelle
+npm run select-web     # sélection de la passe navigateur (sans NOTION_TOKEN) -> data/web-selected.json
 npm run selftest       # tests hors-ligne (scoring, salaires, dédup, quotas)
 npm run typecheck      # vérification des types
 ```

@@ -10,7 +10,10 @@ on:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    name: Collecte Lyon
+    # Ville unique depuis le retrait d'Annecy. La matrice précédente lançait
+    # encore un job "annecy" que `getCity()` rejette (CITIES ne contient plus que
+    # lyon) : un échec rouge à chaque exécution planifiée, pour rien.
+    name: Collecte lyon
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -21,10 +24,15 @@ jobs:
       - name: Lancer la collecte
         run: npm start
         env:
+          CITY: lyon
           FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
           FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          MAX_INSERT: "30" # plafond d'insertions par run (réparti entre dev et alimentaire)
+          # Plafond d'insertions par run. Additionné aux 20 de la passe navigateur
+          # (DEV_CAP 14 + ALIM_CAP 6), il fixe le budget quotidien du tri IA :
+          # 50 offres. Modifier ce nombre suppose de mettre à jour le plafond de
+          # `prompt-tri-ia.md`, sinon un arriéré s'accumule en silence.
+          MAX_INSERT: "30"
