@@ -1,4 +1,6 @@
 import type { ScoredOffer } from "./types";
+import { formatMonthly } from "./salary";
+import { SMIC } from "./config";
 
 const API = "https://api.notion.com/v1";
 const VERSION = "2022-06-28";
@@ -80,7 +82,20 @@ function toProperties(o: ScoredOffer): Record<string, unknown> {
   if (o.contract) p["Contrat"] = { select: { name: o.contract } };
   if (o.url) p["Lien"] = { url: o.url };
   if (o.createdAt) p["Date offre"] = { date: { start: o.createdAt.slice(0, 10) } };
-  if (o.salary) p["Salaire"] = { rich_text: [{ text: { content: o.salary.slice(0, 200) } }] };
+  // Le libellé brut de la source est conservé (traçabilité) et complété par le
+  // brut mensuel normalisé et l'écart au SMIC : la passe de tri lit ainsi un
+  // montant comparable sans avoir à réinterpréter "Horaire de 12.85 Euros".
+  // Aucune propriété nouvelle n'est créée dans Notion : l'API rejette une
+  // propriété absente du schéma de la base.
+  const salaryParts = [
+    o.salary,
+    o.monthlyGross ? formatMonthly(o.monthlyGross, SMIC.monthlyGross35h) : undefined,
+    o.partTime ? "temps partiel" : undefined,
+    o.rhythm && o.rhythm !== "Non précisé" ? o.rhythm.toLowerCase() : undefined
+  ].filter(Boolean);
+  if (salaryParts.length) {
+    p["Salaire"] = { rich_text: [{ text: { content: salaryParts.join(" — ").slice(0, 200) } }] };
+  }
   if (o.channel) p["Canal"] = { select: { name: o.channel } };
   if (o.contact) p["Contact"] = { rich_text: [{ text: { content: o.contact.slice(0, 200) } }] };
   // Texte de l'offre : indispensable au triage (jugement d'accessibilité sur

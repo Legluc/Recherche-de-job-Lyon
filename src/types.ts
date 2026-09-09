@@ -1,7 +1,10 @@
-/** Type de recherche : emploi alimentaire (priorité) ou poste de dev. */
+/** Type de recherche : emploi alimentaire (financement de l'installation) ou poste de dev. */
 export type JobType = "Dev" | "Alimentaire";
 
 export type Contract = "CDI" | "CDD" | "Alternance" | "Intérim" | "Autre";
+
+/** Rythme de travail déduit du texte de l'offre. */
+export type WorkRhythm = "Week-ends libres" | "Week-end travaillé" | "Non précisé";
 
 /** Offre normalisée, format pivot commun à toutes les sources. */
 export interface NormalizedOffer {
@@ -21,8 +24,16 @@ export interface NormalizedOffer {
   channel?: "Email" | "Formulaire" | "Plateforme"; // canal de candidature détecté
 }
 
-/** Offre normalisée enrichie du secteur et du score. */
+/** Offre normalisée enrichie du secteur, des conditions détectées et du score. */
 export interface ScoredOffer extends NormalizedOffer {
   sector: string;
   score: number;
+  /**
+   * Salaire ramené en brut mensuel équivalent 35 h (borne basse de la fourchette),
+   * quand le libellé de la source a pu être interprété. Sert au scoring et est
+   * reporté dans le tracker pour la passe de tri.
+   */
+  monthlyGross?: number;
+  rhythm?: WorkRhythm;
+  partTime?: boolean;
 }

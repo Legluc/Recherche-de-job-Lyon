@@ -5,8 +5,8 @@
  * que le run automatique — aucune logique dupliquée entre les deux chemins.
  *
  * Usage :
- *   CITY=lyon npm run ingest -- chemin/vers/offres.json
- *   CITY=lyon DRY_RUN=1 npm run ingest -- offres.json   (aperçu, sans écriture)
+ *   npm run ingest -- chemin/vers/offres.json
+ *   DRY_RUN=1 npm run ingest -- offres.json   (aperçu, sans écriture)
  *
  * Format attendu : un tableau JSON d'objets
  *   { source, ref, type, title, company, location, contract?, url, createdAt?,
@@ -16,7 +16,7 @@ import { readFileSync } from "node:fs";
 import { getExistingIndex, insertOffers } from "./notion";
 import { selectOffers } from "./pipeline";
 import { LIMITS } from "./config";
-import { getCity } from "./cities";
+import { getCity, DEFAULT_CITY } from "./cities";
 import type { NormalizedOffer } from "./types";
 
 function requireEnv(keys: string[]): Record<string, string> {
@@ -38,7 +38,7 @@ const parsed = JSON.parse(readFileSync(file, "utf-8"));
 const raw: NormalizedOffer[] = Array.isArray(parsed) ? parsed : parsed.offers;
 if (!Array.isArray(raw)) throw new Error("Le fichier doit contenir un tableau d'offres (ou une clé \"offers\").");
 
-const city = getCity(process.env.CITY || "lyon");
+const city = getCity(process.env.CITY || DEFAULT_CITY);
 const dryRun = process.env.DRY_RUN === "1";
 const env = requireEnv(dryRun ? [] : ["NOTION_TOKEN", city.notionDbEnv]);
 
@@ -50,9 +50,10 @@ const existing = dryRun
   : await getExistingIndex(env, env[city.notionDbEnv]);
 
 const maxInsert = Number(process.env.MAX_INSERT) || LIMITS.maxInsert;
-const { scored, selected, duplicates } = selectOffers(raw, city, existing, maxInsert);
+const { scored, selected, duplicates, byType } = selectOffers(raw, city, existing, maxInsert);
 
 console.log(`${scored.length} retenues après filtrage/scoring, ${duplicates} écartées (doublons).`);
+console.log(`Répartition retenue : ${byType.Dev} dev / ${byType.Alimentaire} alimentaire.`);
 for (const o of selected) {
   console.log(`  ${String(o.score).padStart(3)}  ${o.title} — ${o.company || "?"} (${o.location})`);
 }

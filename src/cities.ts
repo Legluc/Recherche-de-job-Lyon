@@ -1,8 +1,14 @@
 import type { JobType } from "./types";
 
 /**
- * Configuration par ville. Le moteur est mono-ville par exécution (variable CITY) :
- * logs isolés, et l'échec d'une ville n'affecte pas l'autre.
+ * Configuration géographique de la recherche.
+ *
+ * Le projet ne cible plus qu'une ville (Lyon) : la piste Annecy a été abandonnée,
+ * un poste y ayant été trouvé. On conserve néanmoins la structure `CityConfig`
+ * plutôt que d'inliner les constantes dans score.ts et dedup.ts : elle isole en un
+ * seul objet tout ce qui dépend du territoire (zone, département, base Notion,
+ * pondération des contrats), et le démontage de cette indirection toucherait huit
+ * fichiers pour aucun gain fonctionnel. Ajouter une ville reste une entrée ici.
  */
 export interface CityConfig {
   key: string;
@@ -20,9 +26,7 @@ export interface CityConfig {
   /** Nom de la variable d'environnement contenant l'ID de base Notion. */
   notionDbEnv: string;
   /**
-   * Points par type de contrat. Volontairement différent selon la ville :
-   * à Lyon (objectif d'installation) le CDI prime ; à Annecy (solution de repli)
-   * le CDD est préférable car il ne bloque pas le départ.
+   * Points par type de contrat. Lyon étant l'objectif d'installation, le CDI prime.
    *
    * `unknown` est appliqué quand la source ne publie pas le type de contrat
    * (cas courant sur Welcome to the Jungle). Sans cette valeur neutre, ces
@@ -60,28 +64,11 @@ export const CITIES: Record<string, CityConfig> = {
     ],
     notionDbEnv: "NOTION_DATABASE_ID",
     contractPoints: { CDI: 15, CDD: 8, unknown: 8 }
-  },
-
-  annecy: {
-    key: "annecy",
-    label: "Annecy",
-    // Plan B : uniquement l'alimentaire (le dev reste concentré sur Lyon).
-    types: ["Alimentaire"],
-    adzunaWhere: "Annecy",
-    adzunaDistance: 12,
-    ftDepartement: "74",
-    // Annecy (communes fusionnées) + couronne desservie par le réseau SIBRA.
-    communesWhitelist: [
-      "annecy", "annecy-le-vieux", "cran-gevrier", "seynod", "meythet", "pringy",
-      "épagny", "epagny", "metz-tessy", "épagny metz-tessy", "epagny metz-tessy",
-      "poisy", "argonay", "chavanod"
-    ],
-    postalPrefixes: ["74000", "74940", "74960", "74600", "74370", "74330", "74650"],
-    notionDbEnv: "NOTION_DATABASE_ID_ANNECY",
-    // CDD privilégié : un contrat court n'enferme pas à Annecy.
-    contractPoints: { CDI: 5, CDD: 15, unknown: 8 }
   }
 };
+
+/** Ville par défaut : le moteur n'en cible qu'une, la variable CITY reste une commodité. */
+export const DEFAULT_CITY = "lyon";
 
 export function getCity(key: string): CityConfig {
   const city = CITIES[key.toLowerCase()];

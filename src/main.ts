@@ -3,7 +3,7 @@ import { fetchFranceTravail } from "./sources/francetravail";
 import { getExistingIndex, insertOffers } from "./notion";
 import { selectOffers } from "./pipeline";
 import { LIMITS } from "./config";
-import { getCity } from "./cities";
+import { getCity, DEFAULT_CITY } from "./cities";
 import type { NormalizedOffer } from "./types";
 
 function requireEnv(keys: string[]): Record<string, string> {
@@ -19,9 +19,8 @@ function requireEnv(keys: string[]): Record<string, string> {
 }
 
 async function main(): Promise<void> {
-  // Une exécution = une ville (CITY=lyon|annecy). Logs isolés, et l'échec d'une
-  // ville n'empêche pas l'autre de tourner (jobs distincts dans le workflow).
-  const city = getCity(process.env.CITY || "lyon");
+  // Une seule ville ciblée (Lyon). CITY reste surchargeable pour un test local.
+  const city = getCity(process.env.CITY || DEFAULT_CITY);
   const env = requireEnv([
     "FT_CLIENT_ID",
     "FT_CLIENT_SECRET",
@@ -51,10 +50,11 @@ async function main(): Promise<void> {
   // échoue : on préfère abandonner le run plutôt qu'insérer à l'aveugle (anti-flood).
   const existing = await getExistingIndex(env, databaseId);
   const maxInsert = Number(process.env.MAX_INSERT) || LIMITS.maxInsert;
-  const { scored, selected, duplicates } = selectOffers(raw, city, existing, maxInsert);
+  const { scored, selected, duplicates, byType } = selectOffers(raw, city, existing, maxInsert);
 
   console.log(`${scored.length} offres retenues après filtrage/scoring.`);
   console.log(`${duplicates} écartées (déjà connues ou doublons), plafond ${maxInsert}.`);
+  console.log(`Répartition insérée : ${byType.Dev} dev / ${byType.Alimentaire} alimentaire.`);
 
   const inserted = await insertOffers(env, databaseId, selected);
   console.log(`OK : ${inserted} offres insérées dans Notion (${city.label}).`);

@@ -1,9 +1,12 @@
-import type { NormalizedOffer, ScoredOffer } from "./types";
+import type { NormalizedOffer, ScoredOffer, WorkRhythm } from "./types";
 import {
-  FILTERS, DEV_RELEVANT, DEV_STACK, SECTOR_KEYWORDS,
+  FILTERS, DEV_RELEVANT, DEV_STACK, DEV_SENIOR_RE, SECTOR_KEYWORDS,
   UNWANTED_CONTRACT_RE, UNWANTED_CONTRACT_MALUS, MANAGEMENT_RE, MANAGEMENT_MALUS,
-  FIELD_SALES_RE, FIELD_SALES_MALUS
+  FIELD_SALES_RE, FIELD_SALES_MALUS, SMIC, SALARY_TIERS, SALARY_DISPLAYED_POINTS, FRESHNESS_POINTS,
+  WEEKEND_FREE_RE, WEEKEND_WORK_RE, WEEKEND_FREE_POINTS, WEEKEND_WORK_MALUS,
+  PART_TIME_RE, PART_TIME_MALUS
 } from "./config";
+import { parseSalary, smicRatio } from "./salary";
 import type { CityConfig } from "./cities";
 
 /** Âge de l'offre en jours, ou null si la source ne publie pas de date. */
@@ -22,16 +25,66 @@ function inGeo(o: NormalizedOffer, city: CityConfig): boolean {
   return byCommune || byPostal;
 }
 
-function sectorOf(text: string): string {
-  for (const { sector, re } of SECTOR_KEYWORDS) if (re.test(text)) return sector;
-  return "Autre";
+/**
+ * Retire les marques de féminisation et les mentions H/F entre parenthèses :
+ * "employé(e) de rayon" doit être reconnu comme "employé de rayon". Sans ce
+ * nettoyage, la moitié des intitulés France Travail échappent à la classification.
+ */
+function stripInlineParens(s: string): string {
+  return s.replace(/\([a-zàâäéèêëîïôöùûüç/.]{1,6}\)/g, "").replace(/\s+/g, " ");
+}
+
+/**
+ * Secteur de l'offre. On teste d'abord l'intitulé, bien plus fiable que la
+ * description : un poste d'entrepôt dont l'annonce vante le « sens du service
+ * client » ne doit pas être classé en relation client.
+ */
+export function sectorOf(title: string, full: string): { sector: string; points: number } {
+  const t = stripInlineParens(title);
+  const f = stripInlineParens(full);
+  for (const { sector, re, points } of SECTOR_KEYWORDS) if (re.test(t)) return { sector, points };
+  for (const { sector, re, points } of SECTOR_KEYWORDS) if (re.test(f)) return { sector, points };
+  return { sector: "Autre", points: 0 };
+}
+
+/** Rythme déduit du texte : les mentions explicites priment sur le silence. */
+export function detectRhythm(full: string): WorkRhythm {
+  if (WEEKEND_WORK_RE.test(full)) return "Week-end travaillé";
+  if (WEEKEND_FREE_RE.test(full)) return "Week-ends libres";
+  return "Non précisé";
+}
+
+/**
+ * Points liés à la rémunération, pour l'alimentaire.
+ * Renvoie aussi le brut mensuel déduit, reporté dans le tracker.
+ */
+function salaryScore(o: NormalizedOffer, partTime: boolean): { points: number; monthlyGross?: number } {
+  const parsed = parseSalary(o.salary);
+  if (!parsed) {
+    // Salaire affiché mais non interprétable ("selon profil") : la transparence
+    // partielle vaut un point symbolique ; l'absence totale vaut zéro (neutre),
+    // pour ne pas pénaliser une offre correcte publiée par une source avare.
+    return { points: o.salary ? SALARY_DISPLAYED_POINTS : 0 };
+  }
+  const ratio = smicRatio(parsed.monthlyGross, SMIC.monthlyGross35h);
+  const tier = SALARY_TIERS.find((t) => ratio >= t.minRatio) ?? SALARY_TIERS[SALARY_TIERS.length - 1];
+  // Temps partiel : le montant mensuel est mécaniquement bas. On applique le
+  // malus de temps partiel (plus haut), pas celui du sous-SMIC, pour ne pas
+  // sanctionner deux fois le même fait.
+  const points = partTime && tier.points < 0 ? 0 : tier.points;
+  return { points, monthlyGross: parsed.monthlyGross };
 }
 
 /**
  * Score l'offre (0–100) ou renvoie null si elle doit être écartée.
- * Règles alignées sur les critères de Lucas : trajet, contrat, fraîcheur,
- * correspondance sectorielle (alimentaire) ou stack (dev).
- * La pondération des contrats dépend de la ville (voir CityConfig.contractPoints).
+ *
+ * Deux régimes distincts :
+ * - **Dev** : pertinence de la stack et séniorité (l'objectif du projet).
+ * - **Alimentaire** : le poste importe moins que les conditions. Depuis
+ *   l'élargissement des requêtes, le bonus sectoriel a été abaissé (14 max au
+ *   lieu de 12 forfaitaires) au profit du salaire (jusqu'à +22, −12 sous le SMIC)
+ *   et du rythme (+12 week-ends libres, −15 si week-end travaillé) : on accepte
+ *   des métiers jamais exercés, on refuse les mauvaises conditions.
  */
 export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | null {
   const title = (o.title || "").toLowerCase();
@@ -39,16 +92,16 @@ export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | 
 
   if (!inGeo(o, city)) return null;
 
-  // Date absente (Indeed n'en publie pas sur ses cartes) : on ne rejette pas et
-  // on n'accorde pas de bonus. Rejeter reviendrait à écarter toute une source
-  // pour une information manquante ; la fraîcheur est alors garantie en amont
-  // par le filtre de la requête de collecte.
+  // Date absente (Indeed n'en publie pas sur ses cartes) : ni rejet, ni bonus
+  // maximal, mais une valeur neutre (cf. FRESHNESS_POINTS.unknown).
   const cd = daysAgo(o.createdAt);
   if (cd !== null && cd > FILTERS.maxDaysOld) return null;
 
   let score = 50;
-  if (cd !== null && cd <= 3) score += 15;
-  else if (cd !== null && cd <= 7) score += 8;
+  if (cd === null) score += FRESHNESS_POINTS.unknown;
+  else if (cd <= 3) score += FRESHNESS_POINTS.recent;
+  else if (cd <= 7) score += FRESHNESS_POINTS.week;
+  else score += FRESHNESS_POINTS.older;
 
   if (o.contract === "CDI") score += city.contractPoints.CDI;
   else if (o.contract === "CDD") score += city.contractPoints.CDD;
@@ -70,23 +123,40 @@ export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | 
   // Commercial terrain / B2B : hors expérience, et souvent véhicule requis.
   if (FIELD_SALES_RE.test(full)) score -= FIELD_SALES_MALUS;
 
-  if (o.salary) score += 5;
   // Bonus centre-ville : trajet plus court depuis le domicile.
   score += (o.location || "").toLowerCase().includes(city.key) ? 5 : 2;
 
   let sector: string;
+  let monthlyGross: number | undefined;
+  let rhythm: WorkRhythm | undefined;
+  let partTime: boolean | undefined;
+
   if (o.type === "Dev") {
     if (!DEV_RELEVANT.test(full)) return null; // écarte le bruit non-dev
     sector = "Dév web";
+    if (o.salary) score += 5; // pour le dev, l'affichage du salaire suffit comme signal
     if (DEV_STACK.test(full)) score += 15; // correspondance stack
     if (/junior|débutant|premier emploi/.test(full)) score += 8; // sans alternance/apprenti
-    if (/senior|lead|confirmé|principal|architecte/.test(title)) score -= 12; // profil junior
+    if (DEV_SENIOR_RE.test(title)) score -= 12; // profil junior
   } else {
-    if (FILTERS.alimentaireExclude.some((k) => full.includes(k))) return null; // nuit/resto/BTP...
-    sector = sectorOf(full);
-    if (sector !== "Autre") score += 12;
+    if (FILTERS.alimentaireExclude.some((k) => full.includes(k))) return null; // nuit/postés/resto/BTP
+
+    const s = sectorOf(title, full);
+    sector = s.sector;
+    score += s.points;
+
+    partTime = PART_TIME_RE.test(full);
+    if (partTime) score -= PART_TIME_MALUS;
+
+    const sal = salaryScore(o, partTime);
+    score += sal.points;
+    monthlyGross = sal.monthlyGross;
+
+    rhythm = detectRhythm(full);
+    if (rhythm === "Week-ends libres") score += WEEKEND_FREE_POINTS;
+    else if (rhythm === "Week-end travaillé") score -= WEEKEND_WORK_MALUS;
   }
 
   score = Math.max(0, Math.min(100, Math.round(score)));
-  return { ...o, sector, score };
+  return { ...o, sector, score, monthlyGross, rhythm, partTime };
 }
