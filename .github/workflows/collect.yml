@@ -10,13 +10,9 @@ on:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    strategy:
-      # Une ville par job : logs séparés, et un échec sur une ville n'empêche
-      # pas l'autre de tourner (fail-fast désactivé).
-      fail-fast: false
-      matrix:
-        city: [lyon, annecy]
-    name: Collecte ${{ matrix.city }}
+    # Une seule ville, un seul profil (alimentaire Lyon) depuis octobre 2026 :
+    # la matrice de villes et la variable CITY ont disparu avec la piste Annecy.
+    name: Collecte Lyon
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,15 +20,15 @@ jobs:
           node-version: 20
       - name: Installer les dépendances
         run: npm install
+      - name: Vérifier le scoring (hors ligne)
+        run: npm run selftest
       - name: Lancer la collecte
         run: npm start
         env:
-          CITY: ${{ matrix.city }}
           FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
           FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          NOTION_DATABASE_ID_ANNECY: ${{ secrets.NOTION_DATABASE_ID_ANNECY }}
-          MAX_INSERT: "30" # plafond d'insertions par run et par ville
+          MAX_INSERT: "30" # plafond d'insertions par run ; le tri IA compte dessus

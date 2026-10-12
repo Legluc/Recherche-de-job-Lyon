@@ -12,7 +12,7 @@
  *
  * Usage :
  *   npm run select-web
- *   DEV_CAP=10 ALIM_CAP=4 npm run select-web
+ *   WEB_CAP=12 WEB_MIN_SCORE=86 npm run select-web
  *
  * Entrées  : data/web-raw.json (NormalizedOffer[]), data/notion-existing.json
  * Sortie   : data/web-selected.json (ScoredOffer[], triées par score décroissant)
@@ -20,44 +20,36 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { selectOffers } from "./pipeline";
 import { CITIES } from "./cities";
-import { PART_TIME_RE, SMIC } from "./config";
+import { PART_TIME_RE, WEEKEND_WORK_RE, SMIC } from "./config";
 import { parseSalary } from "./salary";
 import type { ExistingIndex } from "./notion";
-import type { NormalizedOffer, ScoredOffer } from "./types";
+import type { NormalizedOffer } from "./types";
 
 const RAW_FILE = process.env.WEB_RAW || "data/web-raw.json";
 const EXISTING_FILE = process.env.WEB_EXISTING || "data/notion-existing.json";
 const OUT_FILE = process.env.WEB_OUT || "data/web-selected.json";
 
 /**
- * Plafonds par profil. Le poste alimentaire d'Annecy étant décroché, le dev
- * redevient l'objectif : il prend la plus grosse part du plafond, et
- * l'alimentaire lyonnais n'est plus qu'un filet pour sécuriser l'installation.
- *
- * D'où deux appels successifs à `selectOffers` plutôt qu'un seul : la
- * redistribution des slots non consommés (INSERT_SHARE, cf. pipeline.ts) rendrait
- * au vivier alimentaire — beaucoup plus large — les places que le dev n'a pas
- * remplies, exactement l'inverse de l'arbitrage voulu ici. Les quotas sont donc
- * étanches, quitte à insérer moins que le plafond global.
+ * Plafond d'insertion de la passe. Il valait 14 (dev) + 6 (alimentaire) du temps
+ * où les deux profils se partageaient la place ; l'abandon du dev (octobre 2026)
+ * rend les 20 slots à l'unique profil restant, ce qui garde intact le budget
+ * quotidien du tri IA en aval (30 côté GitHub Actions + 20 ici).
  */
-const DEV_CAP = Number(process.env.DEV_CAP) || 14;
-const ALIM_CAP = Number(process.env.ALIM_CAP) || 6;
+const MAX_SELECT = Number(process.env.WEB_CAP) || 20;
 
 /**
- * Seuil alimentaire relevé au-dessus de MIN_SCORE_BY_TYPE.Alimentaire (80).
- * Un revenu étant déjà assuré, une offre alimentaire ne vaut une candidature que
- * si elle justifie à elle seule le déménagement. Le durcissement est appliqué ici
- * et non dans config.ts : il vise cette passe (recall large, sources sans API) et
- * ne doit pas resserrer le run automatique, dont le vivier est déjà filtré côté
- * requêtes API.
+ * Seuil relevé au-dessus de `LIMITS.minScore` (80), propre à cette passe.
  *
- * Calibré à 84 et non plus haut sur rejeu de data/web-raw.json (71 offres) : les
- * scores alimentaires y plafonnent à 90 puis retombent sur un palier 80-84, parce
- * qu'une carte Indeed ou WTTJ publie rarement de quoi déclencher les bonus de
- * conditions (salaire lisible, week-ends libres). À 88, la passe n'aurait remonté
- * qu'une offre sur ce lot — le filet serait fermé, pas resserré.
+ * Pourquoi plus haut ici : les cartes Indeed et WTTJ publient rarement de quoi
+ * déclencher les bonus de conditions (salaire lisible, mention du rythme), donc
+ * les scores s'y tassent sur un palier au lieu de s'étaler. Un seuil légèrement
+ * supérieur écarte ce palier bas sans toucher au run automatique, dont le vivier
+ * est déjà filtré côté requêtes API.
+ *
+ * Valeur calibrée par rejeu de data/web-raw.json : voir le README. À revoir si la
+ * passe remonte régulièrement zéro offre — le filet serait fermé, pas resserré.
  */
-const ALIM_MIN_SCORE = Number(process.env.ALIM_MIN_SCORE) || 84;
+const MIN_SCORE = Number(process.env.WEB_MIN_SCORE) || 84;
 
 interface ExistingRow {
   ref?: string;
@@ -90,19 +82,26 @@ function readExisting(file: string): ExistingIndex {
 }
 
 /**
- * Rejets fermes propres à l'alimentaire, appliqués **avant** le scoring.
+ * Rejets fermes appliqués **avant** le scoring, pour pouvoir en afficher le motif.
  *
- * Ce sont des règles de collecte (ce qu'on refuse de considérer), pas de
- * pondération : score.ts pénalise le temps partiel et le sous-SMIC pour laisser
- * la passe de tri IA repêcher une offre par ailleurs excellente. Ici, ces cas ne
- * méritent plus d'être présentés du tout, et les écarter en amont évite qu'ils
- * consomment des places du quota alimentaire.
+ * `score.ts` écarte déjà le temps partiel et le travail de week-end ; les retester
+ * ici n'ajoute aucune règle (les regex viennent du même `config.ts`) mais produit
+ * un décompte par motif dans le rapport de la tâche planifiée. Sans lui, une
+ * collecte qui perd la moitié de ses offres ressemble à une panne d'extracteur.
+ *
+ * Deux motifs n'existent qu'ici, propres au vivier navigateur : l'intérim et le
+ * salaire sous le SMIC. Le run automatique les score (l'API publie un contrat
+ * fiable, et un sous-SMIC y est souvent une erreur de libellé) ; dans cette passe,
+ * ils ne valent plus l'occupation d'un slot.
  *
  * Renvoie le motif de rejet, ou null si l'offre est conservée.
  */
-function rejectAlimentaire(o: NormalizedOffer): string | null {
+function rejectUpfront(o: NormalizedOffer): string | null {
+  const full = `${o.title} ${o.description ?? ""}`;
+  if (o.type !== "Alimentaire") return "profil abandonné (dev)";
   if (o.contract === "Intérim") return "intérim";
-  if (PART_TIME_RE.test(`${o.title} ${o.description ?? ""}`)) return "temps partiel";
+  if (WEEKEND_WORK_RE.test(full)) return "week-end travaillé";
+  if (PART_TIME_RE.test(full)) return "temps partiel";
   const parsed = parseSalary(o.salary);
   // Tolérance de 2 % : un taux horaire au SMIC exact reconverti en mensuel
   // retombe à quelques centimes sous le seuil (même raison que SALARY_TIERS).
@@ -117,55 +116,33 @@ const existing = readExisting(EXISTING_FILE);
 console.log(`=== Sélection passe navigateur — ${raw.length} offres brutes depuis ${RAW_FILE} ===`);
 console.log(`Existant Notion : ${existing.refs.size} réf. connues, ${existing.offers.length} lignes.`);
 
-const devRaw = raw.filter((o) => o.type === "Dev");
-const alimRaw: NormalizedOffer[] = [];
+const kept: NormalizedOffer[] = [];
 const rejects: Record<string, number> = {};
 for (const o of raw) {
-  if (o.type !== "Alimentaire") continue;
-  const reason = rejectAlimentaire(o);
+  const reason = rejectUpfront(o);
   if (reason) {
     rejects[reason] = (rejects[reason] ?? 0) + 1;
     continue;
   }
-  alimRaw.push(o);
+  kept.push(o);
 }
 const rejectSummary = Object.entries(rejects).map(([k, n]) => `${n} ${k}`);
 console.log(
-  `Conditions alimentaires : ${alimRaw.length} conservée(s)` +
+  `Conditions : ${kept.length} conservée(s)` +
     (rejectSummary.length ? `, écartées → ${rejectSummary.join(", ")}.` : ".")
 );
 
-// Passe 1 : dev, prioritaire.
-const dev = selectOffers(devRaw, city, existing, DEV_CAP);
-
-// Passe 2 : alimentaire, sur un index de dédup enrichi des retenues dev — sans
-// quoi une même annonce classée dans les deux profils entrerait deux fois.
-const afterDev: ExistingIndex = {
-  refs: new Set([...existing.refs, ...dev.selected.map((o) => o.ref)]),
-  offers: [
-    ...existing.offers,
-    ...dev.selected.map((o) => ({ title: o.title, company: o.company, location: o.location }))
-  ]
-};
-const alim = selectOffers(alimRaw, city, afterDev, ALIM_CAP);
-const alimSelected = alim.selected.filter((o) => o.score >= ALIM_MIN_SCORE);
-
-const selected: ScoredOffer[] = [...dev.selected, ...alimSelected].sort((a, b) => b.score - a.score);
+const { scored, selected, duplicates } = selectOffers(kept, city, existing, MAX_SELECT, MIN_SCORE);
 
 console.log(
-  `Dev          : ${devRaw.length} brutes → ${dev.scored.length} scorées, ` +
-    `${dev.duplicates} doublon(s), ${dev.selected.length} retenue(s) (plafond ${DEV_CAP}).`
+  `${kept.length} brutes → ${scored.length} scorées, ${duplicates} doublon(s), ` +
+    `${selected.length} retenue(s) (seuil ${MIN_SCORE}, plafond ${MAX_SELECT}).`
 );
-console.log(
-  `Alimentaire  : ${alimRaw.length} brutes → ${alim.scored.length} scorées, ` +
-    `${alim.duplicates} doublon(s), ${alim.selected.length} retenue(s) puis ` +
-    `${alimSelected.length} au-dessus de ${ALIM_MIN_SCORE} (plafond ${ALIM_CAP}).`
-);
-console.log(`Total à insérer : ${selected.length}`);
 for (const o of selected) {
   console.log(
-    `  ${String(o.score).padStart(3)}  [${o.type}] ${o.sector} — ${o.title} — ` +
-      `${o.company || "?"} (${o.location}) ${o.contract ?? "contrat n.c."} ${o.source} ${o.ref}`
+    `  ${String(o.score).padStart(3)}  ${o.sector} — ${o.title} — ` +
+      `${o.company || "?"} (${o.location}) ${o.contract ?? "contrat n.c."} ` +
+      `${o.rhythm ?? "rythme n.c."} ${o.source} ${o.ref}`
   );
 }
 

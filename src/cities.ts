@@ -13,7 +13,7 @@ import type { JobType } from "./types";
 export interface CityConfig {
   key: string;
   label: string;
-  /** Profils recherchés dans cette ville. */
+  /** Profils recherchés (un seul depuis l'abandon du dev). */
   types: JobType[];
   /** Paramètres de recherche Adzuna. */
   adzunaWhere: string;
@@ -40,7 +40,8 @@ export const CITIES: Record<string, CityConfig> = {
   lyon: {
     key: "lyon",
     label: "Lyon",
-    types: ["Alimentaire", "Dev"],
+    // Profil unique depuis octobre 2026 : le dev a été abandonné.
+    types: ["Alimentaire"],
     adzunaWhere: "Lyon",
     adzunaDistance: 15,
     ftDepartement: "69",

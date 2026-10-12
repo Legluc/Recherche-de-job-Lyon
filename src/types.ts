@@ -1,9 +1,19 @@
-/** Type de recherche : emploi alimentaire (financement de l'installation) ou poste de dev. */
-export type JobType = "Dev" | "Alimentaire";
+/**
+ * Profil recherché. Le dev a été abandonné (octobre 2026) : la recherche ne porte
+ * plus que sur l'emploi alimentaire lyonnais. Le champ `type` est conservé dans le
+ * modèle pivot parce que la propriété `Type` du tracker existe toujours et que
+ * d'anciens lots collectés (data/web-raw.json) portent encore `"Dev"` : le
+ * pipeline s'en sert pour écarter ces restes au lieu de les scorer par erreur.
+ */
+export type JobType = "Alimentaire";
 
 export type Contract = "CDI" | "CDD" | "Alternance" | "Intérim" | "Autre";
 
-/** Rythme de travail déduit du texte de l'offre. */
+/**
+ * Rythme de travail déduit du texte de l'offre. "Week-end travaillé" ne survit
+ * plus au scoring (rejet ferme, cf. score.ts) : la valeur existe pour nommer le
+ * motif de rejet dans les logs et les rapports.
+ */
 export type WorkRhythm = "Week-ends libres" | "Week-end travaillé" | "Non précisé";
 
 /** Offre normalisée, format pivot commun à toutes les sources. */
@@ -41,6 +51,6 @@ export interface ScoredOffer extends NormalizedOffer {
    * reporté dans le tracker pour la passe de tri.
    */
   monthlyGross?: number;
+  /** Toujours "Week-ends libres" ou "Non précisé" : l'autre cas est rejeté. */
   rhythm?: WorkRhythm;
-  partTime?: boolean;
 }

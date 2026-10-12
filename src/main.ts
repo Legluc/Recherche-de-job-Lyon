@@ -50,11 +50,10 @@ async function main(): Promise<void> {
   // échoue : on préfère abandonner le run plutôt qu'insérer à l'aveugle (anti-flood).
   const existing = await getExistingIndex(env, databaseId);
   const maxInsert = Number(process.env.MAX_INSERT) || LIMITS.maxInsert;
-  const { scored, selected, duplicates, byType } = selectOffers(raw, city, existing, maxInsert);
+  const { scored, selected, duplicates } = selectOffers(raw, city, existing, maxInsert);
 
   console.log(`${scored.length} offres retenues après filtrage/scoring.`);
   console.log(`${duplicates} écartées (déjà connues ou doublons), plafond ${maxInsert}.`);
-  console.log(`Répartition insérée : ${byType.Dev} dev / ${byType.Alimentaire} alimentaire.`);
 
   const inserted = await insertOffers(env, databaseId, selected);
   console.log(`OK : ${inserted} offres insérées dans Notion (${city.label}).`);

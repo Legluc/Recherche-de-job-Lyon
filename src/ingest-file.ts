@@ -50,10 +50,9 @@ const existing = dryRun
   : await getExistingIndex(env, env[city.notionDbEnv]);
 
 const maxInsert = Number(process.env.MAX_INSERT) || LIMITS.maxInsert;
-const { scored, selected, duplicates, byType } = selectOffers(raw, city, existing, maxInsert);
+const { scored, selected, duplicates } = selectOffers(raw, city, existing, maxInsert);
 
 console.log(`${scored.length} retenues après filtrage/scoring, ${duplicates} écartées (doublons).`);
-console.log(`Répartition retenue : ${byType.Dev} dev / ${byType.Alimentaire} alimentaire.`);
 for (const o of selected) {
   console.log(`  ${String(o.score).padStart(3)}  ${o.title} — ${o.company || "?"} (${o.location})`);
 }

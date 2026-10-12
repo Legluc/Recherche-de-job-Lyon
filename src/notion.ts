@@ -90,7 +90,6 @@ function toProperties(o: ScoredOffer): Record<string, unknown> {
   const salaryParts = [
     o.salary,
     o.monthlyGross ? formatMonthly(o.monthlyGross, SMIC.monthlyGross35h) : undefined,
-    o.partTime ? "temps partiel" : undefined,
     o.rhythm && o.rhythm !== "Non précisé" ? o.rhythm.toLowerCase() : undefined
   ].filter(Boolean);
   if (salaryParts.length) {

@@ -3,14 +3,7 @@ name: Nettoyage Notion
 # À lancer manuellement (onglet Actions -> Nettoyage Notion -> Run workflow)
 # après une sur-collecte. Archive les offres "À traiter" (corbeille, réversible).
 on:
-  workflow_dispatch:
-    inputs:
-      city:
-        description: "Ville à nettoyer"
-        required: true
-        default: lyon
-        type: choice
-        options: [lyon, annecy]
+  workflow_dispatch: {}
 
 jobs:
   cleanup:
@@ -25,7 +18,5 @@ jobs:
       - name: Nettoyer
         run: npm run cleanup
         env:
-          CITY: ${{ inputs.city }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          NOTION_DATABASE_ID_ANNECY: ${{ secrets.NOTION_DATABASE_ID_ANNECY }}

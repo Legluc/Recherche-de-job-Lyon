@@ -1,10 +1,10 @@
 /**
- * Tests hors-ligne du scoring, du filtrage, de la déduplication, de la lecture
- * des salaires et des quotas d'insertion (aucun réseau requis).
+ * Tests hors-ligne du scoring, du filtrage, de la déduplication et de la lecture
+ * des salaires (aucun réseau requis).
  * Lancer avec : npm run selftest
  */
 import { scoreOffer } from "./score";
-import { LIMITS, MIN_SCORE_BY_TYPE, SMIC } from "./config";
+import { LIMITS, SMIC } from "./config";
 import { CITIES } from "./cities";
 import { DedupIndex, type OfferLike } from "./dedup";
 import { parseSalary } from "./salary";
@@ -12,7 +12,7 @@ import { selectOffers } from "./pipeline";
 import type { NormalizedOffer, ScoredOffer } from "./types";
 
 const now = new Date().toISOString();
-const base = { source: "Adzuna", url: "u", createdAt: now, description: "" } as const;
+const base = { source: "Adzuna", type: "Alimentaire", url: "u", createdAt: now, description: "" } as const;
 
 let pass = 0;
 let fail = 0;
@@ -27,10 +27,10 @@ function check(ok: boolean, note: string, detail = ""): void {
 // --- 1. Scoring / filtrage -------------------------------------------------
 
 /**
- * "keep"  : retenue par le scoring et au-dessus du seuil de son profil.
+ * "keep"  : retenue par le scoring et au-dessus du seuil de sélection.
  * "below" : retenue par le scoring mais sous le seuil -> jamais insérée (le seuil
  *           est appliqué par le pipeline, pas par scoreOffer).
- * "drop"  : rejet ferme du scoring (zone, exclusions, contrat non souhaité).
+ * "drop"  : rejet ferme du scoring (zone, exclusions, conditions, contrat).
  */
 const cases: Array<{
   o: NormalizedOffer;
@@ -38,115 +38,119 @@ const cases: Array<{
   note: string;
   test?: (s: ScoredOffer) => boolean;
 }> = [
+  // --- Rejets fermes ---
   {
-    o: { ...base, ref: "a:1", type: "Dev", title: "Intégrateur web H/F", company: "X", location: "Lyon", contract: "CDI", description: "Vue.js Tailwind WordPress" },
-    expect: "keep", note: "intégrateur web Lyon + stack -> score élevé",
-    test: (s) => s.score >= 80 && s.sector === "Dév web"
-  },
-  {
-    o: { ...base, ref: "a:2", type: "Dev", title: "Responsable Communication", company: "Y", location: "Lyon", description: "communication institutionnelle" },
-    expect: "drop", note: "hors dev -> écarté"
-  },
-  {
-    o: { ...base, ref: "a:3", type: "Alimentaire", title: "Serveur en restauration", company: "Z", location: "Lyon", description: "service du soir" },
+    o: { ...base, ref: "a:1", title: "Serveur en restauration", company: "Z", location: "Lyon", description: "service du soir" },
     expect: "drop", note: "restauration/serveur -> exclusion"
   },
   {
-    o: { ...base, ref: "a:5", type: "Alimentaire", title: "Préparateur de commandes", company: "V", location: "Marseille", description: "entrepôt" },
+    o: { ...base, ref: "a:2", title: "Préparateur de commandes", company: "V", location: "Marseille", description: "entrepôt" },
     expect: "drop", note: "hors zone (Marseille) -> écarté"
   },
   {
-    o: { ...base, ref: "a:6", type: "Alimentaire", title: "Agent de production de nuit", company: "U", location: "Bron", description: "équipe de nuit 3x8" },
+    o: { ...base, ref: "a:3", title: "Agent de production de nuit", company: "U", location: "Bron", description: "équipe de nuit 3x8" },
     expect: "drop", note: "travail de nuit -> exclusion"
   },
   {
-    o: { ...base, ref: "a:7", type: "Dev", title: "Alternance – Développeur Web & Mobile", company: "T", location: "Lyon", description: "contrat d'apprentissage, React" },
+    o: { ...base, ref: "a:4", title: "Alternance – Assistant administratif", company: "T", location: "Lyon", description: "contrat d'apprentissage" },
     expect: "drop", note: "alternance dans le titre -> rejet ferme"
   },
   {
-    o: { ...base, ref: "a:7b", type: "Dev", title: "Web Developer Internship", company: "T", location: "Lyon", description: "React, 6 months" },
-    expect: "drop", note: "internship (anglais) -> rejet ferme"
+    o: { ...base, ref: "a:5", title: "Hôte de caisse", company: "W", location: "Lyon", contract: "CDI", description: "travail le samedi et le dimanche par roulement", salary: "Mensuel de 2200.0 Euros sur 12 mois" },
+    expect: "drop", note: "travail de week-end annoncé -> rejet ferme, même avec un bon salaire"
   },
   {
-    o: { ...base, ref: "a:7c", type: "Dev", title: "Développeur web", company: "T", location: "Lyon", contract: "CDI", description: "équipe internationale, React, Vue" },
-    expect: "keep", note: "\"internationale\" ne déclenche pas le filtre stage"
+    o: { ...base, ref: "a:6", title: "Employé administratif", company: "W", location: "Lyon", contract: "CDI", description: "amplitude du lundi au samedi", salary: "Mensuel de 2400.0 Euros sur 12 mois" },
+    expect: "drop", note: "« du lundi au samedi » -> rejet ferme"
   },
   {
-    o: { ...base, ref: "a:9", type: "Dev", title: "Développeur Web H/F", company: "R", location: "Lyon", contract: "CDI", description: "Vue.js ; alternance possible" },
-    expect: "keep", note: "alternance en description seule -> conservé avec malus",
-    test: (s) => s.score >= MIN_SCORE_BY_TYPE.Dev
+    o: { ...base, ref: "a:7", title: "Assistant administratif", company: "W", location: "Bron", contract: "CDI", description: "poste à temps partiel, 24h/semaine", salary: "Mensuel de 1200.0 Euros sur 12 mois" },
+    expect: "drop", note: "temps partiel annoncé -> rejet ferme"
   },
   {
-    o: { ...base, ref: "a:8", type: "Dev", title: "Développeur web junior", company: "S", location: "Lyon", contract: "CDI", description: "Vue.js, WordPress, PHP" },
-    expect: "keep", note: "CDI junior avec stack -> au-dessus du seuil",
-    test: (s) => s.score >= MIN_SCORE_BY_TYPE.Dev
-  },
-  {
-    o: { ...base, ref: "a:8b", type: "Dev", title: "Développeur Web Sénior (F/H)", company: "S", location: "Lyon", contract: "CDI", description: "Vue.js, PHP" },
-    expect: "keep", note: "\"Sénior\" accentué -> malus séniorité appliqué",
-    test: (s) => {
-      const junior = scoreOffer(
-        { ...base, ref: "cmp-jr", type: "Dev", title: "Développeur Web (F/H)", company: "S", location: "Lyon", contract: "CDI", description: "Vue.js, PHP" },
-        CITIES.lyon
-      );
-      return junior !== null && s.score < junior.score;
-    }
+    // Un ancien lot collecté peut encore porter des offres marquées "Dev".
+    o: { ...base, ref: "a:8", type: "Dev", title: "Développeur web junior", company: "S", location: "Lyon", contract: "CDI", description: "Vue.js, WordPress, PHP" } as unknown as NormalizedOffer,
+    expect: "drop", note: "profil Dev résiduel -> écarté (profil abandonné)"
   },
 
-  // --- Conditions alimentaires (salaire, rythme, temps partiel) ---
+  // --- Conditions et conservation des offres muettes ---
   {
-    o: { ...base, ref: "a:20", type: "Alimentaire", title: "Conseiller clientèle", company: "W", location: "Villeurbanne", contract: "CDD", description: "relation client, du lundi au vendredi", salary: "Mensuel de 2300.0 Euros sur 12 mois" },
-    expect: "keep", note: "salaire > SMIC +15 % + week-ends libres -> secteur et rythme détectés",
+    o: { ...base, ref: "b:1", title: "Conseiller clientèle", company: "W", location: "Villeurbanne", contract: "CDD", description: "relation client, du lundi au vendredi", salary: "Mensuel de 2300.0 Euros sur 12 mois" },
+    expect: "keep", note: "week-ends libres prouvés + salaire > SMIC +15 %",
     test: (s) => s.sector === "Call center" && s.rhythm === "Week-ends libres" && s.monthlyGross === 2300
   },
   {
-    o: { ...base, ref: "a:21", type: "Alimentaire", title: "Hôte de caisse", company: "W", location: "Lyon", contract: "CDI", description: "travail le samedi et le dimanche par roulement", salary: "Horaire de 12.31 Euros sur 12 mois" },
-    expect: "below", note: "SMIC + week-end travaillé -> repasse sous le seuil alimentaire",
-    test: (s) => {
-      const better = scoreOffer(
-        { ...base, ref: "cmp-we", type: "Alimentaire", title: "Hôte de caisse", company: "W", location: "Lyon", contract: "CDI", description: "du lundi au vendredi", salary: "Mensuel de 2200.0 Euros sur 12 mois" },
-        CITIES.lyon
-      );
-      // L'écart réel est écrasé par le plafond à 100 : on vérifie qu'il reste net.
-      return s.rhythm === "Week-end travaillé" && better !== null && better.score - s.score >= 20;
-    }
+    o: { ...base, ref: "b:2", title: "Gestionnaire back office", company: "W", location: "Lyon", contract: "CDI", description: "week-ends non travaillés, gestion de dossiers", salary: "Mensuel de 2000.0 Euros sur 12 mois" },
+    expect: "keep", note: "« week-ends non travaillés » n'est pas pris pour du travail de week-end",
+    test: (s) => s.rhythm === "Week-ends libres" && s.sector === "Back-office / ADV"
   },
   {
-    o: { ...base, ref: "a:22", type: "Alimentaire", title: "Employé polyvalent", company: "W", location: "Bron", contract: "CDI", description: "poste à temps partiel, 24h/semaine", salary: "Mensuel de 1200.0 Euros sur 12 mois" },
-    expect: "below", note: "temps partiel sous le SMIC -> sous le seuil alimentaire",
-    test: (s) => s.partTime === true
+    o: { ...base, ref: "b:3", title: "Assistant administratif", company: "W", location: "Lyon", contract: "CDI", description: "saisie et suivi de dossiers", salary: "Mensuel de 2100.0 Euros sur 12 mois" },
+    expect: "keep", note: "offre muette sur le rythme -> conservée, sans bonus",
+    test: (s) => s.rhythm === "Non précisé"
   },
   {
-    o: { ...base, ref: "a:23", type: "Alimentaire", title: "Technicien support informatique N1", company: "W", location: "Lyon", contract: "CDI", description: "helpdesk, du lundi au vendredi", salary: "Annuel de 27000.0 Euros sur 12 mois" },
-    expect: "keep", note: "support informatique = passerelle dev -> secteur dédié",
+    o: { ...base, ref: "b:4", title: "Technicien support informatique N1", company: "W", location: "Lyon", contract: "CDI", description: "helpdesk, du lundi au vendredi", salary: "Annuel de 27000.0 Euros sur 12 mois" },
+    expect: "keep", note: "support informatique = secteur le mieux noté",
     test: (s) => s.sector === "Support informatique" && s.score >= 95
   },
   {
-    o: { ...base, ref: "a:24", type: "Alimentaire", title: "Préparateur de commandes", company: "W", location: "Corbas", contract: "CDD", description: "entrepôt logistique", salary: "Horaire de 11.90 Euros sur 12 mois" },
-    expect: "below", note: "sous le SMIC + aucun autre atout -> sous le seuil alimentaire"
-  },
-  {
-    o: { ...base, ref: "a:25", type: "Alimentaire", title: "Gestionnaire back office", company: "W", location: "Lyon", contract: "CDI", description: "week-ends non travaillés, gestion de dossiers", salary: "Mensuel de 2000.0 Euros sur 12 mois" },
-    expect: "keep", note: "« week-ends non travaillés » n'est plus éliminatoire (bug corrigé)",
-    test: (s) => s.rhythm === "Week-ends libres"
-  },
-  {
-    o: { ...base, ref: "a:26", type: "Alimentaire", title: "Assistant administratif", company: "W", location: "Lyon", contract: "CDI", description: "saisie et suivi de dossiers", salary: "selon profil" },
+    o: { ...base, ref: "b:5", title: "Conseiller clientèle", company: "W", location: "Lyon", contract: "CDI", description: "relation client, horaires de bureau", salary: "selon profil" },
     expect: "keep", note: "salaire non chiffré -> neutre, l'offre reste jugeable",
     test: (s) => s.monthlyGross === undefined
   },
   {
-    o: { ...base, ref: "a:27", type: "Alimentaire", title: "Agent de tri", company: "W", location: "Saint-Priest", contract: "CDD", createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "tri de colis" },
-    expect: "below", note: "offre tiède, sans salaire ni rythme -> filtrée par le seuil relevé"
+    o: { ...base, ref: "b:6", title: "Préparateur de commandes", company: "W", location: "Corbas", contract: "CDD", description: "entrepôt logistique", salary: "Horaire de 11.90 Euros sur 12 mois" },
+    expect: "below", note: "sous le SMIC + aucun autre atout -> sous le seuil"
+  },
+  {
+    o: { ...base, ref: "b:7", title: "Agent de tri", company: "W", location: "Saint-Priest", contract: "CDD", createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "tri de colis" },
+    expect: "below", note: "offre tiède, sans salaire ni rythme -> filtrée par le seuil"
+  },
+  {
+    // Salaire volontairement proche du SMIC : au-dessus, les deux variantes
+    // saturent à 100 et le malus devient invisible (cf. « Limites » du README).
+    o: { ...base, ref: "b:8", title: "Conseiller commercial sédentaire", company: "W", location: "Lyon", contract: "CDI", description: "télévente au siège, b2b, du lundi au vendredi", salary: "Mensuel de 1900.0 Euros sur 12 mois" },
+    expect: "keep", note: "commercial B2B sédentaire -> malus appliqué mais offre conservée",
+    test: (s) => {
+      const sansB2B = scoreOffer(
+        { ...base, ref: "cmp-b2b", title: "Conseiller commercial sédentaire", company: "W", location: "Lyon", contract: "CDI", description: "télévente au siège, du lundi au vendredi", salary: "Mensuel de 1900.0 Euros sur 12 mois" },
+        CITIES.lyon
+      );
+      return sansB2B !== null && s.score < sansB2B.score;
+    }
   }
 ];
 
+// Rejets fermes de compétence et de mobilité : testés à part, car ils doivent
+// écarter l'offre même lorsque tout le reste est excellent (un malus était absorbé
+// par le plafond de 100).
+const hardRejects: Array<{ o: NormalizedOffer; note: string }> = [
+  {
+    o: { ...base, ref: "c:1", title: "Responsable administratif", company: "W", location: "Lyon", contract: "CDI", description: "encadrement d'une équipe de 5 personnes, du lundi au vendredi", salary: "Mensuel de 2600.0 Euros sur 12 mois" },
+    note: "encadrement dans l'intitulé -> rejet ferme malgré d'excellentes conditions"
+  },
+  {
+    o: { ...base, ref: "c:2", title: "Chargé de clientèle", company: "W", location: "Lyon", contract: "CDI", description: "tournée clients, véhicule personnel obligatoire, du lundi au vendredi", salary: "Mensuel de 2400.0 Euros sur 12 mois" },
+    note: "véhicule personnel exigé -> rejet ferme (pas de voiture)"
+  },
+  {
+    o: { ...base, ref: "c:3", title: "Assistant administratif", company: "W", location: "Lyon", contract: "CDI", description: "en lien avec le responsable de service, du lundi au vendredi", salary: "Mensuel de 2200.0 Euros sur 12 mois" },
+    note: "CONTRE-EXEMPLE : « responsable » en description seule ne doit PAS écarter"
+  }
+]
+;
+
 for (const c of cases) {
   const s = scoreOffer(c.o, CITIES.lyon);
-  const got: "keep" | "below" | "drop" = !s ? "drop" : s.score >= MIN_SCORE_BY_TYPE[c.o.type] ? "keep" : "below";
+  const got: "keep" | "below" | "drop" = !s ? "drop" : s.score >= LIMITS.minScore ? "keep" : "below";
   const ok = got === c.expect && (!c.test || (s !== null && c.test(s)));
   check(ok, c.note, `attendu ${c.expect}, obtenu ${got}${s ? ` score=${s.score} secteur=${s.sector}` : ""}`);
 }
+
+check(scoreOffer(hardRejects[0].o, CITIES.lyon) === null, hardRejects[0].note);
+check(scoreOffer(hardRejects[1].o, CITIES.lyon) === null, hardRejects[1].note);
+check(scoreOffer(hardRejects[2].o, CITIES.lyon) !== null, hardRejects[2].note);
 
 // --- 2. Lecture des salaires ----------------------------------------------
 
@@ -182,14 +186,14 @@ check(
 const dedupCases: Array<{ note: string; a: OfferLike; b: OfferLike; expectDup: boolean }> = [
   {
     note: "même annonce, deux IDs, libellés de lieu différents",
-    a: { title: "Développeur Web senior H/F", company: "Groupe Martin Belaysoud", location: "Lyon, Rhône" },
-    b: { title: "Développeur WEB senior (F/H)", company: "Groupe Martin Belaysoud", location: "1er-Arrondissement, Lyon" },
+    a: { title: "Gestionnaire de dossiers H/F", company: "Groupe Martin Belaysoud", location: "Lyon, Rhône" },
+    b: { title: "Gestionnaire de dossiers (F/H)", company: "Groupe Martin Belaysoud", location: "1er-Arrondissement, Lyon" },
     expectDup: true
   },
   {
     note: "même annonce republiée par deux intermédiaires",
-    a: { title: "LEAD DÉVELOPPEUR WEB (F/H)", company: "Direct Emploi", location: "Jonage, Lyon" },
-    b: { title: "Lead développeur web F/H", company: "Randstad professional", location: "Jonage" },
+    a: { title: "ASSISTANT ADMINISTRATIF (F/H)", company: "Direct Emploi", location: "Jonage, Lyon" },
+    b: { title: "Assistant administratif F/H", company: "Randstad professional", location: "Jonage" },
     expectDup: true
   },
   {
@@ -200,8 +204,8 @@ const dedupCases: Array<{ note: string; a: OfferLike; b: OfferLike; expectDup: b
   },
   {
     note: "même enseigne, communes différentes -> pas un doublon",
-    a: { title: "Employé libre service", company: "E.Leclerc", location: "Meyzieu, Lyon" },
-    b: { title: "Employé libre service", company: "E.Leclerc", location: "Beynost (Ain)" },
+    a: { title: "Agent administratif", company: "Enedis", location: "Meyzieu, Lyon" },
+    b: { title: "Agent administratif", company: "Enedis", location: "Beynost (Ain)" },
     expectDup: false
   }
 ];
@@ -212,36 +216,37 @@ for (const c of dedupCases) {
   check(idx.isDuplicate(c.b) === c.expectDup, `dédup : ${c.note}`);
 }
 
-// --- 4. Quotas d'insertion par profil -------------------------------------
+// --- 4. Pipeline : seuil, plafond, tri ------------------------------------
 
 const flood: NormalizedOffer[] = [];
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 12; i++) {
   flood.push({
-    ...base, ref: `flood-ali:${i}`, type: "Alimentaire",
+    ...base, ref: `flood:${i}`,
     title: `Conseiller clientèle ${i}`, company: `Entreprise ${i}`, location: "Lyon",
     contract: "CDI", description: "relation client, du lundi au vendredi",
     salary: "Mensuel de 2400.0 Euros sur 12 mois"
   });
 }
-for (let i = 0; i < 4; i++) {
-  flood.push({
-    ...base, ref: `flood-dev:${i}`, type: "Dev",
-    title: `Développeur web ${i}`, company: `Agence ${i}`, location: "Lyon",
-    contract: "CDI", description: "Vue.js WordPress PHP"
-  });
-}
+// Une offre sous le seuil ne doit pas consommer un slot du plafond.
+flood.push({
+  ...base, ref: "flood:faible", title: "Agent de tri", company: "Tri Express", location: "Saint-Priest",
+  createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "tri de colis"
+});
+
 const emptyIndex = { refs: new Set<string>(), offers: [] };
-const quotaRun = selectOffers(flood, CITIES.lyon, emptyIndex, 10);
+const run = selectOffers(flood, CITIES.lyon, emptyIndex, 5);
+check(run.selected.length === 5, "pipeline : plafond d'insertion respecté", `obtenu ${run.selected.length}`);
 check(
-  quotaRun.byType.Dev === 4 && quotaRun.selected.length === 10,
-  "quota : l'alimentaire ne noie pas les offres dev, et les slots libres sont réattribués",
-  `dev=${quotaRun.byType.Dev} alimentaire=${quotaRun.byType.Alimentaire} total=${quotaRun.selected.length}`
+  run.selected.every((o) => o.score >= LIMITS.minScore),
+  "pipeline : aucune offre sous le seuil n'est retenue"
 );
 check(
-  quotaRun.selected.every((o, i, arr) => i === 0 || arr[i - 1].score >= o.score),
-  "quota : la sélection finale reste triée par score décroissant"
+  run.selected.every((o, i, arr) => i === 0 || arr[i - 1].score >= o.score),
+  "pipeline : sélection triée par score décroissant"
 );
-check(LIMITS.minScore <= MIN_SCORE_BY_TYPE.Alimentaire, "seuil alimentaire au moins égal au seuil par défaut");
+// Seuil surchargeable par la passe navigateur (cf. select-web.ts).
+const strict = selectOffers(flood, CITIES.lyon, emptyIndex, 5, 101);
+check(strict.selected.length === 0, "pipeline : seuil surchargé pris en compte");
 
 console.log(`selftest: ${pass} OK, ${fail} KO`);
 process.exit(fail ? 1 : 0);

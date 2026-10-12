@@ -2,6 +2,8 @@ name: Nettoyage Notion
 
 # À lancer manuellement (onglet Actions -> Nettoyage Notion -> Run workflow)
 # après une sur-collecte. Archive les offres "À traiter" (corbeille, réversible).
+# Ville unique : le choix « annecy » pointait vers une entrée de CITIES qui
+# n'existe plus et faisait échouer le job.
 on:
   workflow_dispatch: {}
 
@@ -18,5 +20,6 @@ jobs:
       - name: Nettoyer
         run: npm run cleanup
         env:
+          CITY: lyon
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
