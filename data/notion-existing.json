@@ -1,2336 +1,520 @@
 [
- {
-  "title": "Téléconseiller / Téléconseillère (H/F)",
-  "company": "HANDICALL LYON",
-  "location": "69 - LYON 07",
-  "ref": "ft:211SKFK"
- },
- {
-  "title": "2026 - CIC - Chargé de clientèle Particuliers (F/H)",
-  "company": "LYONNAISE DE BANQUE",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": "ft:5467367"
- },
- {
-  "title": "URGENT Vendeuse / Vendeur en boulangerie artisanale (H/F)",
-  "company": "M.F.P.",
-  "location": "69 - Lyon 6e Arrondissement",
-  "ref": "ft:211SPVK"
- },
- {
-  "title": "Vendeur-conseil en fromagerie H/F (H/F)",
-  "company": "MONS FROMAGER AFFINEUR",
-  "location": "69 - LYON 01",
-  "ref": "ft:211RLZJ"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Lyon 5e Arrondissement",
-  "ref": "ft:5481658"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Lyon 5e Arrondissement",
-  "ref": "ft:5439721"
- },
- {
-  "title": "Conseiller de Vente Poissonnerie H/F",
-  "company": "CRIT BRIGNAIS",
-  "location": "Oullins, Lyon",
-  "ref": "adzuna:5816446864"
- },
- {
-  "title": "Développeur Front-End (Ember.js) H/F",
-  "company": "",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817429362"
- },
- {
-  "title": "VENDEUR COMPTOIR (H/F)",
-  "company": "START PEOPLE",
-  "location": "69 - IRIGNY",
-  "ref": "ft:211SMWP"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Meyzieu",
-  "ref": "ft:5482002"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Rillieux-la-Pape",
-  "ref": "ft:5481991"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Vénissieux",
-  "ref": "ft:5481882"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Vaulx-en-Velin",
-  "ref": "ft:5481875"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Villefranche-sur-Saône",
-  "ref": "ft:5481837"
- },
- {
-  "title": "Vendeur / Vendeuse en alimentation générale (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Villeurbanne",
-  "ref": "ft:5481683"
- },
- {
-  "title": "Technicien de maintenance SAV itinérant (H/F)",
-  "company": "SYNERGIES-TECH",
-  "location": "69 - Saint-Priest",
-  "ref": "ft:211SMYS"
- },
- {
-  "title": "Employé de libre-service (H/F)",
-  "company": "CARREFOUR MARKET",
-  "location": "69 - VILLEURBANNE",
-  "ref": "ft:211RNGZ"
- },
- {
-  "title": "Préparateur de commande H/F)- Corbas (H/F)",
-  "company": "UPERGY",
-  "location": "69 - CORBAS",
-  "ref": "ft:211SKGC"
- },
- {
-  "title": "Préparateur de commandes Drive (H/F)",
-  "company": "CARREFOUR MARKET",
-  "location": "69 - ANSE",
-  "ref": "ft:211RQJL"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Caluire-et-Cuire",
-  "ref": "ft:5472225"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Bron",
-  "ref": "ft:5472145"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Vaulx-en-Velin",
-  "ref": "ft:5471176"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Saint-Priest",
-  "ref": "ft:5471077"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Vénissieux",
-  "ref": "ft:5440434"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "RANDSTAD",
-  "location": "69 - Villeurbanne",
-  "ref": "ft:5440183"
- },
- {
-  "title": "Agent d'Accueil et Entretien CDI 35h00 Givors / Grigny (69) (H/F)",
-  "company": "L'HACIENDA",
-  "location": "69 - GIVORS",
-  "ref": "ft:211RWBR"
- },
- {
-  "title": "Agent d'accueil et Entretien CDI 35h Vénissieux (H/F)",
-  "company": "L'HACIENDA",
-  "location": "69 - Vénissieux",
-  "ref": "ft:211RVDK"
- },
- {
-  "title": "Hôte d'accueil standardiste H/F",
-  "company": "PHONE REGIE",
-  "location": "69 - Saint-Cyr-au-Mont-d'Or",
-  "ref": "ft:5441652"
- },
- {
-  "title": "Coordinateur Logistique Production (h/f) (H/F)",
-  "company": "IZIWORK",
-  "location": "69 - Chaponnay",
-  "ref": "ft:211RRNN"
- },
- {
-  "title": "Développeur Junior - Technicien Support Applicatif - H/F (H/F)",
-  "company": "MATEN",
-  "location": "69 - Lyon 9e Arrondissement",
-  "ref": "ft:211RYKV"
- },
- {
-  "title": "Intégrateur web H/F",
-  "company": "",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817429333"
- },
- {
-  "title": "Développeur Front-End (React) H/F",
-  "company": "",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817429338"
- },
- {
-  "title": "Développeur/se Fullstack C#/.Net F/H",
-  "company": "EXALT LYON",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5810767504"
- },
- {
-  "title": "Responsable Drive F/H",
-  "company": "Auchan Retail France",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817545918"
- },
- {
-  "title": "Assistant administration des ventes H/F",
-  "company": "APAVE",
-  "location": "Saint-Priest, Lyon",
-  "ref": "adzuna:5817513728"
- },
- {
-  "title": "Conseiller commercial à distance F/H",
-  "company": "MAAF",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817513693"
- },
- {
-  "title": "PREPARATEUR DE COMMANDE PRODUITS CHARCUTIERS (H/F)",
-  "company": "ABALONE",
-  "location": "Vénissieux, Lyon",
-  "ref": "adzuna:5817546003"
- },
- {
-  "title": "Hôte(sse) d'accueil en étage - H/F",
-  "company": "Groupe Ramsay Santé",
-  "location": "Ecully, Lyon",
-  "ref": "adzuna:5816885090"
- },
- {
-  "title": "Conseiller de vente 35H - H/F",
-  "company": "Toocorner",
-  "location": "69 - Lyon 9e Arrondissement",
-  "ref": "ft:5359215"
- },
- {
-  "title": "Téléconseiller / Téléconseillère (H/F)",
-  "company": "",
-  "location": "69 - Lyon 5e Arrondissement",
-  "ref": "ft:5186797"
- },
- {
-  "title": "Responsable régional H/F",
-  "company": "BOULANGERIE ANGE",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817611358"
- },
- {
-  "title": "Négociateur transaction H/F",
-  "company": "QUALIS RECRUTEMENT",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817611287"
- },
- {
-  "title": "Boucher F/H",
-  "company": "Auchan Retail France",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817611284"
- },
- {
-  "title": "Conseiller Bancaire en Ligne - H/F",
-  "company": "BNP PARIBAS",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5817610932"
- },
- {
-  "title": "1er Vendeur H/F",
-  "company": "BOULANGERIE ANGE",
-  "location": "Ecully, Lyon",
-  "ref": "adzuna:5817610597"
- },
- {
-  "title": "Vendeur Conseil Expérimenté - Produits, Prestations et Services H/F",
-  "company": "FEU VERT",
-  "location": "Genay, Lyon",
-  "ref": "adzuna:5817610510"
- },
- {
-  "title": "Chargé de Clientèle Assurance de Personnes (H/F)",
-  "company": "Fed Group",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": "ft:5177062"
- },
- {
-  "title": "Conseillère/Conseiller en ligne (F/H)",
-  "company": "CAISSE FEDERALE DE CREDIT MUTUEL",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": "ft:5349318"
- },
- {
-  "title": "Vendeur/Vendeuse (H/F)",
-  "company": "HENRI ET SEBASTIEN BOUILLET",
-  "location": "69 - Lyon 4e Arrondissement",
-  "ref": "ft:211PHKK"
- },
- {
-  "title": "Employée, employé de rayon liquides (H/F)",
-  "company": "Monoprix.",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": "ft:5429549"
- },
- {
-  "title": "Commercial fruits et légumes (H/F)",
-  "company": "KELTIS",
-  "location": "69 - LYON",
-  "ref": "ft:211QFPS"
- },
- {
-  "title": "Hôte d'accueil standardiste H/F",
-  "company": "PHONE REGIE",
-  "location": "69 - Lyon 9e Arrondissement",
-  "ref": "ft:5359743"
- },
- {
-  "title": "Manutentionnaire",
-  "company": "CRIT BRIGNAIS",
-  "location": "Mornant, Lyon",
-  "ref": "adzuna:5816446886"
- },
- {
-  "title": "Manutentionnaire atelier H/F",
-  "company": "APROJOB CHAZELLES",
-  "location": "Saint-Laurent-de-Chamousset, Lyon",
-  "ref": "adzuna:5815255934"
- },
- {
-  "title": "Manutentionnaire F/H",
-  "company": "Synergie Saint Quentin Fallavier",
-  "location": "Jonage, Lyon",
-  "ref": "adzuna:5815249872"
- },
- {
-  "title": "Agent de production en industrie alimentaire F/H",
-  "company": "Synergie Oullins",
-  "location": "Chaponost, Lyon",
-  "ref": "adzuna:5815249439"
- },
- {
-  "title": "Ingénieur(e) développeur(se) fullstack Flutter & Java spring (H/F)",
-  "company": "",
-  "location": "69 - SAINT-BONNET-DE-MURE",
-  "ref": "ft:211PJNR"
- },
- {
-  "title": "Chargé(e) de Relation Client F/H",
-  "company": "GEODIS",
-  "location": "69 - Corbas",
-  "ref": "ft:5444406"
- },
- {
-  "title": "Vendeur détail alimentaire (H/F)",
-  "company": "AUCHAN RETAIL FRANCE",
-  "location": "69 - Caluire-et-Cuire",
-  "ref": "ft:5439734"
- },
- {
-  "title": "Vendeur / Vendeuse en matériaux de construction (H/F)",
-  "company": "CHAUSSON MATERIAUX",
-  "location": "69 - Chassieu",
-  "ref": "ft:5436917"
- },
- {
-  "title": "Employé Libre-Service Fruits et Légumes - CDI 20h (H/F)",
-  "company": "Chez André Villefranche",
-  "location": "69 - Villefranche-sur-Saône",
-  "ref": "ft:5493382"
- },
- {
-  "title": "Employé / Employée de libre-service (H/F)",
-  "company": "AUCHAN RETAIL FRANCE",
-  "location": "69 - Caluire-et-Cuire",
-  "ref": "ft:5481305"
- },
- {
-  "title": "EMPLOYE DE MAGASIN ST BONNET DE MURE F/H (H/F)",
-  "company": "CENTRAKOR",
-  "location": "69 - Saint-Bonnet-de-Mure",
-  "ref": "ft:211RPWG"
- },
- {
-  "title": "Equipier commerce boulangerie / Employé rayon boulangerie F/H",
-  "company": "",
-  "location": "69 - Caluire-et-Cuire",
-  "ref": "ft:5489932"
- },
- {
-  "title": "Employé / Employée de libre-service (H/F)",
-  "company": "AUCHAN RETAIL FRANCE",
-  "location": "69 - Caluire-et-Cuire",
-  "ref": "ft:5439828"
- },
- {
-  "title": "Manutentionnaire Cariste - Mions H/F",
-  "company": "GEODIS",
-  "location": "69 - Mions",
-  "ref": "ft:5482512"
- },
- {
-  "title": "Hôte d'accueil H/F",
-  "company": "U Les Commerçants",
-  "location": "69 - Fleurieux-sur-l'Arbresle",
-  "ref": "ft:5444481"
- },
- {
-  "title": "Développeur Front-end F/H",
-  "company": "VICINITY",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5810777483"
- },
- {
-  "title": "Téléconseiller / Téléconseillère (H/F)",
-  "company": "HANDICALL LYON",
-  "location": "69 - Villeurbanne",
-  "ref": "ft:211SKNM"
- },
- {
-  "title": "Réceptionnaire Atelier / Conseiller Client Après-Vente H/F",
-  "company": "AZUR TRUCKS FROID",
-  "location": "69 - CORBAS",
-  "ref": "ft:211PDKB"
- },
- {
-  "title": "Conseiller client (H/F)",
-  "company": "SPONSOR RH",
-  "location": "69 - Vénissieux",
-  "ref": "ft:5184710"
- },
- {
-  "title": "Technicien de maintenance électronique (H/F)",
-  "company": "FIDERIM LYON",
-  "location": "69 - Corbas",
-  "ref": "ft:5429620"
- },
- {
-  "title": "Vendeur / Vendeuse en bijouterie (H/F)",
-  "company": "",
-  "location": "69 - GIVORS",
-  "ref": "ft:211PGPH"
- },
- {
-  "title": "Employé Libre Service Fruits et Légumes - Saint-Bonnet-de-Mure - CDD 35h (H/F)",
-  "company": "Chez André",
-  "location": "69 - Saint-Bonnet-de-Mure",
-  "ref": "ft:5493211"
- },
- {
-  "title": "Employé / Employée de libre-service (H/F)",
-  "company": "",
-  "location": "69 - Villefranche-sur-Saône",
-  "ref": "ft:5357568"
- },
- {
-  "title": "Préparateur de Commandes (h/f) (H/F)",
-  "company": "IZIWORK",
-  "location": "69 - Vaugneray",
-  "ref": "ft:211RDJX"
- },
- {
-  "title": "PRÉPARATEUR(TRICE) DE COMMANDES - EXPÉRIMENTÉ(E) - H/F",
-  "company": "Groupe GP",
-  "location": "69 - Corbas",
-  "ref": "ft:5216964"
- },
- {
-  "title": "Préparateur / Préparatrice de commandes (H/F)",
-  "company": "",
-  "location": "69 - Saint-Genis-Laval",
-  "ref": "ft:5186499"
- },
- {
-  "title": "Agent de quai (H/F)",
-  "company": "CILAOS",
-  "location": "69 - ST FONS",
-  "ref": "ft:211PSPR"
- },
- {
-  "title": "Manutentionnaire cariste (H/F)",
-  "company": "KOMAKS FRANCE",
-  "location": "69 - RILLIEUX LA PAPE",
-  "ref": "ft:211MVYM"
- },
- {
-  "title": "HÔTE DE CAISSE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Craponne",
-  "ref": "wttj:hote-de-caisse-h-f_craponne"
- },
- {
-  "title": "Vendeur CDI temps partiel (18h) (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": "wttj:vendeur-cdi-temps-partiel-18h-f-h_lyon"
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal (H/F) - Temps plein",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-h-f-temps-plein_lyon"
- },
- {
-  "title": "Equipier de commerce F/H",
-  "company": "Auchan",
-  "location": "Lyon",
-  "ref": "wttj:equipier-de-commerce-f-h_lyon"
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-de-vente-f-h_lyon"
- },
- {
-  "title": "Vendeur-se / Hôte-sse (H/F) - Temps partiel Rayon Cycle",
-  "company": "Decathlon",
-  "location": "Bron",
-  "ref": "wttj:vendeur-se-hote-sse-temps-partiel-rayon-cycle_bron"
- },
- {
-  "title": "Product & Software Engineer",
-  "company": "Galadrim",
-  "location": "Lyon, Nantes, Paris",
-  "ref": "wttj:developpeur-full-stack_paris"
- },
- {
-  "title": "Software Engineer Frontend - F/H/N",
-  "company": "OVHcloud",
-  "location": "Lyon",
-  "ref": "wttj:software-engineer-frontend-f-h-n_lyon"
- },
- {
-  "title": "Vendeur CDI temps partiel (25h) (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": "wttj:vendeur-cdi-temps-partiel-25h-f-h_lyon"
- },
- {
-  "title": "Conseiller de vente - 28h - Lyon H/F",
-  "company": "Faguo",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-de-vente-28h-lyon-h-f_lyon"
- },
- {
-  "title": "Développeur Fullstack (H/F) — React / Go",
-  "company": "SOEMAN GROUP",
-  "location": "Lyon, Clermont-Ferrand",
-  "ref": "wttj:developpeur-fullstack-h-f-react-go"
- },
- {
-  "title": "Conseiller de vente Alimentaire F/H",
-  "company": "Auchan",
-  "location": "Caluire-et-Cuire",
-  "ref": "wttj:conseiller-de-vente-alimentaire-f-h_caluire-et-cuire"
- },
- {
-  "title": "HÔTE DE CAISSE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Lyon",
-  "ref": "wttj:hote-de-caisse-h-f_lyon"
- },
- {
-  "title": "Conseiller de vente Jardin (F/H)",
-  "company": "Castorama France",
-  "location": "Rillieux-la-Pape",
-  "ref": "wttj:conseiller-de-vente-jardin-f-h_rillieux-la-pape"
- },
- {
-  "title": "Conseiller de vente Technique (F/H)",
-  "company": "Castorama France",
-  "location": "Rillieux-la-Pape",
-  "ref": "wttj:conseiller-de-vente-technique-f-h_rillieux-la-pape_pDZoGeN"
- },
- {
-  "title": "Conseiller de vente - 21h - Printemps Lyon H/F",
-  "company": "Faguo",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-de-vente-21h-printemps-lyon-h-f_lyon"
- },
- {
-  "title": "Développeur Full Stack WordPress confirmé/sénior (H/F)",
-  "company": "CEETADEL",
-  "location": "Lyon",
-  "ref": "wttj:developpeur-full-stack-wordpress-confirme-senior-h-f_lyon"
- },
- {
-  "title": "Software Engineer Full Stack (NestJS / Angular) - Squad Operations H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": "wttj:software-engineer-full-stack-nestjs-angular-squad-operations-h-f_bron"
- },
- {
-  "title": "Vendeur / Tea Sommelier 35h H/F - Boutique Lyon",
-  "company": "Palais des Thés",
-  "location": "Lyon",
-  "ref": "wttj:vendeur-tea-sommelier-35h-h-f-boutique-lyon_lyon"
- },
- {
-  "title": "Développeur Full Stack Python & Go (H/F)",
-  "company": "Algosecure",
-  "location": "Villeurbanne",
-  "ref": "wttj:developpeur-cybersurveillance-h-f_villeurbanne"
- },
- {
-  "title": "Conseiller(ère) Vente et Service Client",
-  "company": "BRICO DEPOT",
-  "location": "Saint-Priest",
-  "ref": "wttj:conseiller-ere-vente-et-service-client_saint-priest"
- },
- {
-  "title": "VENDEUR TRAD (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Beynost",
-  "ref": "wttj:vendeur-trad-h-f_dijon"
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal (H/F) Randonnée/Trekking/Escalade",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-randonnee-trekking-escalade_lyon"
- },
- {
-  "title": "VENDEUR ALIMENTAIRE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Tassin-la-Demi-Lune",
-  "ref": "wttj:modele-intermarche-vendeur-alimentaire-h-f_tassin-la-demi-lune"
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal (H/F)",
-  "company": "Decathlon",
-  "location": "Beynost",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-h-f_beynost_60mxZqJ"
- },
- {
-  "title": "VENDEUR RAYON POISSONNERIE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Oullins-Pierre-Bénite",
-  "ref": "wttj:vendeur-rayon-poissonnerie-h-f_pierre-benite"
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal Randonnée Trek (H/F) - Temps partiel",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-randonnee-trek-temps-partiel_lyon"
- },
- {
-  "title": "Software Engineer - Java Angular H/F",
-  "company": "Sogelink",
-  "location": "Caluire-et-Cuire",
-  "ref": "wttj:software-engineer-java-angular-h-f_caluire-et-cuire"
- },
- {
-  "title": "CONSEILLER DE VENTE - VENDEUR (H/F) BRICORAMA",
-  "company": "Groupement Mousquetaires",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-de-vente-vendeur-h-f-bricorama_lyon"
- },
- {
-  "title": "Vendeuse / Vendeur boutique - temps partiel 13,75h",
-  "company": "La Maison du Mochi",
-  "location": "Lyon",
-  "ref": "wttj:vendeuse-vendeur-boutique-temps-partiel_lyon"
- },
- {
-  "title": "Développeur Full Stack H/F",
-  "company": "Textiles Services Développement",
-  "location": "Villeurbanne",
-  "ref": "indeed:aef5dcde3908d4ea"
- },
- {
-  "title": "Vendeur en animalerie H/F",
-  "company": "ANIMALIS",
-  "location": "Beynost",
-  "ref": "indeed:f856717b77e4ec8d"
- },
- {
-  "title": "Employé de vente polyvalent libre service H/F (temps plein)",
-  "company": "Biocoop Totem",
-  "location": "Villeurbanne",
-  "ref": "indeed:27669ba5f4fecca2"
- },
- {
-  "title": "Developpeur Web H/F PHP Symfony",
-  "company": "ORA7",
-  "location": "Sérézin-du-Rhône",
-  "ref": "indeed:4ee0f6894d6c6b4f"
- },
- {
-  "title": "Vendeur polyvalent H/F",
-  "company": "Terre de Running",
-  "location": "Limonest",
-  "ref": "indeed:e6592d10727b1ca8"
- },
- {
-  "title": "Intégrateur-Intégratrice et Développeur-Développeuse d'applications",
-  "company": "ComUE Université de Lyon",
-  "location": "Lyon 7e",
-  "ref": "indeed:a31a137f5e51fe31"
- },
- {
-  "title": "Agent logistique (H/F)",
-  "company": "TCRI Group",
-  "location": "Corbas",
-  "ref": "indeed:45e42ed42cb244c8"
- },
- {
-  "title": "Vendeur / Vendeuse Micromania Zing H/F",
-  "company": "Micromania Zing",
-  "location": "Caluire-et-Cuire",
-  "ref": "indeed:900cc9e04d528477"
- },
- {
-  "title": "Manutentionnaire (H/F)",
-  "company": "Partnaire Beynost",
-  "location": "Miribel (01700)",
-  "ref": "indeed:6f15588a75efe26a"
- },
- {
-  "title": "Réceptionnaire H/F",
-  "company": "Sysco France",
-  "location": "Lyon",
-  "ref": "indeed:780975232894aa4c"
- },
- {
-  "title": "Vendeur H/F",
-  "company": "Les Artistes Chevreul",
-  "location": "Lyon 4e",
-  "ref": "indeed:462ea5a7218d58b3"
- },
- {
-  "title": "Chargé clientèle H/F",
-  "company": "INTELCIA",
-  "location": "Vaulx-en-Velin",
-  "ref": "indeed:75e2761527a97337"
- },
- {
-  "title": "Agent logistique polyvalent H/F – CDD saison",
-  "company": "France Boissons Rhône-Alpes",
-  "location": "Corbas",
-  "ref": "indeed:5c9fff28681069e6"
- },
- {
-  "title": "Vendeur technicien multiservices H/F",
-  "company": "MISTER MINIT",
-  "location": "Lyon",
-  "ref": "indeed:a99a7c0b70588469"
- },
- {
-  "title": "Magasinier / Cariste (H/F)",
-  "company": "Gi Group France",
-  "location": "Lyon 3e",
-  "ref": "indeed:5b8a92b7b8990bdf"
- },
- {
-  "title": "Employé(e) polyvalent(e) boulangerie – Production / Logistique",
-  "company": "Boulangerie Ange",
-  "location": "Rillieux-la-Pape",
-  "ref": "indeed:d72f2195506d7cfe"
- },
- {
-  "title": "Conseiller de Vente (H/F)",
-  "company": "Jeff de Bruges",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": "ft:5502323"
- },
- {
-  "title": "Conseiller Commercial à Distance (H/F)",
-  "company": "COVEA COOPERATIONS",
-  "location": "69 - Lyon 5e Arrondissement",
-  "ref": "ft:5499924"
- },
- {
-  "title": "Conseiller(ère) de vente / Vendeur(se) - CDI 35h (H/F)",
-  "company": "LES PLAISIRS GOURMANDS DE MARION",
-  "location": "69 - Lyon 5e Arrondissement",
-  "ref": "ft:211SZRZ"
- },
- {
-  "title": "Welcomer Accueil 10h H/F",
-  "company": "MAHOLA",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": "ft:5502273"
- },
- {
-  "title": "Vendeur F/H",
-  "company": "mateam Vendeurs",
-  "location": "Saint-Genis-Laval, Lyon",
-  "ref": "adzuna:5817952576"
- },
- {
-  "title": "Vendeur F/H dès le 27/07 à Saint-genis-laval (69)",
-  "company": "mateam",
-  "location": "Oullins, Lyon",
-  "ref": "adzuna:5817720086"
- },
- {
-  "title": "DEV FULL STACK (React/JAVA) (H/F)",
-  "company": "O2MAX",
-  "location": "69 - Lyon 7e Arrondissement",
-  "ref": "ft:5509871"
- },
- {
-  "title": "Développeur Fullstack (H/F) - React / Go (H/F)",
-  "company": "REFLEX TRAINING",
-  "location": "69 - LYON",
-  "ref": "ft:211SNTY"
- },
- {
-  "title": "Conseiller Pièces de Rechange - Comptoir Clients (H/F)",
-  "company": "CRESCENDO",
-  "location": "69 - GENAS",
-  "ref": "ft:211TVSK"
- },
- {
-  "title": "Chargé de clientèle en ligne - secteur bancaire H/F",
-  "company": "Aquila Rh",
-  "location": "69 - Lyon",
-  "ref": "ft:5505002"
- },
- {
-  "title": "Gestionnaire Relation Client Assurance (H/F)",
-  "company": "RELAIS-ASSUR",
-  "location": "69 - Lyon 5e Arrondissement",
-  "ref": "ft:5500972"
- },
- {
-  "title": "Hôte de caisse / Employé polyvalent H/F",
-  "company": "U Les Commerçants",
-  "location": "69 - Lyon",
-  "ref": "ft:5504905"
- },
- {
-  "title": "Chef hôte / hôtesse d'accueil (H/F)",
-  "company": "Armonia",
-  "location": "69 - Lyon",
-  "ref": "ft:5501791"
- },
- {
-  "title": "Coiffeuse polyvalente",
-  "company": "Upercut",
-  "location": "Villeurbanne, Lyon",
-  "ref": "adzuna:5818159768"
- },
- {
-  "title": "Employé commercial polyvalent - H/F",
-  "company": "E.Leclerc",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5818143869"
- },
- {
-  "title": "E.Leclerc Chaponnay - Employé(e) Libre Service / Hôte de Caisse",
-  "company": "E.Leclerc",
-  "location": "Chaponnay, Lyon",
-  "ref": "adzuna:5818128844"
- },
- {
-  "title": "Chargé(e) de recrutement KARPOS RH · INDUSTRIE",
-  "company": "KARPOS RH",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5818632073"
- },
- {
-  "title": "EMPLOYE LIBRE SERVICE - H/F",
-  "company": "E.LECLERC",
-  "location": "Saint-Priest, Lyon",
-  "ref": "adzuna:5818109973"
- },
- {
-  "title": "Préparateur de commandes / livreur drive F/H",
-  "company": "Auchan Retail France",
-  "location": "Ecully, Lyon",
-  "ref": "adzuna:5818172419"
- },
- {
-  "title": "Préparateur de commandes CDI (H/F)",
-  "company": "Crit",
-  "location": "Givors, Lyon",
-  "ref": "adzuna:5818165972"
- },
- {
-  "title": "Magasinier Cariste H/F",
-  "company": "Etablissements BARILLET",
-  "location": "Meyzieu, Lyon",
-  "ref": "adzuna:5818155215"
- },
- {
-  "title": "Préparateur de commandes / livreur drive F/H",
-  "company": "Auchan Retail France",
-  "location": "Caluire-et-Cuire, Lyon",
-  "ref": "adzuna:5818126915"
- },
- {
-  "title": "préparateur de commandes - H/F",
-  "company": "E.Leclerc",
-  "location": "Genay, Lyon",
-  "ref": "adzuna:5818120258"
- },
- {
-  "title": "Vendeur Conseil H/F - CVC",
-  "company": "ADSEARCH",
-  "location": "Meyzieu, Lyon",
-  "ref": "adzuna:5818108652"
- },
- {
-  "title": "Préparateur de commandes - H/F",
-  "company": "E.LECLERC",
-  "location": "Saint-Priest, Lyon",
-  "ref": "adzuna:5818102591"
- },
- {
-  "title": "RRH - secteur Hôtesses d'accueil H/F",
-  "company": "Fiducial",
-  "location": "Lyon, Rhône",
-  "ref": "adzuna:5818155090"
- },
- {
-  "title": "Assistant administratif / Téléconseiller (H/F)",
-  "company": "Aquila RH Saint-Priest",
-  "location": "Corbas, Lyon",
-  "ref": "adzuna:5818264498"
- },
- {
-  "title": "Employé de Libre-Service H/F",
-  "company": "Work 2000 Bron",
-  "location": "Jonage, Lyon",
-  "ref": "adzuna:5818220483"
- },
- {
-  "title": "Employé de Libre-Service H/F",
-  "company": "Work 2000 Bron",
-  "location": "Limonest, Lyon",
-  "ref": "adzuna:5818220479"
- },
- {
-  "title": "Employé de Libre-Service H/F",
-  "company": "Work 2000 Bron",
-  "location": "Tassin-la-Demi-Lune, Lyon",
-  "ref": "adzuna:5818220478"
- },
- {
-  "title": "Préparateur de Commandes Surgele - Corbas 69 H/F",
-  "company": "Interaction",
-  "location": "Corbas, Lyon",
-  "ref": "adzuna:5818112970"
- },
- {
-  "title": "Préparateur de Commandes est Lyonnais H/F",
-  "company": "Manpower",
-  "location": "Mions, Lyon",
-  "ref": "adzuna:5818112851"
- },
- {
-  "title": "Préparateur de Commande CACES 3 H/F",
-  "company": "Start People",
-  "location": "Irigny, Lyon",
-  "ref": "adzuna:5818112930"
- },
- {
-  "title": "Préparateur de Commandes CACES 1 H/F",
-  "company": "Manpower",
-  "location": "Chaponnay, Lyon",
-  "ref": "adzuna:5818112862"
- },
- {
-  "title": "Preparateur de Commandes CACES 1B H/F",
-  "company": "Start People",
-  "location": "Mornant, Lyon",
-  "ref": "adzuna:5818112936"
- },
- {
-  "title": "Préparateur de Commande H/F",
-  "company": "ALLIANCE RECRUTEMENT",
-  "location": "Jonage, Lyon",
-  "ref": "adzuna:5818112612"
- },
- {
-  "title": "Préparateur de Commande H/F",
-  "company": "ALLIANCE RECRUTEMENT",
-  "location": "Feyzin, Lyon",
-  "ref": "adzuna:5818112613"
- },
- {
-  "title": "Cariste Prépa Commandes Froid H/F",
-  "company": "Slash Intérim",
-  "location": "Saint-Priest, Lyon",
-  "ref": "adzuna:5818112436"
- },
- {
-  "title": "Préparateur de Commandes CACES 1B H/F",
-  "company": "Slash Intérim",
-  "location": "Saint-Priest, Lyon",
-  "ref": "adzuna:5818112438"
- },
- {
-  "title": "Préparateur de Commandes CACES 1 et 6 H/F",
-  "company": "Manpower",
-  "location": "Corbas, Lyon",
-  "ref": "adzuna:5818111843"
- },
- {
-  "title": "Magasinier Cariste - CACES R489 1B 3 et 5 H/F",
-  "company": "Recrutement Services",
-  "location": "Caluire-et-Cuire, Lyon",
-  "ref": "adzuna:5818111833"
- },
- {
-  "title": "Préparateur de Commandes avec CACES 1B et 5 H/F",
-  "company": "Manpower",
-  "location": "Chaponnay, Lyon",
-  "ref": "adzuna:5818111851"
- },
- {
-  "title": "Cariste CACES 1.3.5.6 H/F",
-  "company": "Aquila RH",
-  "location": "Jonage, Lyon",
-  "ref": "adzuna:5818111575"
- },
- {
-  "title": "Préparateurs de Commandes H/F",
-  "company": "LIP Transport",
-  "location": "Chaponnay, Lyon",
-  "ref": "adzuna:5818111493"
- },
- {
-  "title": "Préparateur de Commandes - Produits Surgelés H/F",
-  "company": "Sovitrat",
-  "location": "Saint-Priest, Lyon",
-  "ref": "adzuna:5818111529"
- },
- {
-  "title": "Agent de Quai Manutentionnaire H/F",
-  "company": "Aquila RH",
-  "location": "Jonage, Lyon",
-  "ref": "adzuna:5818223074"
- },
- {
-  "title": "Manutentionnaire - Corbas H/F",
-  "company": "Gojob",
-  "location": "Corbas, Lyon",
-  "ref": "adzuna:5817239346"
- },
- {
-  "title": "Manutentionnaire H/F",
-  "company": "Gojob",
-  "location": "Décines-Charpieu, Lyon",
-  "ref": "adzuna:5817239238"
- },
- {
-  "title": "Secrétaire d'Accueil - CDI Temps Plein H/F",
-  "company": "Dentalam",
-  "location": "Villeurbanne, Lyon",
-  "ref": "adzuna:5818221117"
- },
- {
-  "title": "Agent de Production en Menuiserie H/F",
-  "company": "Aquila RH",
-  "location": "Vaugneray, Lyon",
-  "ref": "adzuna:5818234734"
- },
- {
-  "title": "Agent de Production H/F",
-  "company": "Adecco",
-  "location": "Oullins, Lyon",
-  "ref": "adzuna:5818193815"
- },
- {
-  "title": "Opérateur de Production Assemblage H/F",
-  "company": "Samsic Emploi",
-  "location": "Irigny, Lyon",
-  "ref": "adzuna:5818193200"
- },
- {
-  "title": "Agent de Production H/F",
-  "company": "Randstad",
-  "location": "Décines-Charpieu, Lyon",
-  "ref": "adzuna:5816387756"
- },
- {
-  "title": "Agent de Fabrication H/F",
-  "company": "Randstad",
-  "location": "Décines-Charpieu, Lyon",
-  "ref": "adzuna:5816387740"
- },
- {
-  "title": "Manutentionnaire industriel - Levageur - permis C (H/F)",
-  "company": "GROUPE CAYON",
-  "location": "69 - Vénissieux",
-  "ref": "ft:211SZQB"
- },
- {
-  "title": "Agent de manutention (H/F)",
-  "company": "TRANSPORTS RAPIDES J BESSON ET CIE",
-  "location": "69 - Vaulx-en-Velin",
-  "ref": "ft:5500783"
- },
- {
-  "title": "LIBRAIRE - H/F",
-  "company": "E.Leclerc",
-  "location": "Beynost, Ain",
-  "ref": "adzuna:5818129451"
- },
- {
-  "title": "Employé(e) Commercial(e) Libre-Service - Rayon Fruits & Légumes - H/F",
-  "company": "E.Leclerc",
-  "location": "Beynost, Ain",
-  "ref": "adzuna:5818179223"
- },
- {
-  "title": "HÔTE (SSE) D'ACCUEIL H/F - H/F",
-  "company": "E.Leclerc",
-  "location": "Beynost, Ain",
-  "ref": "adzuna:5818122995"
- },
- {
-  "title": "Développeur Fullstack Senior Node.js / Angular (H/F)",
-  "company": "SIMPLICITI",
-  "location": "69 - Lyon 3e Arrondissement",
-  "ref": "ft:211TLWS"
- },
- {
-  "title": "Manutentionnaire, préparateur de commandes H/F",
-  "company": "MEDISTOCK",
-  "location": "Corbas (69)",
-  "ref": "indeed:c22a1e20801b8f19"
- },
- {
-  "title": "Software Engineer Fullstack - Squad E-commerce H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": "wttj:software-engineer-fullstack-squad-e-commerce-h-f_bron_DOUGS_pKeNlK"
- },
- {
-  "title": "Commercial(e) Sédentaire",
-  "company": "STANDARD TEXTILE",
-  "location": "Rillieux-la-Pape",
-  "ref": "wttj:commercial-sedentaire_rillieux-la-pape_ST_L4a3PYM"
- },
- {
-  "title": "CONSEILLER DE VENTE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Villeurbanne",
-  "ref": "wttj:conseiller-de-vente-h-f_villeurbanne"
- },
- {
-  "title": "Conseiller commercial Vente à Distance - Assurance Collective F/H",
-  "company": "Malakoff Humanis",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-commercial-vente-a-distance-assurance-collective-f-h_lyon"
- },
- {
-  "title": "Software Engineer Fullstack - Squad Compta Core H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": "wttj:software-engineer-fullstack-squad-compta-core-h-f_bron_DOUGS_WLwbX4z"
- },
- {
-  "title": "Développeur d'applicatifs SIG Métiers (H/F)",
-  "company": "Métropole de Lyon",
-  "location": "Lyon 3e (69003)",
-  "ref": "indeed:26545dc4bf6d5ba2"
- },
- {
-  "title": "VALSERVE - Chargé de devis F/H",
-  "company": "Framatome",
-  "location": "Lyon",
-  "ref": "wttj:valserve-charge-de-devis-f-h_lyon_FRAMA_WPagoe0"
- },
- {
-  "title": "Vendeur au rayon charcuterie (F/H)",
-  "company": "Carrefour",
-  "location": "Écully",
-  "ref": "wttj:vendeur-au-rayon-charcuterie-f-h_ecully_CARRE_660z99j"
- },
- {
-  "title": "Assistant de fabrication poissonnerie (H/F)",
-  "company": "CARREFOUR",
-  "location": "69 - ECULLY",
-  "ref": "ft:211XXCR"
- },
- {
-  "title": "ASSISTANT DE FABRICATION (H/F)",
-  "company": "CARREFOUR",
-  "location": "69 - ECULLY",
-  "ref": "ft:211XXJS"
- },
- {
-  "title": "Vendeur au rayon charcuterie (F/H)",
-  "company": "Carrefour",
-  "location": "Écully",
-  "ref": "wttj:vendeur-au-rayon-charcuterie-f-h_ecully"
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Saint-Priest",
-  "ref": "wttj:conseiller-de-vente-f-h_saint-priest"
- },
- {
-  "title": "Software Engineer Fullstack - Squad E-commerce H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": "wttj:software-engineer-fullstack-squad-e-commerce-h-f_bron"
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Saint-Priest",
-  "ref": "wttj:conseiller-de-vente-f-h_saint-priest_BT_9oRo7rk"
- },
- {
-  "title": "Conseiller(e) running - CDD 35H - Août et septembre",
-  "company": "Decathlon",
-  "location": "Bron",
-  "ref": "wttj:conseiller-running-cdd-35h-aout-et-septembre_bron"
- },
- {
-  "title": "Téléconseiller Technique Automobile (H/F)",
-  "company": "Opteven",
-  "location": "Villeurbanne",
-  "ref": "wttj:gestionnaire-de-decision-technique-h-f_villeurbanne"
- },
- {
-  "title": "Vendeur CDI temps partiel (17,5h) (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": "wttj:vendeur-cdi-temps-partiel-17-5h-f-h_lyon_LACOS_xjGGgjg"
- },
- {
-  "title": "Développeur d'applications mobile H/F",
-  "company": "INFANS GROUP",
-  "location": "Décines-Charpieu",
-  "ref": "indeed:4f09435d45a60443"
- },
- {
-  "title": "Rayonniste en pharmacie H/F",
-  "company": "PHARMACIE LABBE DUTILLEUL",
-  "location": "Lyon 8e",
-  "ref": "indeed:124018ba79635eb6"
- },
- {
-  "title": "Web Designer / UX Designer & Développeur·se WordPress",
-  "company": "Lemon & Joy",
-  "location": "Lyon 1er",
-  "ref": "indeed:11ae6577c04fc21c"
- },
- {
-  "title": "Développeur·se Produit / Product Builder F/H",
-  "company": "TheCodingMachine",
-  "location": "Lyon (télétravail partiel)",
-  "ref": "indeed:13f2e49db20ea641"
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal Randonnée Trek (H/F) - Temps partiel (15/25h)",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-randonnee-trek-h-f-temps-partiel-15-25h_lyon_DECAT_3MNWWb5"
- },
- {
-  "title": "Vendeur(euse) CDI (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": "wttj:vendeur-euse-cdi-f-h_lyon_LACOS_NP0oaR3"
- },
- {
-  "title": "Senior Product & Software Engineer",
-  "company": "Galadrim",
-  "location": "Lyon",
-  "ref": "wttj:developpeur-full-stack-senior-cdi_GALAD_07lJMD"
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Caluire-et-Cuire",
-  "ref": "wttj:conseiller-de-vente-f-h_caluire-et-cuire_BT_YDq34ye"
- },
- {
-  "title": "Vendeur polyvalent H/F",
-  "company": "FRIPES A GOGO",
-  "location": "69002 Lyon",
-  "ref": "indeed:9422d3eaec32265b"
- },
- {
-  "title": "CDD Conseiller-ère Vente (H/F) Temps complet",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": "wttj:cdd-conseiller-ere-vente-h-f-temps-complet_lyon"
- },
- {
-  "title": "Vendeur Polyvalent adidas (H/F/D) - Vaulx-en-Velin",
-  "company": "Adidas France",
-  "location": "Vaulx-en-Velin",
-  "ref": "wttj:vendeur-polyvalent-adidas-h-f-d-vaulx-en-velin_lyon"
- },
- {
-  "title": "Vendeur polyvalent H/F",
-  "company": "ARTHUR&ASTON",
-  "location": "69006 Lyon",
-  "ref": "indeed:17adffe0f2c74aee"
- },
- {
-  "title": "Vendeur animalier H/F",
-  "company": "Les Jardins des Monts d'Or",
-  "location": "69760 Limonest",
-  "ref": "indeed:c67dfc2631cf0de3"
- },
- {
-  "title": "Développeur PHP H/F",
-  "company": "INFANS GROUP",
-  "location": "Décines-Charpieu (69)",
-  "ref": "indeed:4c52cb8b54ac7f1d"
- },
- {
-  "title": "Commercial sédentaire H/F",
-  "company": "Indy",
-  "location": "Lyon",
-  "ref": "wttj:commercial-sedentaire-h-f_lyon"
- },
- {
-  "title": "Vendeur polyvalent H/F en boulangerie",
-  "company": "SAS LE FOURNIL DE L'OPERA",
-  "location": "Lyon 2e (69002)",
-  "ref": "indeed:f462455b82cf4f20"
- },
- {
-  "title": "Software Engineer Fullstack - OPB - Team transverse H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": "wttj:software-engineer-fullstack-opb-team-transverse-h-f_bron"
- },
- {
-  "title": "Vendeur produits frais poissonnerie (F/H)",
-  "company": "Carrefour",
-  "location": "Lyon",
-  "ref": "wttj:vendeur-produits-frais-poissonnerie-f-h_lyon"
- },
- {
-  "title": "[ref] indeed:021759773a83f924",
-  "company": "",
-  "location": "",
-  "ref": "indeed:021759773a83f924"
- },
- {
-  "title": "[ref] indeed:0e20bf06bfcae838",
-  "company": "",
-  "location": "",
-  "ref": "indeed:0e20bf06bfcae838"
- },
- {
-  "title": "[ref] indeed:120c080557f9b8b6",
-  "company": "",
-  "location": "",
-  "ref": "indeed:120c080557f9b8b6"
- },
- {
-  "title": "[ref] indeed:12db79c9c20d53ba",
-  "company": "",
-  "location": "",
-  "ref": "indeed:12db79c9c20d53ba"
- },
- {
-  "title": "[ref] indeed:1aa67942eb789f2d",
-  "company": "",
-  "location": "",
-  "ref": "indeed:1aa67942eb789f2d"
- },
- {
-  "title": "[ref] indeed:1af63766c02313ee",
-  "company": "",
-  "location": "",
-  "ref": "indeed:1af63766c02313ee"
- },
- {
-  "title": "[ref] indeed:22e628b195e0777d",
-  "company": "",
-  "location": "",
-  "ref": "indeed:22e628b195e0777d"
- },
- {
-  "title": "[ref] indeed:247728ab4dc03984",
-  "company": "",
-  "location": "",
-  "ref": "indeed:247728ab4dc03984"
- },
- {
-  "title": "[ref] indeed:2f876e4fb5c3638f",
-  "company": "",
-  "location": "",
-  "ref": "indeed:2f876e4fb5c3638f"
- },
- {
-  "title": "[ref] indeed:3406fb4551f5d10f",
-  "company": "",
-  "location": "",
-  "ref": "indeed:3406fb4551f5d10f"
- },
- {
-  "title": "[ref] indeed:3779808030afd9ca",
-  "company": "",
-  "location": "",
-  "ref": "indeed:3779808030afd9ca"
- },
- {
-  "title": "[ref] indeed:3b81dce46d12f0c8",
-  "company": "",
-  "location": "",
-  "ref": "indeed:3b81dce46d12f0c8"
- },
- {
-  "title": "[ref] indeed:3c6c05cf812944e6",
-  "company": "",
-  "location": "",
-  "ref": "indeed:3c6c05cf812944e6"
- },
- {
-  "title": "[ref] indeed:51e7393fa32ae948",
-  "company": "",
-  "location": "",
-  "ref": "indeed:51e7393fa32ae948"
- },
- {
-  "title": "[ref] indeed:52911e15d7c44c9a",
-  "company": "",
-  "location": "",
-  "ref": "indeed:52911e15d7c44c9a"
- },
- {
-  "title": "[ref] indeed:610e8382d05ba59d",
-  "company": "",
-  "location": "",
-  "ref": "indeed:610e8382d05ba59d"
- },
- {
-  "title": "[ref] indeed:6bd8003dd014d799",
-  "company": "",
-  "location": "",
-  "ref": "indeed:6bd8003dd014d799"
- },
- {
-  "title": "[ref] indeed:88607e1a504ee923",
-  "company": "",
-  "location": "",
-  "ref": "indeed:88607e1a504ee923"
- },
- {
-  "title": "[ref] indeed:aa644c29287620d8",
-  "company": "",
-  "location": "",
-  "ref": "indeed:aa644c29287620d8"
- },
- {
-  "title": "[ref] indeed:adf4563965f5c46e",
-  "company": "",
-  "location": "",
-  "ref": "indeed:adf4563965f5c46e"
- },
- {
-  "title": "[ref] indeed:cdbcfcb16711477a",
-  "company": "",
-  "location": "",
-  "ref": "indeed:cdbcfcb16711477a"
- },
- {
-  "title": "[ref] indeed:d1f798d4df811878",
-  "company": "",
-  "location": "",
-  "ref": "indeed:d1f798d4df811878"
- },
- {
-  "title": "[ref] indeed:e321b4336a5efc30",
-  "company": "",
-  "location": "",
-  "ref": "indeed:e321b4336a5efc30"
- },
- {
-  "title": "[ref] indeed:eaf69c9a7eb103df",
-  "company": "",
-  "location": "",
-  "ref": "indeed:eaf69c9a7eb103df"
- },
- {
-  "title": "[ref] indeed:f4fa4682334ff5dc",
-  "company": "",
-  "location": "",
-  "ref": "indeed:f4fa4682334ff5dc"
- },
- {
-  "title": "[ref] wttj:bricorama-conseiller-de-vente-h-f_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:bricorama-conseiller-de-vente-h-f_lyon"
- },
- {
-  "title": "[ref] wttj:conseiller-de-vente-17h-h-f-lyon-bron_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-de-vente-17h-h-f-lyon-bron_lyon"
- },
- {
-  "title": "[ref] wttj:conseiller-de-vente-et-service-client-cdi-etudiant_saint-priest_BD_W4Mp3ml",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-de-vente-et-service-client-cdi-etudiant_saint-priest_BD_W4Mp3ml"
- },
- {
-  "title": "[ref] wttj:conseiller-ere-de-vente-clients-pros_saint-priest_BD_xDPyjaw",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-ere-de-vente-clients-pros_saint-priest_BD_xDPyjaw"
- },
- {
-  "title": "[ref] wttj:conseiller-ere-vente-omnicanal-cycle-h-f-temps-partiel-12h_beynost",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-cycle-h-f-temps-partiel-12h_beynost"
- },
- {
-  "title": "[ref] wttj:conseiller-ere-vente-omnicanal-h-f-temps-partiel-15h_limonest",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-h-f-temps-partiel-15h_limonest"
- },
- {
-  "title": "[ref] wttj:conseiller-ere-vente-randonnee-h-f-20h-cdi_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-ere-vente-randonnee-h-f-20h-cdi_lyon"
- },
- {
-  "title": "[ref] wttj:developpeur-full-stack-java-h-f_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:developpeur-full-stack-java-h-f_lyon"
- },
- {
-  "title": "[ref] wttj:developpeur-fullstack-javascript-junior-h-f_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:developpeur-fullstack-javascript-junior-h-f_lyon"
- },
- {
-  "title": "[ref] wttj:developpeur-fullstack-javascript-senior-h-f_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:developpeur-fullstack-javascript-senior-h-f_lyon"
- },
- {
-  "title": "[ref] wttj:developpeur-net-h-f_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:developpeur-net-h-f_lyon"
- },
- {
-  "title": "[ref] wttj:employe-libre-service-cdd-7-mois-h-f_corbas",
-  "company": "",
-  "location": "",
-  "ref": "wttj:employe-libre-service-cdd-7-mois-h-f_corbas"
- },
- {
-  "title": "[ref] wttj:gestionnaire-adv-h-f_rillieux-la-pape",
-  "company": "",
-  "location": "",
-  "ref": "wttj:gestionnaire-adv-h-f_rillieux-la-pape"
- },
- {
-  "title": "[ref] wttj:modele-intermarche-hote-sse-de-caisse-h-f_villeurbanne",
-  "company": "",
-  "location": "",
-  "ref": "wttj:modele-intermarche-hote-sse-de-caisse-h-f_villeurbanne"
- },
- {
-  "title": "[ref] wttj:senior-software-engineer-h-f_lyon",
-  "company": "",
-  "location": "",
-  "ref": "wttj:senior-software-engineer-h-f_lyon"
- },
- {
-  "title": "[ref] wttj:senior-software-engineer-nodejs",
-  "company": "",
-  "location": "",
-  "ref": "wttj:senior-software-engineer-nodejs"
- },
- {
-  "title": "[ref] wttj:vendeur-cdd-h-f_fr-btq-lyon-jacobins_NESPR_qoVZ07y",
-  "company": "",
-  "location": "",
-  "ref": "wttj:vendeur-cdd-h-f_fr-btq-lyon-jacobins_NESPR_qoVZ07y"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:commercial-sedentaire_rillieux-la-pape_L4a3PYM"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:software-engineer-fullstack-squad-compta-core-h-f_bron_WLwbX4z"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:valserve-charge-de-devis-f-h_lyon_WPagoe0"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:vendeur-au-rayon-charcuterie-f-h_ecully_660z99j"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-de-vente-f-h_saint-priest_9oRo7rk"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:software-engineer-fullstack-squad-e-commerce-h-f_bron_pKeNlK"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:vendeur-cdi-temps-partiel-17-5h-f-h_lyon_xjGGgjg"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-ere-vente-omnicanal-randonnee-trek-h-f-temps-partiel-15-25h_lyon_3MNWWb5"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:vendeur-euse-cdi-f-h_lyon_NP0oaR3"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:developpeur-full-stack-senior-cdi_07lJMD"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-de-vente-f-h_caluire-et-cuire_YDq34ye"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:vendeur-cdd-h-f_fr-btq-lyon-jacobins_qoVZ07y"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-de-vente-et-service-client-cdi-etudiant_saint-priest_W4Mp3ml"
- },
- {
-  "title": "",
-  "company": "",
-  "location": "",
-  "ref": "wttj:conseiller-ere-de-vente-clients-pros_saint-priest_xDPyjaw"
- },
- {
-  "title": "Software Engineer Full Stack (NestJS / Angular) - Squad Operations H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": ""
- },
- {
-  "title": "Vendeur / Tea Sommelier 35h H/F - Boutique Lyon",
-  "company": "Palais des Thés",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Développeur Full Stack Python & Go (H/F)",
-  "company": "Algosecure",
-  "location": "Villeurbanne",
-  "ref": ""
- },
- {
-  "title": "Vendeur-se / Hôte-sse (H/F) - Temps partiel Rayon Cycle",
-  "company": "Decathlon",
-  "location": "Bron",
-  "ref": ""
- },
- {
-  "title": "Product & Software Engineer",
-  "company": "Galadrim",
-  "location": "Lyon, Nantes, Paris",
-  "ref": ""
- },
- {
-  "title": "Software Engineer Frontend - F/H/N",
-  "company": "OVHcloud",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Chargé clientèle H/F",
-  "company": "INTELCIA",
-  "location": "Vaulx-en-Velin",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal (H/F) Randonnée/Trekking/Escalade",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal (H/F)",
-  "company": "Decathlon",
-  "location": "Beynost",
-  "ref": ""
- },
- {
-  "title": "Vendeur CDI temps partiel (25h) (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller de vente - 28h - Lyon H/F",
-  "company": "Faguo",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur au rayon charcuterie (F/H)",
-  "company": "Carrefour",
-  "location": "Écully",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal Randonnée Trek (H/F) - Temps partiel",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Software Engineer - Java Angular H/F",
-  "company": "Sogelink",
-  "location": "Caluire-et-Cuire",
-  "ref": ""
- },
- {
-  "title": "CONSEILLER DE VENTE - VENDEUR (H/F) BRICORAMA",
-  "company": "Groupement Mousquetaires",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "BRICORAMA - CONSEILLER DE VENTE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "CONSEILLER DE VENTE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Villeurbanne",
-  "ref": ""
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Software Engineer Fullstack - Squad E-commerce H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": ""
- },
- {
-  "title": "Conseiller de vente Alimentaire F/H",
-  "company": "Auchan",
-  "location": "Caluire-et-Cuire",
-  "ref": ""
- },
- {
-  "title": "HÔTE DE CAISSE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller de vente Jardin (F/H)",
-  "company": "Castorama France",
-  "location": "Rillieux-la-Pape",
-  "ref": ""
- },
- {
-  "title": "Conseiller de vente Technique (F/H)",
-  "company": "Castorama France",
-  "location": "Rillieux-la-Pape",
-  "ref": ""
- },
- {
-  "title": "Conseiller(ère) Vente et Service Client",
-  "company": "BRICO DEPOT",
-  "location": "Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Commercial(e) Sédentaire",
-  "company": "STANDARD TEXTILE",
-  "location": "Rillieux-la-Pape",
-  "ref": ""
- },
- {
-  "title": "Conseiller commercial Vente à Distance - Assurance Collective F/H",
-  "company": "Malakoff Humanis",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Software Engineer Fullstack - Squad Compta Core H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": ""
- },
- {
-  "title": "VALSERVE - Chargé de devis F/H",
-  "company": "Framatome",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller(e) running - CDD 35H - Août et septembre",
-  "company": "Decathlon",
-  "location": "Bron",
-  "ref": ""
- },
- {
-  "title": "Téléconseiller Technique Automobile (H/F)",
-  "company": "Opteven",
-  "location": "Villeurbanne",
-  "ref": ""
- },
- {
-  "title": "Vendeur CDI temps partiel (17,5h) (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Développeur Front-End Sénior React (H/F)",
-  "company": "ALTEN",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Web Designer / UX Designer & Développeur·se WordPress",
-  "company": "Lemon & Joy",
-  "location": "Lyon 1er",
-  "ref": ""
- },
- {
-  "title": "Développeur Full-Stack Java (h/f)",
-  "company": "THE ADECCO GROUP",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Développeur·se Produit / Product Builder F/H",
-  "company": "TheCodingMachine",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal Randonnée Trek (H/F) - Temps partiel (15/25h)",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Senior Software Engineer H/F",
-  "company": "BLUECODERS",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Développeur .Net (h/f)",
-  "company": "THE ADECCO GROUP",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur(euse) CDI (F/H)",
-  "company": "Lacoste",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Senior Software Engineer (NodeJS)",
-  "company": "Agicap",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Senior Product & Software Engineer",
-  "company": "Galadrim",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller de Vente F/H",
-  "company": "Bouygues Telecom",
-  "location": "Caluire-et-Cuire",
-  "ref": ""
- },
- {
-  "title": "Développeur Web PHP H/F",
-  "company": "wizio",
-  "location": "Lyon 3e",
-  "ref": ""
- },
- {
-  "title": "Développeur Fullstack JavaScript Junior (H/F)",
-  "company": "PulseLife (ex 360 medics)",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Développeur Fullstack JavaScript Sénior (H/F)",
-  "company": "PulseLife (ex 360 medics)",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur polyvalent H/F",
-  "company": "FRIPES A GOGO",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "CDD Conseiller-ère Vente (H/F) Temps complet",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur Polyvalent adidas (H/F/D) - Vaulx-en-Velin",
-  "company": "Adidas France",
-  "location": "Vaulx-en-Velin",
-  "ref": ""
- },
- {
-  "title": "Vendeur animalier H/F",
-  "company": "Les Jardins des Monts d'Or",
-  "location": "Limonest",
-  "ref": ""
- },
- {
-  "title": "Commercial sédentaire H/F",
-  "company": "Indy",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur/Vendeuse - Boulangerie H/F",
-  "company": "Comptoir J&K",
-  "location": "Lyon 9e",
-  "ref": ""
- },
- {
-  "title": "Employé(e) Libre Service CDD 7 mois (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Corbas",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commande CACES 1B.3.5 (H/F)",
-  "company": "FIDERIM BRON",
-  "location": "Chassieu",
-  "ref": ""
- },
- {
-  "title": "Vendeur polyvalent H/F en boulangerie",
-  "company": "SAS LE FOURNIL DE L'OPERA",
-  "location": "Lyon 2e",
-  "ref": ""
- },
- {
-  "title": "Vendeur - CDD (H/F)",
-  "company": "Nespresso",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "HÔTE(SSE) DE CAISSE (H/F)",
-  "company": "Groupement Mousquetaires",
-  "location": "Villeurbanne",
-  "ref": ""
- },
- {
-  "title": "Software Engineer Fullstack - OPB - Team transverse H/F",
-  "company": "Dougs",
-  "location": "Bron",
-  "ref": ""
- },
- {
-  "title": "Vendeur produits frais poissonnerie (F/H)",
-  "company": "Carrefour",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commande CACES 1 SURGELES (H/F)",
-  "company": "FIDERIM BRON",
-  "location": "Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Vendeur véhicules neufs H/F",
-  "company": "Recrutement Réseau Renault",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller(e) de vente et service client - CDI étudiant",
-  "company": "BRICO DEPOT",
-  "location": "Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Préparateur réparateur véhicules de loisirs",
-  "company": "CT CARR",
-  "location": "Chassieu",
-  "ref": ""
- },
- {
-  "title": "Vendeur véhicules d'occasion H/F",
-  "company": "Recrutement Réseau Renault",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur Automobile VO H/F",
-  "company": "bymycar",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal cycle (H/F) - Temps partiel 12h",
-  "company": "Decathlon",
-  "location": "Beynost",
-  "ref": ""
- },
- {
-  "title": "Conseiller(ère) de Vente - Clients Pros",
-  "company": "BRICO DEPOT",
-  "location": "Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Vendeur polyvalent H/F",
-  "company": "Jules",
-  "location": "Vaulx-en-Velin",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente Omnicanal (H/F) - Temps partiel +/-15h",
-  "company": "Decathlon",
-  "location": "Limonest",
-  "ref": ""
- },
- {
-  "title": "Conseiller de Vente 17h H/F - Lyon Bron",
-  "company": "Sessùn",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller-ère Vente randonnée (H/F) - 20H CDI",
-  "company": "Decathlon",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Développeur CMS (WordPress) H/F",
-  "company": "",
-  "location": "Lyon, Rhône",
-  "ref": ""
- },
- {
-  "title": "Développeur Front-End (Vue.js) H/F",
-  "company": "",
-  "location": "Lyon, Rhône",
-  "ref": ""
- },
- {
-  "title": "Développeur back-end - Lyon, France (H/F)",
-  "company": "Forums Talents Handicap",
-  "location": "69 - Lyon 1er Arrondissement",
-  "ref": ""
- },
- {
-  "title": "Téléconseillers (H/F)",
-  "company": "Tessi France",
-  "location": "69 - Lyon 7e Arrondissement",
-  "ref": ""
- },
- {
-  "title": "Téléconseiller / Téléconseillère (H/F)",
-  "company": "France Travail",
-  "location": "Villeurbanne, Lyon",
-  "ref": ""
- },
- {
-  "title": "Téléconseiller H/F",
-  "company": "Epitech",
-  "location": "Saint-Fons, Lyon",
-  "ref": ""
- },
- {
-  "title": "Equipier Commerce home décoration/ poste après-midi F/H",
-  "company": "",
-  "location": "69 - Saint-Genis-Laval",
-  "ref": ""
- },
- {
-  "title": "Employé Libre Service CDD H/F",
-  "company": "Groupement Mousquetaires",
-  "location": "Rillieux-la-Pape, Lyon",
-  "ref": ""
- },
- {
-  "title": "Préparateur / Préparatrice de commandes (H/F)",
-  "company": "1PACT",
-  "location": "69 - Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commande CACES 1 (H/F)",
-  "company": "FIDERIM BRON",
-  "location": "Saint-Bonnet-de-Mure, Lyon",
-  "ref": ""
- },
- {
-  "title": "Vendeur en boulangerie-pâtisserie - Temps Partiel (H/F)",
-  "company": "BOULANGERIE CHEZ JULES",
-  "location": "69 - LYON 06",
-  "ref": ""
- },
- {
-  "title": "Assistant administratif / Téléconseiller (H/F)",
-  "company": "Aquila RH Saint-Priest",
-  "location": "Corbas, Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller(ère) de vente 35h - CDI",
-  "company": "American Vintage",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Conseiller(e) de Vente Tezenis - CDI 35h - Lyon Part-Dieu",
-  "company": "ONIVERSE (Calzedonia)",
-  "location": "Lyon (Part-Dieu)",
-  "ref": ""
- },
- {
-  "title": "Conseillère vendeuse / Conseiller vendeur",
-  "company": "Orange Store",
-  "location": "Vénissieux",
-  "ref": "indeed:eaf69c9a7eb103df"
- },
- {
-  "title": "Assistant(e) Administratif(ve) & Coordination",
-  "company": "SAMAC",
-  "location": "Lyon (69)",
-  "ref": "indeed:4349b19bdb32176b"
- },
- {
-  "title": "Développeur Fullstack - TMA (H/F)",
-  "company": "Réseau Services Sociaux Interentreprises",
-  "location": "69003 Lyon 3e",
-  "ref": "indeed:352265be11fb99f4"
- },
- {
-  "title": "Développeur Magento 2",
-  "company": "DATASOLUTION",
-  "location": "Lyon (69)",
-  "ref": "indeed:7304cb9338e2624c"
- },
- {
-  "title": "Développeur Back-end Python (H/F)",
-  "company": "Lowit",
-  "location": "69003 Lyon",
-  "ref": "indeed:6c8ecb13b8671a27"
- },
- {
-  "title": "Développeur.euse Back-End ou Full-Stack",
-  "company": "EXO-DEV",
-  "location": "69006 Lyon",
-  "ref": "indeed:d4e81f77fda7ded1"
- },
- {
-  "title": "Développeur PHP H/F",
-  "company": "INFANS GROUP",
-  "location": "Décines-Charpieu",
-  "ref": ""
- },
- {
-  "title": "Equipier Commerce F/H",
-  "company": "Auchan",
-  "location": "Saint-Genis-Laval",
-  "ref": "wttj:equipier-commerce-f-h_saint-genis-laval"
- },
- {
-  "title": "Equipier Commerce F/H",
-  "company": "Auchan Retail France",
-  "location": "Saint-Genis-Laval, Lyon",
-  "ref": ""
- },
- {
-  "title": "EMPLOYE COMMERCIAL (H/F)",
-  "company": "Intermarché",
-  "location": "69 - Lyon",
-  "ref": ""
- },
- {
-  "title": "EMPLOYE LIBRE SERVICE (H/F)",
-  "company": "Intermarché",
-  "location": "69 - Lyon",
-  "ref": ""
- },
- {
-  "title": "EMPLOYE RAYON LIBRE SERVICE (H/F)",
-  "company": "Intermarché",
-  "location": "69 - Lyon",
-  "ref": ""
- },
- {
-  "title": "Employé drive H/F",
-  "company": "FH2MRE",
-  "location": "Lyon",
-  "ref": ""
- },
- {
-  "title": "Téléconseillers H/F",
-  "company": "Groupe VYV",
-  "location": "Villeurbanne",
-  "ref": "wttj:teleconseillers-h-f_villeurbanne_GV_17RjJYO"
- },
- {
-  "title": "Téléconseiller H/F",
-  "company": "Phone Régie",
-  "location": "Décines-Charpieu, Lyon",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commandes, livreur H/F",
-  "company": "UNION DES DROGUISTES LYONNAIS",
-  "location": "Beynost (01)",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commandes H/F",
-  "company": "1PACT Rhône-Alpes-Ouest",
-  "location": "69800 Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Préparateur de Commandes H/F",
-  "company": "Adecco",
-  "location": "Villeurbanne, Lyon",
-  "ref": ""
- },
- {
-  "title": "Préparateur de Commandes H/F",
-  "company": "Partnaire",
-  "location": "Corbas, Lyon",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commandes / Cariste (H/F) - Lyon - CDI 35h",
-  "company": "Le Fourgon",
-  "location": "69120 Vaulx-en-Velin",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commande CACES 1B.3.5 (H/F)",
-  "company": "FIDERIM BRON",
-  "location": "Chassieu (69680)",
-  "ref": ""
- },
- {
-  "title": "Préparateur de commande CACES 1 SURGELES (H/F)",
-  "company": "FIDERIM BRON",
-  "location": "Saint-Priest (69800)",
-  "ref": ""
- },
- {
-  "title": "Mécanicien préparateur (H/F)",
-  "company": "KILOUTOU",
-  "location": "Chassieu",
-  "ref": ""
- },
- {
-  "title": "Technicien Préparateur Réparateur H/F",
-  "company": "Groupe Hunyvers",
-  "location": "Saint-Priest",
-  "ref": ""
- },
- {
-  "title": "Magasinier Cariste Caces 1, 3, 5 (H/F)",
-  "company": "Jubil ANSE",
-  "location": "Saint-Priest (69800)",
-  "ref": ""
- },
- {
-  "title": "Référent centre d'appel H/F",
-  "company": "Feu Vert",
-  "location": "Écully (69130)",
-  "ref": ""
- }
+{"ref":"indeed:4ee0f6894d6c6b4f","title":"Developpeur Web H/F PHP Symfony","company":"ORA7","location":"Sérézin-du-Rhône"},
+{"ref":"wttj:conseiller-de-vente-h-f_villeurbanne","title":"CONSEILLER DE VENTE (H/F)","company":"Groupement Mousquetaires","location":"Villeurbanne"},
+{"ref":"wttj:bricorama-conseiller-de-vente-h-f_lyon","title":"BRICORAMA - CONSEILLER DE VENTE (H/F)","company":"Groupement Mousquetaires","location":"Lyon"},
+{"ref":"indeed:88607e1a504ee923","title":"Développeur Web PHP H/F","company":"wizio","location":"Lyon 3e (69)"},
+{"ref":"indeed:e321b4336a5efc30","title":"Vendeur(euse) comptoir","company":"CODEP","location":"69760 Limonest"},
+{"ref":"indeed:3779808030afd9ca","title":"Vendeur polyvalent H/F en boulangerie","company":"MAISON RICHARD","location":"69100 Villeurbanne"},
+{"ref":"indeed:4f09435d45a60443","title":"Développeur d'applications mobile H/F","company":"INFANS GROUP","location":"69150 Décines-Charpieu"},
+{"ref":"indeed:1aa67942eb789f2d","title":"Développeur Front-End Sénior React (H/F)","company":"ALTEN","location":"Télétravail à Lyon (69)"},
+{"ref":"indeed:11ae6577c04fc21c","title":"Web Designer / UX Designer & Développeur·se WordPress","company":"Lemon & Joy","location":"69001 Lyon 1er"},
+{"ref":"indeed:51e7393fa32ae948","title":"Mécanicien préparateur (H/F)","company":"KILOUTOU","location":"Chassieu (69)"},
+{"ref":"indeed:13f2e49db20ea641","title":"Développeur·se Produit / Product Builder F/H","company":"TheCodingMachine","location":"Télétravail partiel à Lyon (69)"},
+{"ref":"wttj:gestionnaire-de-decision-technique-h-f_villeurbanne","title":"Téléconseiller Technique Automobile (H/F)","company":"Opteven","location":"Villeurbanne"},
+{"ref":"wttj:conseiller-de-vente-f-h_saint-priest_BT_9oRo7rk","title":"Conseiller de Vente F/H","company":"Bouygues Telecom","location":"Saint-Priest"},
+{"ref":"wttj:vendeur-euse-cdi-f-h_lyon_LACOS_NP0oaR3","title":"Vendeur(euse) CDI (F/H)","company":"Lacoste","location":"Lyon"},
+{"ref":"indeed:c67dfc2631cf0de3","title":"Vendeur animalier H/F","company":"Les Jardins des Monts d'Or","location":"Limonest (69760)"},
+{"ref":"wttj:developpeur-fullstack-javascript-senior-h-f_lyon","title":"Développeur Fullstack JavaScript Sénior (H/F)","company":"PulseLife (ex 360 medics)","location":"Lyon"},
+{"ref":"wttj:developpeur-fullstack-javascript-junior-h-f_lyon","title":"Développeur Fullstack JavaScript Junior (H/F)","company":"PulseLife (ex 360 medics)","location":"Lyon"},
+{"ref":"wttj:cdd-conseiller-ere-vente-h-f-temps-complet_lyon","title":"CDD Conseiller-ère Vente (H/F) Temps complet","company":"Decathlon","location":"Lyon"},
+{"ref":"indeed:4c52cb8b54ac7f1d","title":"Développeur PHP H/F","company":"INFANS GROUP","location":"Décines-Charpieu"},
+{"ref":"indeed:17adffe0f2c74aee","title":"Vendeur polyvalent H/F","company":"ARTHUR&ASTON","location":"Lyon 6e (69006)"},
+{"ref":"indeed:9422d3eaec32265b","title":"Vendeur polyvalent H/F","company":"FRIPES A GOGO","location":"Lyon 2e (69002)"},
+{"ref":"wttj:vendeur-polyvalent-adidas-h-f-d-vaulx-en-velin_lyon","title":"Vendeur Polyvalent adidas (H/F/D) - Vaulx-en-Velin","company":"Adidas France","location":"Vaulx-en-Velin"},
+{"ref":"wttj:conseiller-de-vente-f-h_caluire-et-cuire_BT_YDq34ye","title":"Conseiller de Vente F/H","company":"Bouygues Telecom","location":"Caluire-et-Cuire"},
+{"ref":"indeed:2f876e4fb5c3638f","title":"Vendeur/Vendeuse en Poissonnerie LYON 7","company":"Poissonnerie Lugdunum Marée","location":"Lyon 7e"},
+{"ref":"wttj:modele-intermarche-hote-sse-de-caisse-h-f_villeurbanne","title":"HÔTE(SSE) DE CAISSE (H/F)","company":"Groupement Les Mousquetaires","location":"Villeurbanne"},
+{"ref":"ft:6735212","title":"Secrétaire médical / médicale (H/F)","company":"","location":"69 - Lyon"},
+{"ref":"ft:213MBZR","title":"Technicien Support Comptable (H/F)","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"adzuna:5872148156","title":"Développeur Full Stack WordPress confirméu002Fsénior (Hu002FF)","company":"Ceetadel","location":"Ecully, Lyon"},
+{"ref":"wttj:developpeur-full-stack_paris","title":"Product & Software Engineer","company":"Galadrim","location":"Lyon"},
+{"ref":"adzuna:5876637019","title":"Développeur Front-end Angular 20 - secteur bancaire (F/H) (IT)","company":"Free-Work","location":"Villeurbanne, Lyon"},
+{"ref":"indeed:8edea128ff0e90e3","title":"Développeur FullStack Java/Angular H/F","company":"Consort Group","location":"Lyon 1er (69001)"},
+{"ref":"ft:6704154","title":"Secrétaire juridique (H/F)","company":"DLSI","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:6766162","title":"Développeur Java/Angular Confirmé (H/F)","company":"FOKUS","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:6430491","title":"Développeur back-end - Lyon, France (H/F)","company":"Forums Talents Handicap","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:213NLKT","title":"Agent de recouvrement (F/H)","company":"RANDSTAD & RANDSTAD SEARCH","location":"69 - Caluire-et-Cuire"},
+{"ref":"ft:213HBZD","title":"Technicien support informatique (H/F)","company":"LA NEF","location":"69 - VAULX EN VELIN"},
+{"ref":"ft:6766279","title":"EMPLOYE (E) ADMINISTRATIF (VE) F/H","company":"France Travail - DR Auvergne-Rhone-Alpes","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"ft:6495467","title":"Développeur Python / DevOps (H/F)","company":"SOHOFT","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:213MNLG","title":"ASSISTANT JURIDIQUE PROPRIETE INTELLECTUELLE (H/F)","company":"ANVERGURE INTERIM & RECRUTEMENT","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"ft:6517609","title":"Lead Tech / DevOps Sénior (H/F)","company":"Tuanis Conseil","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:213QRLT","title":"Assistant administratif et commercial / Assistante administrative (H/F)","company":"FOYER ODETTE WITKOWSKA","location":"69 - STE FOY LES LYON"},
+{"ref":"ft:6472017","title":"Administrateur / Administratrice de biens immobiliers (H/F)","company":"LE CABRH","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"indeed:f136c79ba9f6f2e7","title":"Développeur PHP junior H/F – Lyon - CDI","company":"AXOPEN","location":"Lyon 6e (69006)"},
+{"ref":"indeed:2d9cff8438d97cf0","title":"dev. JAVA ANGULAR","company":"W Executive France SAS","location":"Lyon (69000)"},
+{"ref":"ft:6311936","title":"Technicien Support IT (H/F)","company":"Talents IT","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"indeed:43c5e37cb3c49c77","title":"Développeur FullStack Java/Angular H/F","company":"Consort Group","location":"Lyon 1er (69001)"},
+{"ref":"indeed:68889fd6f4c53ecc","title":"Assistant administratif et commercial H/F","company":"MEDISTOCK","location":"Corbas (69)"},
+{"ref":"ft:6640246","title":"Technicien Support Technique SAV (H/F)","company":"","location":"69 - Saint-Priest"},
+{"ref":"indeed:5e86d5f3945c8b82","title":"Technicien(ne) Support de Proximité (F/H/X)","company":"Metaline","location":"Lyon (69)"},
+{"ref":"indeed:865c318680b4ad77","title":"Business analyst - éditique H/F","company":"VIVERIS","location":"Lyon 6e (69006)"},
+{"ref":"adzuna:5875747456","title":"Développeur·euse Front Web","company":"Primx","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5873900898","title":"Développeur Front-End (React) H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"indeed:29551e026e5f0257","title":"Technicien administratif / conseiller clientèle H/F","company":"Veolia Eau - Centre-Est","location":"Pusignan (69330)"},
+{"ref":"indeed:e6a2b36b9535d47c","title":"Développeur Java junior H/F - Lyon - CDI","company":"AXOPEN","location":"Lyon 6e (69006)"},
+{"ref":"ft:213HSFX","title":"Conseiller Service Après-Vente automobile (H/F)","company":"CRESCENDO","location":"69 - Décines-Charpieu"},
+{"ref":"adzuna:5866965869","title":"Chef.fe de produit Sanytol GMS F/H","company":"AC Marca Ideal","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"ft:6741802","title":"Secrétaire de direction (H/F)","company":"","location":"69 - Vaulx-en-Velin"},
+{"ref":"ft:6623619","title":"Développeur Php / Angular (H/F)","company":"AMILTONE","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"wttj:software-engineer-fullstack-compte-pro-h-f_bron_DOUGS_bwYokQN","title":"Software Engineer Fullstack - Compte Pro H/F","company":"Dougs","location":"Bron"},
+{"ref":"ft:213MQMS","title":"Gestionnaire adminitratif(ve) et locatif H/F (H/F)","company":"HABITAT ET HUMANISME URGENCE","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"ft:6673515","title":"Collaborateur client entreprise H/F","company":"Hays","location":"69 - Lyon"},
+{"ref":"wttj:developpeur-full-stack-f-h_lyon","title":"Développeur Full Stack Java / Spring Boot / Vue.js (H/F)","company":"Accenture France","location":"Lyon"},
+{"ref":"indeed:f4850ea50b24c679","title":"Secrétaire Commerciale Secteur Automobiles (H/F)","company":"GROUPE VULCAIN","location":"Vénissieux (69200)"},
+{"ref":"ft:6748309","title":"Développeur GO (Golang) confirmé (H/F)","company":"SULLY GROUP","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"ft:213PVKM","title":"Secrétaire médical en urologie (H/F)","company":"CENTRE LEON BERARD","location":"69 - LYON"},
+{"ref":"ft:213PDVD","title":"Assistante administrative (H/F)","company":"MILLET INVESTIS","location":"69 - VAULX EN VELIN"},
+{"ref":"indeed:47311620adaa1d1e","title":"Développeur full-stack PHP & JS","company":"PEEXWEB","location":"Saint-Priest (69800)"},
+{"ref":"ft:6699233","title":"Technicien Support Informatique N1 - H/F","company":"RSM en Rhône-Alpes","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"ft:6495525","title":"Ingénieur DevOps (H/F)","company":"Act Digital France","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"indeed:a9597c56feb134c4","title":"Technicien H/F hotline monétique","company":"GROUPE EXM","location":"Villeurbanne (69)"},
+{"ref":"indeed:23d825bc11e6cb4a","title":"Assistant.e Administratif.ve","company":"ACOLEA","location":"Lyon 3e (69003)"},
+{"ref":"indeed:1d6938addc95c647","title":"Chargé de Relation Client T H/F CDD 3 mois","company":"NETEXIAL SAS","location":"Corbas (69960)"},
+{"ref":"ft:213LFCQ","title":"Gestionnaire Recouvrement (H/F)","company":"L'ODYSEE","location":"69 - LYON"},
+{"ref":"ft:6700160","title":"Agent administratif / Agente administrative d'assurances (H/F)","company":"FED","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"indeed:03816fb6bf119165","title":"Chargé(e) de clientèle","company":"SHIVA","location":"Lyon (69)"},
+{"ref":"adzuna:5873900874","title":"Développeur Front-End (Ember.js) H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"ft:6765988","title":"DevSecOps (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:6467731","title":"Administrateur Zimbra / Lead Technique - H/F","company":"Seyos","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"wttj:full-stack-developer-java-angular-senior","title":"Full Stack Developer Java / Angular / React – Senior (H/F)","company":"Key Consulting","location":"Lyon"},
+{"ref":"indeed:84de8aa259dbda4e","title":"Développeur Fullstack Node/React H/F","company":"AXEAL","location":"Villeurbanne (69100)"},
+{"ref":"indeed:1c1cdd724932e8ee","title":"Technicien Support de Proximité VIP (H/F)","company":"SEA TPI","location":"Lyon (69000)"},
+{"ref":"adzuna:5860708384","title":"Développeur web (H/F)","company":"France Travail","location":"Bron, Lyon"},
+{"ref":"ft:6318556","title":"Hotliner Technique - Industrie H/F","company":"UNANIM Recrutement","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"indeed:beb78d70c9547fa8","title":"Développeur COBOL H/F","company":"STEP UP Lyon","location":"Lyon 3e (69003)"},
+{"ref":"wttj:consultant-ai-software-engineer-sdlc-f-h-x_lyon","title":"Consultant AI Software Engineer SDLC (F/H/X)","company":"Zenika","location":"Lyon"},
+{"ref":"ft:6748220","title":"Chargé de communication numérique - Webmestre (H/F)","company":"Université Claude Bernard Lyon 1","location":"69 - Lyon 4e Arrondissement"},
+{"ref":"wttj:software-engineer-full-stack-nestjs-angular-squad-operations-h-f_bron_DOUGS_bZdjqmO","title":"Software Engineer Full Stack (NestJS / Angular) - Squad Operations H/F","company":"Dougs","location":"Bron"},
+{"ref":"wttj:software-engineer-fullstack-cross-functional-team-h-f_bron_DOUGS_rozDkJd","title":"Software Engineer Fullstack - Cross-functional Team H/F","company":"Dougs","location":"Bron (69500)"},
+{"ref":"ft:6531809","title":"Lead Developper Fall Stack (Lyon ou Paris) (H/F)","company":"Sopht","location":"69 - Lyon"},
+{"ref":"ft:6734683","title":"Conseillère/Conseiller de clientèle (F/H) - - Génération (a)venir","company":"CAISSE FEDERALE DE CREDIT MUTUEL","location":"69 - Villeurbanne"},
+{"ref":"ft:213NRDX","title":"Assistant administratif et commercial / Assistante administrative (H/F)","company":"LASA","location":"69 - LYON"},
+{"ref":"indeed:11379bc0cf40c6f6","title":"Développeur·se Python H/F","company":"Webnet","location":"Lyon (69000)"},
+{"ref":"adzuna:5866415574","title":"Développeur Full Stack Java / Vue.js 3 (IT)","company":"Free-Work","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5873900871","title":"Intégrateur web H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"ft:6640228","title":"Technicien support informatique de proximité (H/F)","company":"QUALIS INFORMATIQUE ET INDUSTRIE","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:213NKVQ","title":"Développeur-se Full Stack & DevOps Junior (H/F)","company":"WORLDLINE","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:213KCSD","title":"Développeur C# .net - (H/F)","company":"BDO RHONE-ALPES","location":"69 - Saint-Priest"},
+{"ref":"ft:213MNDB","title":"Chargé d'instruction Prêts et Aides - 3 postes (H/F)","company":"ACTION LOGEMENT SERVICES","location":"69 - LYON"},
+{"ref":"ft:213BQDV","title":"Développeur web (H/F)","company":"GLOBAL DIGITAL AGENCY","location":"69 - BRON"},
+{"ref":"ft:6573594","title":"DEVELOPPEUR FULL STACK SENIOR (H/F)","company":"Médiane Système","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"adzuna:5862844567","title":"Développeur Front-End (Angular) H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"indeed:311dff4a59fb4f07","title":"Chargé(e) de clientèle en télévente F/H","company":"Coup de Pates","location":"Saint-Priest (69)"},
+{"ref":"ft:213PHSW","title":"Chargé ADV (H/F)","company":"FOLAN","location":"69 - RILLIEUX LA PAPE"},
+{"ref":"adzuna:5866969440","title":"Développeur JAVA / Vue.js F/H","company":"CELAD-Lyon","location":"Ecully, Lyon"},
+{"ref":"adzuna:5870009832","title":"Senior Front-End Developer H/F","company":"SPASH","location":"Vénissieux, Lyon"},
+{"ref":"ft:213KMPN","title":"Assistant Client & Administration des Ventes - Instrumentation (H/F)","company":"ACAVI","location":"69 - LYON"},
+{"ref":"ft:6765911","title":"DevOps (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"indeed:177997eef0123c8d","title":"Développeur expérimenté React H/F","company":"Groupe LR Technologies","location":"Lyon 2e (69002)"},
+{"ref":"ft:6731837","title":"Secrétaire commerciale Automobile H/F","company":"GVA BYMYCAR LYON","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"wttj:developpeur-cloud-experimente-azure-devops_saint-denis","title":"Développeur Cloud Expérimenté (Azure / DevOps)","company":"Altametris","location":"Lyon"},
+{"ref":"ft:213HGLV","title":"Télévendeur / Télévendeuse (H/F)","company":"POMONA PASSIONFROID","location":"69 - ST PRIEST"},
+{"ref":"ft:6765991","title":"Développeur Front Angular (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"indeed:5a86922a94eebf5c","title":"ASSISTANT APPELS D'OFFRES","company":"EPITECH Tertiaire - Rhône Alpes","location":"Villeurbanne (69100)"},
+{"ref":"ft:213LXCW","title":"Assistant Administrative Comptable (H/F)","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Saint-Priest"},
+{"ref":"ft:213PNVF","title":"ADMINISTRATION DES VENTES (H/F)","company":"F L A T FOURNITURES POUR LITERIES AMEUBL","location":"69 - ST PRIEST"},
+{"ref":"wttj:valserve-assistant-qualite-et-gestion-des-archives-f-h_lyon","title":"VALSERVE - Assistant(e) Qualité et Gestion des Archives F/H","company":"Framatome","location":"Lyon"},
+{"ref":"ft:6635961","title":"Chargé de maintenance H/F - Artillerie","company":"Artillerie","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"ft:213RDLC","title":"Chauffeur-livreur / Chauffeuse-livreuse (H/F)","company":"ERE TRANSPORTS ET LOCATIONS","location":"69 - CORBAS"},
+{"ref":"ft:6735515","title":"Adjoint Service Exploitation et Valorisation du Patrimoine - immobilier social (H/F)","company":"Est Métropole Habitat","location":"69 - Villeurbanne"},
+{"ref":"indeed:aedd8d159252109b","title":"Gestionnaire ADV France et Export H/F","company":"Michael Page","location":"Lyon (69)"},
+{"ref":"wttj:developpeur-full-stack-senior-cdi_GALAD_07lJMD","title":"Senior Product & Software Engineer","company":"Galadrim","location":"Lyon"},
+{"ref":"ft:213PYDH","title":"Assistante Médicale / Hôtesse d'accueil - Lyon (H/F)","company":"BALTHAZAR SELECTION","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"indeed:f5ace3577f4bd177","title":"Ingénieur en développement et Déploiement d'application complexes H/F","company":"PLUG'In Design","location":"Saint-Genis-Laval (69)"},
+{"ref":"indeed:c4e79d2a59c66d38","title":"Développeur WINDEV / WEBDEV & Support IT (H/F)","company":"AGRA","location":"Meyzieu (69330)"},
+{"ref":"ft:213RNWC","title":"Assistant administratif et comptable (H/F)","company":"TRANSFORMATEURS SOLUTIONS VENISSIEUX TSV","location":"69 - VENISSIEUX"},
+{"ref":"indeed:f456466444a1e040","title":"Ingénieur Infrastructure SRE H/F","company":"IMADIS TECHNOLOGIES & SERVICES","location":"Lyon 2e (69002)"},
+{"ref":"ft:213PFSV","title":"Agent polyvalent logistique & opérations (H/F)","company":"RAFY GOLD","location":"69 - LYON"},
+{"ref":"ft:213SGQL","title":"Hote hotesse accueil (H/F)","company":"COM AND GO","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"ft:6704119","title":"Agent / Agente logistique en magasinage (H/F)","company":"SYSCO FRANCE SAS","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:213SHLD","title":"CHEF D'EQUIPE EN ATELIER POIDS LOURD SUR LYON (69) (H/F)","company":"NEW RECRUTEMENT","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:213SDKW","title":"Gestionnaire recouvrement Grands Comptes (H/F)","company":"CEDEO - CLIM+","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:213PGHP","title":"Commercial-e Fidélisation Education - Afterwork jeudi 24.09.2026 (H/F)","company":"WOONOZ","location":"69 - LYON"},
+{"ref":"ft:6634915","title":"Assistant commercial & Administrateur des Ventes (H/F)","company":"Bières des Régions AURA","location":"69 - Vénissieux"},
+{"ref":"indeed:f3a138d632728af0","title":"Chargée/Chargé de clientèle Particuliers (F/H)","company":"CAISSE DE CREDIT MUTUEL DU SUD EST","location":"Francheville (69340)"},
+{"ref":"ft:213QPHD","title":"Assistant(e) Commercial(e) / Organisation de tournées (H/F)","company":"","location":"69 - LYON"},
+{"ref":"ft:6805310","title":"Délégué Général-e (H/F)","company":"Mouvement Sol - Pour une appropriation citoyenne de","location":"69 - Lyon"},
+{"ref":"ft:213PFLZ","title":"Commerciale. Acquisition Education - Afterwork jeudi 24 septembre (H/F)","company":"WOONOZ","location":"69 - LYON"},
+{"ref":"wttj:developpeur-se-python-cyber_lyon","title":"Senior Software Engineer, Integrations team","company":"HACKUITY","location":"Lyon"},
+{"ref":"adzuna:5878693175","title":"Administrateur système","company":"Teliae","location":"Mornant, Lyon"},
+{"ref":"ft:213PGYH","title":"Coordinateur des opérations tourisme (H/F)","company":"CARS PHILIBERT","location":"69 - CALUIRE ET CUIRE"},
+{"ref":"ft:213RXKJ","title":"Conseiller en Service Relation Clients F/H - Chances","company":"LA POSTE","location":"69 - LYON"},
+{"ref":"ft:6803245","title":"Key User SAP S/4HANA Service Client (H/F)","company":"Talents ADV & Supply","location":"69 - Villeurbanne"},
+{"ref":"wttj:assistant-copropriete-h-f_lyon_EVORI_GrZ3QN0","title":"Assistant copropriété H/F","company":"Evoriel","location":"Lyon"},
+{"ref":"ft:6741503","title":"Agent / Agente de maintenance en climatisation (H/F)","company":"ATOUT TRAVAIL TEMPORAIRE","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"indeed:3ab14ae6ffe49801","title":"Développeur Full Stack - PHP/React – Migration Cloud & IA (H/F)","company":"Externatic","location":"Lyon 9e (69009)"},
+{"ref":"ft:213RRSR","title":"Téléprospecteur / Téléprospectrice en Assurances Santé (H/F)","company":"CK 1","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"ft:213NQBB","title":"Ouvrier / Ouvrière d'entretien et de propreté d'immeubles (H/F)","company":"DYNACITE OFFICE PUBLIC DE L'HABITAT DE L","location":"69 - Rillieux-la-Pape"},
+{"ref":"ft:6775641","title":"Secrétaire du Président F/H - Groupe Or en Cash","company":"Groupe Or en Cash","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"ft:213RHPM","title":"Développeur Junior - Technicien Support Applicatif - H/F (H/F)","company":"MATEN","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"ft:213QVBL","title":"Technicien de maintenance en Hôtellerie (H/F)","company":"BIRD INTERIM LYON CENTRE","location":"69 - LYON"},
+{"ref":"wttj:assistant-commercial-f-h_lyon","title":"Assistant(e) Commercial(e) F/H","company":"ZEPLUG","location":"Lyon"},
+{"ref":"ft:213PTLN","title":"Technicien SAV atelier (H/F)","company":"CRESCENDO","location":"69 - ST PRIEST"},
+{"ref":"ft:213KHFV","title":"Assistant Transport - Anglais (H/F)","company":"MAIDO","location":"69 - ST FONS"},
+{"ref":"ft:6741289","title":"Conseiller Commercial Automobile (H/F)","company":"LE MERCATO DE L EMPLOI","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:6776441","title":"3 CDI de \"Conseiller prévoyance\" F/H","company":"GROUPE APICIL","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:6796564","title":"Développeur web senior (H/F)","company":"","location":"69 - Lyon"},
+{"ref":"indeed:fb5d71f78f152a28","title":"Ingénieur Développement Full Stack TS / Java || Kotlin [Full Remote possible]","company":"Recrut Info","location":"Lyon (69000)"},
+{"ref":"ft:6805545","title":"Assistante commerciale / Assistant commercial F/H - CENPAC","company":"CENPAC","location":"69 - Saint-Priest"},
+{"ref":"ft:213TBPD","title":"Conseiller clientèle CRC Bancassurance h/f (H/F)","company":"CAISSE FEDERALE DE CREDIT MUTUEL SOCIETE","location":"69 - LYON 09"},
+{"ref":"adzuna:5877977493","title":"Conseiller Clientèle Particuliers H/F","company":"FINAÏA","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"ft:213THFM","title":"Chargé d'affaires Froid Commercial H/F (H/F)","company":"KELTIS","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"adzuna:5878323493","title":"Technicien Support/SAV Confirmé - F/H","company":"TEAM.IS","location":"Colombier-Saugnieu, Genas"},
+{"ref":"ft:213TKDB","title":"Conseiller commercial (H/F)","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Lyon 2e Arrondissement"},
+{"ref":"adzuna:5877979022","title":"Conseiller Clientèle Particuliers H/F","company":"FINAÏA","location":"Neuville-sur-Saône, Lyon"},
+{"ref":"ft:6825410","title":"Développeur Fullstack Python H/F - CDI","company":"Collective.work","location":"69 - Lyon"},
+{"ref":"ft:6825194","title":"Ingénieur OpenStack Senior H/F - CDI","company":"Collective.work","location":"69 - Lyon"},
+{"ref":"adzuna:5879100539","title":"Préparateur en Pharmacie Intérim H/F","company":"LIP Tertiaire","location":"Villeurbanne, Lyon"},
+{"ref":"ft:213SNVT","title":"Préparateur / Préparatrice de commandes (H/F)","company":"INTERNATIONAL BURGER'S COMPANY","location":"69 - VENISSIEUX"},
+{"ref":"adzuna:5878329373","title":"Assistant administratif et comptable F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Lyon, Rhône"},
+{"ref":"adzuna:5879100534","title":"Préparateur en Pharmacie Intérim H/F","company":"LIP Tertiaire","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"ft:213RZHS","title":"Technicien Support Applicatif IT (H/F)","company":"KAPA IT","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"adzuna:5877977490","title":"Conseiller Clientèle Particuliers H/F","company":"FINAÏA","location":"Chaponost, Lyon"},
+{"ref":"adzuna:5877977508","title":"Conseiller Clientèle Particuliers H/F","company":"FINAÏA","location":"Rillieux-la-Pape, Lyon"},
+{"ref":"ft:213QYPS","title":"Chauffeur livreur VL H/F (H/F)","company":"TCE TRANSPORT","location":"69 - CORBAS"},
+{"ref":"ft:213SNPY","title":"Magasinier (H/F)","company":"INTERNATIONAL BURGER'S COMPANY","location":"69 - Vénissieux"},
+{"ref":"ft:6806574","title":"Un Collaborateur d'agence en Assurance H/F Lyon","company":"Fed Group","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"adzuna:5879100516","title":"Préparateur en Pharmacie Intérim H/F","company":"LIP Tertiaire","location":"Mornant, Lyon"},
+{"ref":"adzuna:5876446011","title":"Chargé de Clientèle Assurance de Personnes","company":"Fed Group","location":"Lyon, Rhône"},
+{"ref":"ft:213SMCK","title":"Développeur / Développeuse Full Stack - Spécialiste SaaS / Cloud (H/F)","company":"ALMGROUP SOLUTIONS","location":"69 - VAULX EN VELIN"},
+{"ref":"ft:213TGGJ","title":"Chargée de clientèle - Equipements PL (H/F)","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Genas"},
+{"ref":"ft:213RZKB","title":"Ingénieur Support IT (H/F)","company":"KAPA IT","location":"69 - LYON 09"},
+{"ref":"ft:213RZQR","title":"CHARGÉ(E) DE RELATIONS PROPRIÉTAIRES (H/F)","company":"TERRESENS VACANCES","location":"69 - LYON"},
+{"ref":"ft:213TMTW","title":"Gestionnaire recouvrement (H/F)","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Vénissieux"},
+{"ref":"adzuna:5878306081","title":"Chargé de Clientèle Maintenance Multitechnique (H/F)","company":"FIDERIM MORNANT","location":"Mornant, Lyon"},
+{"ref":"ft:213TRCP","title":"Chef.fe d'unité gestion des examens (H/F)","company":"ANTENNE LYON","location":"69 - LYON"},
+{"ref":"ft:6825327","title":"Développeur Fullstack JavaScript & Node.js H/F - CDI","company":"Collective.work","location":"69 - Lyon"},
+{"ref":"ft:213MFBJ","title":"Conducteur livreur installateur / Conductrice livreuse installatr (H/F)","company":"MJ TRANSPORT","location":"69 - CORBAS"},
+{"ref":"indeed:7eea02444fbaf94a","title":"Chargé de Médiation Financière F-H","company":"Intrum Corporate SAS","location":"Saint-Priest (69800)"},
+{"ref":"adzuna:5880903113","title":"Comptable Syndic F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Lyon, Rhône"},
+{"ref":"ft:213VFLN","title":"Conseillère de vente H/F en bijouterie","company":"PANDORA","location":"69 - LYON"},
+{"ref":"adzuna:5883052191","title":"Développeur Full-Stack Node.Js - Vue.Js H/F","company":"Seyos","location":"Ecully, Lyon"},
+{"ref":"adzuna:5882785303","title":"Chargé(e) de Relation Clientèle Affacturage","company":"Bibby Factor France","location":"4ème-Arrondissement, Lyon"},
+{"ref":"adzuna:5883083129","title":"Conseiller Clientèle et Accueil H/F","company":"Caisse d'Epargne Rhône Alpes","location":"Décines-Charpieu, Lyon"},
+{"ref":"indeed:26ab761e7f095bf9","title":"Administrateur systèmes et infrastructures H/F","company":"Invenio-rh","location":"Télétravail partiel à Saint-Priest (69)"},
+{"ref":"adzuna:5876982633","title":"Inspecteur du recouvrement - LCTD F/H","company":"U R S S A F RHONE ALPES","location":"Vénissieux, Lyon"},
+{"ref":"ft:213VKGR","title":"Futur conducteur de Bus F/H (H/F)","company":"KEOLIS BUS LYON","location":"69 - LYON 02"},
+{"ref":"ft:6846319","title":"Développeur Java (H/F)","company":"AMILTONE","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"indeed:27a728bdfcb08903","title":"Postdoc - développement de PETS sur mobile","company":"Inria","location":"Lyon (69)"},
+{"ref":"indeed:37a52ce95a606153","title":"Assistant Copropriété H/F","company":"Le Recrutement Autrement","location":"Lyon (69001)"},
+{"ref":"ft:213VTBM","title":"Assistant Administratif - Service Après Vente H/F (H/F)","company":"","location":"69 - LYON"},
+{"ref":"indeed:80302d554c385b7d","title":"Poste : Lead Développeur python IA","company":"DATACORP","location":"69000 Lyon"},
+{"ref":"indeed:177997eef0123c8d","title":"Développeur expérimenté React H/F","company":"Groupe LR Technologies","location":"Télétravail partiel à 69002 Lyon"},
+{"ref":"indeed:96fd6ce32da1077f","title":"Ingénieur de recherche","company":"Inria","location":"Villeurbanne"},
+{"ref":"adzuna:5883078598","title":"Automaticien H/F","company":"HARRY HOPE","location":"Saint-Priest, Lyon"},
+{"ref":"adzuna:5883083158","title":"Conseiller Clientèle en Ligne H/F","company":"Caisse d'Epargne Rhône Alpes","location":"Ecully, Lyon"},
+{"ref":"ft:213VMZP","title":"Employé (e) Logistique / Cariste polyvalent (e) (H/F)","company":"PAREDES DISTRIBUTION FRANCE","location":"69 - GENAS"},
+{"ref":"adzuna:5875032179","title":"Chargé de Recouvrement - Grands Comptes H/F","company":"PROLIANS","location":"Vénissieux, Lyon"},
+{"ref":"adzuna:5882523267","title":"Chargé de recouvrement locataires partis H/F","company":"ALLIADE HABITAT","location":"4ème-Arrondissement, Lyon"},
+{"ref":"indeed:d78ce73ba503f4e1","title":"Développeur JAVA H/F","company":"Synanto","location":"69000 Lyon"},
+{"ref":"ft:6846161","title":"Développeur Java/Angular (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:6846220","title":"Lead Developer Java/Angular (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"wttj:developpeur-euse-java-angular-h-f_lyon","title":"Développeur(euse) Java/Angular H/F","company":"Steamulo","location":"Lyon"},
+{"ref":"adzuna:5883083202","title":"Conseiller Clientèle H/F","company":"Caisse d'Epargne Rhône Alpes","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"indeed:60c0eeb81981c460","title":"Gestionnaire technique tertiaire H/F","company":"Réseau Talents","location":"Lyon (69)"},
+{"ref":"ft:213VZKJ","title":"Assistant administratif et commercial / Assistante administrative (H/F)","company":"LACOUR SAS","location":"69 - LYON 04"},
+{"ref":"indeed:4765c9124662b42a","title":"Pilote d'exploitation systèmes réseaux (H/F)","company":"Actual Talent Pays de la Loire Ingénierie","location":"69004 Lyon 4e"},
+{"ref":"indeed:36f5b9c8941d6991","title":"Chargé de Clientèle en Protection Sociale H/F [Caluire-et-Cuire]","company":"Kairo RH","location":"69300 Caluire-et-Cuire"},
+{"ref":"indeed:61b3869c97363ecc","title":"Assistant(e) ADV – Gestion des commandes et logistique H/F","company":"GROUPE EXM","location":"69100 Villeurbanne"},
+{"ref":"wttj:developpeur-euse-full-stack-h-f_lyon_STEAM_Mgo26W8","title":"Développeur(euse) Full Stack H/F","company":"Steamulo","location":"Lyon"},
+{"ref":"adzuna:5883083194","title":"Conseiller Clientèle H/F","company":"Caisse d'Epargne Rhône Alpes","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"indeed:2ff7dd279538adb5","title":"Développeur COBOL (Telon) H/F - CDI","company":"Collective.work","location":"69001 Lyon"},
+{"ref":"wttj:sgami-sud-est-69-developpeur-euse-d-applications-php-symfony-sic_lyon","title":"SGAMI SUD EST 69 - Développeur(euse) d'applications PHP/Symfony (SIC)","company":"Ministère de l'Intérieur","location":"Lyon"},
+{"ref":"ft:213VDSB","title":"Secrétaire médical en cancérologie (H/F)","company":"CENTRE LEON BERARD","location":"69 - Lyon 8e Arrondissement"},
+{"ref":"indeed:11f74f9d0e6603f1","title":"UN(E) COMMERCIAL(E) / CHEF(FE) DE PROJETS","company":"GALIS","location":"Lyon"},
+{"ref":"ft:6846148","title":"Software Engineer Full Stack Go / React (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"indeed:987ec59ff8c2f42d","title":"Développeur C/C++ Confirmé - Cybersécurité - H/F/X","company":"EFFEKTIV","location":"Télétravail partiel à 69003 Lyon"},
+{"ref":"indeed:029a84c22ee6da73","title":"Assistant ADV H/F","company":"CRESCENDO EMPLOI","location":"Genas"},
+{"ref":"adzuna:5875032082","title":"Chargé de Recouvrement H/F","company":"Groupe Barkene","location":"Rillieux-la-Pape, Lyon"},
+{"ref":"adzuna:5880364965","title":"Technicien Administratif - Conseiller Clientèle H/F","company":"Veolia Eau","location":"Jonage, Lyon"},
+{"ref":"ft:213VQZX","title":"Assistant administratif et commercial (H/F)","company":"TRIBOLOGY & MATERIALS FOR INDUSTRY","location":"69 - Bron"},
+{"ref":"adzuna:5880903115","title":"Comptable gestion locative F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Lyon, Rhône"},
+{"ref":"adzuna:5879609046","title":"Expert Evaluateur F/H","company":"CABINET ROUX","location":"Lyon, Rhône"},
+{"ref":"adzuna:5880632917","title":"Expert comptable (H/F)","company":"","location":"Lyon, Rhône"},
+{"ref":"indeed:9a08c56f7f45be58","title":"Conseiller Relation Client F/H MMA - CDD","company":"Groupe Covéa","location":"Lyon (69003)"},
+{"ref":"adzuna:5878318434","title":"Conseiller/Conseillère social(e) F/H","company":"EST METROPOLE HABITAT","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5882522770","title":"Chargé d'affaires multi technique (H/F)","company":"FIDERIM MORNANT","location":"Mornant, Lyon"},
+{"ref":"adzuna:5883083157","title":"Conseiller Clientèle en Ligne H/F","company":"Caisse d'Epargne Rhône Alpes","location":"Décines-Charpieu, Lyon"},
+{"ref":"ft:213WWXT","title":"Référent technique Automatisation & Programmation (H/F)","company":"CRESCENDO LYON","location":"69 - GENAS"},
+{"ref":"adzuna:5884538885","title":"Technico-Commercial Sédentaire - Instrumentation F/H","company":"Valexane","location":"Feyzin, Lyon"},
+{"ref":"ft:6865576","title":"U Commerçants Autrement - Vendeur / Vendeuse en boulangerie-pâtisserie (H/F)","company":"U Commerçants Autrement","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"adzuna:5883434412","title":"Développeur Full-Stack (Ruby) H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"adzuna:5884543913","title":"Assistant ADV F/H","company":"Talents ADV & Supply","location":"Saint-Symphorien-d'Ozon, Lyon"},
+{"ref":"ft:213WYCX","title":"Assistant(e) administrative / facturation (H/F)","company":"SMART PS SAS","location":"69 - Saint-Priest"},
+{"ref":"adzuna:5883434349","title":"Développeur Front-End (Vue.js) H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"ft:213WVPZ","title":"Employé / Employée de rayon fruits et légumes","company":"NETTO","location":"69 - PUSIGNAN"},
+{"ref":"adzuna:5871278389","title":"Technicien Support Applicatif WCS F/H - CDI","company":"Collective.work","location":"Pierre-Bénite, Lyon"},
+{"ref":"ft:6895184","title":"Développeur Angular confirmé - CDI (H/F)","company":"Collective.work","location":"69 - Lyon"},
+{"ref":"adzuna:5884538411","title":"Chargé d'Affaire IRVE F/H","company":"asap.work","location":"Lyon, Rhône"},
+{"ref":"ft:213XKKS","title":"RESPONSABLE TELECONSEILLER (H/F)","company":"CLEDOR PRIMEURS SERVICES","location":"69 - CORBAS"},
+{"ref":"adzuna:5884551529","title":"Technicien.ne SAV Hotline F/H","company":"E.M.I RH","location":"Colombier-Saugnieu, Genas"},
+{"ref":"adzuna:5883434330","title":"Développeur CMS (WordPress) H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"adzuna:5884544235","title":"Technicien support N2 F/H","company":"Sincrone IT","location":"Bron, Lyon"},
+{"ref":"ft:6884443","title":"Technicien de Maintenance Sécurité Incendie - Bâtiments Tertiaires (H/F)","company":"COTENTIN RH","location":"69 - Saint-Priest"},
+{"ref":"ft:6882649","title":"Développeur / Développeuse web (H/F)","company":"","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"adzuna:5884864791","title":"Consultant Senior en Transaction Services - F/H","company":"BDO France","location":"1er-Arrondissement, Lyon"},
+{"ref":"ft:213TFBS","title":"Gestionnaire du recouvrement","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"adzuna:5884551730","title":"Formateur Finthesis/PowerBI - F/H","company":"BDO France","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5884787795","title":"Customer Care","company":"Toporder","location":"Ecully, Lyon"},
+{"ref":"ft:213WNWF","title":"Chargé de clientèle (H/F)","company":"LES INTERIMAIRES PROFESSIONNELS TERTIAIR","location":"69 - Vénissieux"},
+{"ref":"adzuna:5884537491","title":"Développeur – ERP & Applications Métiers F/H","company":"IT PARTNER","location":"Lyon, Rhône"},
+{"ref":"ft:213VCSW","title":"CHAUFFEUR LIVREUR POIDS LOURD PL (H/F)","company":"INNOVIA","location":"69 - Saint-Priest"},
+{"ref":"adzuna:5884342158","title":"Ingénieur chargé de projets \"Qualité du lait et des produits laitiers\" (H/F)","company":"Idele","location":"4ème-Arrondissement, Lyon"},
+{"ref":"ft:213XKXP","title":"Exploitant Transport Service Client (H/F)","company":"STEF TRANSPORT LYON EST","location":"69 - Corbas"},
+{"ref":"adzuna:5879609194","title":"Technicien support informatique F/H","company":"AMILTONE","location":"Lyon, Rhône"},
+{"ref":"adzuna:5884138162","title":"Technicien Dépanneur SAV H/F","company":"Randstad","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"adzuna:5884550857","title":"COORDINATEUR OPC/DET confirmé - secteur bâtiment F/H","company":"AS Recrutement & Interim","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"adzuna:5884527207","title":"Technicien de maintenance industrielle (H/F)","company":"Aquila RH Lyon Sud","location":"Oullins, Lyon"},
+{"ref":"adzuna:5886025296","title":"Gestionnaire copropriété F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Lyon, Rhône"},
+{"ref":"adzuna:5886003221","title":"Technicien Ascenseur (H/F)","company":"FIDERIM BRON","location":"Saint-Priest, Lyon"},
+{"ref":"ft:213YSDL","title":"Secrétariat médical (H/F)","company":"SDF DES ANESTHESISTES DE LA CLINIQUE DU","location":"69 - LYON 06"},
+{"ref":"adzuna:5886018104","title":"Coordinateur Ressources Humaines F/H","company":"SUPPLAY LYON TC PHARMA","location":"Marcy-l'Étoile, Lyon"},
+{"ref":"adzuna:5886034695","title":"CONDUCTEUR DE TRAVAUX RESEAUX ELECTRIQUES TP F/H","company":"SOBECA","location":"Ecully, Lyon"},
+{"ref":"adzuna:5886025703","title":"Collaborateur comptable confirmé F/H","company":"Hays France","location":"Lyon, Rhône"},
+{"ref":"ft:213YJRF","title":"Magasinier-Gestionnaire de stocks (F/H)","company":"RANDSTAD","location":"69 - Pusignan"},
+{"ref":"adzuna:5886005055","title":"Câbleur Machines Spéciales (H/F)","company":"HARRY HOPE","location":"Saint-Priest, Lyon"},
+{"ref":"ft:213XKYH","title":"Assistant administratif / Assistante administrative et comptable (H/F)","company":"SPIRAL 2","location":"69 - LYON"},
+{"ref":"ft:213YSWZ","title":"Référent technique étanchéité (H/F)","company":"INVENIO","location":"69 - Saint-Priest"},
+{"ref":"adzuna:5886012634","title":"(H/F) Automaticien","company":"HARRY HOPE","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"ft:6928184","title":"DEV FULL STACK (React/JAVA) (H/F)","company":"O2MAX","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"ft:213YMBT","title":"Assistant(e) SAV H/F (H/F)","company":"QUIETALIS","location":"69 - Décines-Charpieu"},
+{"ref":"adzuna:5883314773","title":"Agent administratif / Aide comptable - H/F","company":"E.Leclerc","location":"Saint-Priest, Lyon"},
+{"ref":"ft:6928186","title":"Développeur Full Stack Confirmé - Angular / Java / Playwright - Lyon (H/F)","company":"O2MAX","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"adzuna:5885962220","title":"Collaborateur comptable H/F - Progressez dans un environnement convivial","company":"EFFEKTIV","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5886003117","title":"Technicien support informatique (H/F)","company":"asap.work","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5886034807","title":"Chargé d'Études F/H","company":"HIREE","location":"Mornant, Lyon"},
+{"ref":"adzuna:5886026191","title":"Ingénieur service client F/H","company":"SAIREM SOCIETE POUR L APPLICATION INDUSTRIELLE DE LA RECHERCHE EN ELECTRONIQUE ET MICRO ONDES","location":"Décines-Charpieu, Lyon"},
+{"ref":"adzuna:5886025929","title":"Ingénieur en Installation Générale Lead Génie Civil F/H","company":"SOM RHONE ALPES","location":"Lyon, Rhône"},
+{"ref":"adzuna:5885633454","title":"Chargé de recouvrement / Relance clients H/F","company":"PRO ARMATURE","location":"Corbas, Lyon"},
+{"ref":"adzuna:5885577623","title":"TECHNICIEN METHODES H/F","company":"Maxon France","location":"Beynost, Ain"},
+{"ref":"wttj:developpeur-full-stack-kotlin-java-h-f_lyon","title":"Développeur Full Stack Kotlin/Java H/F","company":"The Adecco Group","location":"Lyon"},
+{"ref":"adzuna:5886011859","title":"intérim-Assistant administratif/gestion des sinistres crédit client H/F-30/32K","company":"Assistalents","location":"Saint-Priest, Lyon"},
+{"ref":"adzuna:5884526196","title":"Assistante administrative H/F","company":"CRIT DECINES","location":"Jonage, Lyon"},
+{"ref":"adzuna:5886034635","title":"Technicien Support de Proximité F/H","company":"DCS GROUP","location":"Lyon, Rhône"},
+{"ref":"adzuna:5886479713","title":"Technicien bureau d'etude H/F","company":"","location":"Villeurbanne, Lyon"},
+{"ref":"ft:213XWZS","title":"Assistant administratif / Assistante administrative (H/F)","company":"JULIE RICCI - CABINET DE STENOTYPIE","location":"69 - Lyon 2e Arrondissement"},
+{"ref":"adzuna:5885389724","title":"Developpeur Front End H/F","company":"PROMAN","location":"Beynost, Ain"},
+{"ref":"ft:213YTTF","title":"Magasinier-Gestionnaire de stocks (F/H)","company":"RANDSTAD","location":"69 - Rillieux-la-Pape"},
+{"ref":"ft:213XVCZ","title":"Agent logistique / cariste H/FAAIRM","company":"CRIT","location":"69 - Meyzieu"},
+{"ref":"ft:214BBXL","title":"Développeur (H/F)","company":"NEXIIUM TALENT","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"adzuna:5887162151","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Jonage, Lyon"},
+{"ref":"adzuna:5887162305","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5887162144","title":"Conseiller clientèle particuliers H/F","company":"SKILLS Banque | Assurance","location":"Ecully, Lyon"},
+{"ref":"indeed:71e65544b69946aa","title":"Intégrateur Codes & Méthodes - SCT and methods officer F/H","company":"Forums Talents Handicap","location":"69000 Lyon"},
+{"ref":"adzuna:5887582623","title":"Technicien de maintenance mobile F/H","company":"V.S CONSULTING","location":"Lyon, Rhône"},
+{"ref":"indeed:b266c1cebbd19bb2","title":"Lead Développeur React Native Senior - F/H/X","company":"EFFEKTIV","location":"69002 Lyon"},
+{"ref":"indeed:1e0aba3c8cc137c7","title":"Développeur Front CRM H/F","company":"Synapsun SAS","location":"69110 Sainte-Foy-lès-Lyon"},
+{"ref":"ft:213ZZBG","title":"Chargé(e) de Patrimoine Exploitation (H/F)","company":"FEDERATION HABITAT ET HUMANISME","location":"69 - CALUIRE ET CUIRE"},
+{"ref":"indeed:3d4fc216adf01a78","title":"Technicien support de proximité H/F","company":"DCS EASYWARE","location":"69000 Lyon"},
+{"ref":"adzuna:5887162328","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Sainte-Foy-lès-Lyon, Lyon"},
+{"ref":"indeed:ff2cf24949a8b110","title":"Technicien Support de Proximité / Anglais Junior (H/F)","company":"SEA TPI","location":"69000 Lyon"},
+{"ref":"ft:213ZQGY","title":"Technicien IT -Support (H/F)","company":"","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"adzuna:5887191118","title":"Conseiller clientèle en crédits H/F - Lyon (F/H)","company":"","location":"Lyon, Rhône"},
+{"ref":"indeed:0ff76a6834f659a7","title":"Développeur_Open Java /API Rest_(Garantie)Expérimenté chez CATS à Lyon","company":"Deodis","location":"69000 Lyon"},
+{"ref":"indeed:0a7f7f3ae2fac5c1","title":"Technicien support H/F","company":"DCS EASYWARE","location":"69000 Lyon"},
+{"ref":"adzuna:5885778791","title":"Developpeur Web Junior et Medium","company":"HR Hiring","location":"Lyon, Rhône"},
+{"ref":"indeed:d221bf8eac17b4fe","title":"Développeur Cobol (F/H/X)","company":"IT Link","location":"Lyon"},
+{"ref":"adzuna:5887559407","title":"Technicien(ne) Bureau d'Études Électromécanique (H/F)","company":"KALIXENS RH LYON","location":"Décines-Charpieu, Lyon"},
+{"ref":"ft:213ZFDF","title":"Coordinateur technique (H/F)","company":"LA CINE FABRIQUE - ECOLE NATIONALE DE CI","location":"69 - LYON"},
+{"ref":"adzuna:5887162336","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"1er-Arrondissement, Lyon"},
+{"ref":"ft:6961891","title":"Technicien Support applicatif N2 - CDI (H/F)","company":"Collective.work","location":"69 - Lyon"},
+{"ref":"adzuna:5887162319","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Rillieux-la-Pape, Lyon"},
+{"ref":"adzuna:5886957676","title":"Chargé de Recouvrement H/F","company":"Lynx RH","location":"Limonest, Lyon"},
+{"ref":"adzuna:5887162387","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Villeurbanne, Lyon"},
+{"ref":"adzuna:5887191122","title":"Chef d'équipe Maintenance (F/H)","company":"","location":"Givors, Lyon"},
+{"ref":"adzuna:5887162135","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"adzuna:5887191114","title":"Gestionnaire de portefeuille affacturage H/F","company":"","location":"Lyon, Rhône"},
+{"ref":"adzuna:5887582293","title":"Ingénieur gestion de projet F/H","company":"PARLYM","location":"Lyon, Rhône"},
+{"ref":"adzuna:5887582266","title":"Consultant SILAE F/H","company":"OPT'IN Recrutement","location":"Lyon, Rhône"},
+{"ref":"ft:6943908","title":"Développeur mobile (H/F)","company":"","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:6943986","title":"Développeur web (H/F)","company":"","location":"69 - Vaulx-en-Velin"},
+{"ref":"adzuna:5887162516","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Limonest, Lyon"},
+{"ref":"adzuna:5887162159","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"adzuna:5887161920","title":"Assistant support technique H/F","company":"Invenio-rh","location":"Chaponnay, Lyon"},
+{"ref":"adzuna:5886951401","title":"Technicien Bureau d'Études Électromécanique H/F","company":"Kalixens RH Lyon","location":"Décines-Charpieu, Lyon"},
+{"ref":"indeed:10a05f1b693b412e","title":"Technicien Support IT – Helpdesk & Proximité H/F","company":"DCS EASYWARE","location":"69000 Lyon"},
+{"ref":"indeed:d9a6e520480fc72f","title":"Technicien Support de Proximité Bilingue Anglais H/F","company":"DCS EASYWARE","location":"69200 Vénissieux"},
+{"ref":"adzuna:5887162513","title":"Conseiller Clientèle Particuliers H/F","company":"SKILLS Banque | Assurance","location":"Pierre-Bénite, Lyon"},
+{"ref":"ft:213ZDZJ","title":"Technicien / Technicienne d'entretien et de maintenance du bâtime (H/F)","company":"BIRD INTERIM LYON CENTRE","location":"69 - LYON"},
+{"ref":"adzuna:5889144206","title":"Tech Lead JAVA / React.js F/H","company":"CELAD-Lyon","location":"Lyon, Rhône"},
+{"ref":"adzuna:5889116078","title":"Gestionnaire de Paie Expérimenté H/F","company":"FAB GROUP","location":"Limonest, Lyon"},
+{"ref":"ft:214CMKF","title":"Agent polyvalent/laveur de vitres (H/F)","company":"","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"adzuna:5889149172","title":"Chef·fe de Projets Evènementiels F/H","company":"Institut Lyfe","location":"Ecully, Lyon"},
+{"ref":"adzuna:5889075735","title":"Gestionnaire de Paie F/H/X","company":"EFFEKTIV","location":"Limonest, Lyon"},
+{"ref":"ft:214CDWY","title":"Secrétaire médical (H/F)","company":"","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:6995210","title":"Assistant ADV H/F","company":"Talents ADV & Supply","location":"69 - Feyzin"},
+{"ref":"adzuna:5889144218","title":"Développeur Back-end Java / Spring - TDD & qualité logicielle F/H","company":"CELAD-Lyon","location":"Lyon, Rhône"},
+{"ref":"ft:6969356","title":"Technicien de maintenance SAV H/F","company":"Hays France","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:6992470","title":"FORMATEUR(RICE) SANTE INTERNE H/F H/F","company":"GSF Propreté et Services","location":"69 - Vénissieux"},
+{"ref":"ft:6994703","title":"CDI-Assistant/secrétaire administratif - cabinet d'avocats H/F-28/31K-ASAP","company":"Assistalents","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:6972373","title":"Assistant Administratif Juridique en Cabinet d'Avocats (H/F)","company":"","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"adzuna:5889146526","title":"Chef d'équipe élagueur F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Saint-Genis-Laval, Lyon"},
+{"ref":"ft:6995213","title":"Gestionnaire ADV (H/F)","company":"Talents ADV & Supply","location":"69 - Rillieux-la-Pape"},
+{"ref":"adzuna:5889452042","title":"69 - TECHNICIEN INFORMATIQUE HOTLINE (F/H)","company":"Randstad Roissy","location":"1er-Arrondissement, Lyon"},
+{"ref":"ft:6995886","title":"Assistant ADV Export H/F","company":"Talents ADV & Supply","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:6970904","title":"Assistant clientèle banque (H/F)","company":"","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"ft:213YTHG","title":"Secrétaire Juridique F/H","company":"OREN Avocats","location":"69 - LYON"},
+{"ref":"ft:7006247","title":"Gestionnaire assistance utilisateur (F/H)","company":"CENTRE DE CONSEIL ET DE SERVICE - CCS","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"adzuna:5887191440","title":"Assistant Banquier Privé (H/F)","company":"","location":"Lyon, Rhône"},
+{"ref":"adzuna:5889108447","title":"Data Engineer F/H","company":"SandYOU LYON","location":"Rillieux-la-Pape, Lyon"},
+{"ref":"adzuna:5889531638","title":"AGN Avocats Lyon / Valence","company":"AGN Avocats","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"ft:214BRMJ","title":"Gestionnaire back office crédits (H/F)","company":"LA NEF","location":"69 - VAULX EN VELIN"},
+{"ref":"adzuna:5889565434","title":"Technicien Automatisme et IT industriel (H/F)","company":"Lustucru Frais","location":"Oullins, Lyon"},
+{"ref":"adzuna:5889143784","title":"Consutant Devops / Production F/H","company":"REDOPUS","location":"Lyon, Rhône"},
+{"ref":"adzuna:5889149410","title":"Data Engineer / Développeur Big Data – Spark Java & Databricks F/H","company":"CELAD-Lyon","location":"Lyon, Rhône"},
+{"ref":"adzuna:5889551166","title":"Régleur commande numérique (tour ou fraisage) (F/H)","company":"Pilat RH","location":"Saint-Symphorien-sur-Coise, Lyon"},
+{"ref":"ft:214CMZF","title":"Lead tech manager python/django (H/F)","company":"AK RECRUTEMENT","location":"69 - LYON"},
+{"ref":"adzuna:5889149376","title":"Expert Sinistre F/H","company":"CABINET ROUX","location":"Lyon, Rhône"},
+{"ref":"adzuna:5889144158","title":"Technicien Support applicatif N2 - CDI F/H","company":"Collective","location":"Lyon, Rhône"},
+{"ref":"adzuna:5892222238","title":"Conseiller·ère Clientèle Patrimoniale H/F","company":"SKILLS Banque et Assurance","location":"Marcy-l'Étoile, Lyon"},
+{"ref":"adzuna:5892221551","title":"Assistant de Gestion H/F","company":"Exaltan RH - Maïdo","location":"Pierre-Bénite, Lyon"},
+{"ref":"adzuna:5890006320","title":"Conseiller Accueil - CDI Etudiant H/F","company":"Commercial & Relation Clientèle","location":"Champagne-au-Mont-d'Or, Lyon"},
+{"ref":"adzuna:5892996575","title":"Développeur/se Fullstack C#/.Net/Vue.js Confirmé(e)","company":"eXalt","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5890072018","title":"Chargé de clientèle (H/F) - Service client SaaS - CDD 10 Mois - Lyon - CDI","company":"Collective.work","location":"1er-Arrondissement, Lyon"},
+{"ref":"ft:7015046","title":"Assistanat commercial (H/F)","company":"COTENTIN RH","location":"69 - Corbas"},
+{"ref":"adzuna:5890225300","title":"Gestionnaire ADV Export (F/H)","company":"","location":"Chaponnay, Lyon"},
+{"ref":"ft:7053786","title":"Ingénieur DevOps - Automatisation & Déploiement (H/F)","company":"FOKUS","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"adzuna:5890200004","title":"Technicien Support Informatique (H/F)","company":"Gineys S.A.S.","location":"Condrieu, Lyon"},
+{"ref":"adzuna:5890549779","title":"Comptable général F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5890818110","title":"Technicien DataCenter - H/F","company":"Skaelia","location":"Jonage, Lyon"},
+{"ref":"adzuna:5889852337","title":"69 - TECHNICIEN INFORMATIQUE HOTLINE (F/H) (Basé à Lyon 01)","company":"Randstad Roissy","location":"Sainte-Foy-lès-Lyon, Lyon"},
+{"ref":"adzuna:5889852346","title":"69 - TECHNICIEN INFORMATIQUE HOTLINE (F/H) (Basé à Lyon 01)","company":"Randstad Roissy","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"ft:7015950","title":"Développeur-se back-end Node.JS (H/F)","company":"Fulll","location":"69 - Lyon"},
+{"ref":"adzuna:5892221488","title":"Assistant de Gestion H/F","company":"TIMTARGETT","location":"Champagne-au-Mont-d'Or, Lyon"},
+{"ref":"adzuna:5889571725","title":"Technicien Système & Réseau (F/H)","company":"Cypath","location":"Villeurbanne, Lyon"},
+{"ref":"adzuna:5891616078","title":"Assistant administration des ventes F/H","company":"Synergie Limonest","location":"Limonest, Lyon"},
+{"ref":"ft:214DRMM","title":"Manutentionnaire (H/F)","company":"INTERNATIONAL BURGER'S COMPANY","location":"69 - VENISSIEUX"},
+{"ref":"adzuna:5889852338","title":"69 - TECHNICIEN INFORMATIQUE HOTLINE (F/H) (Basé à Lyon 01)","company":"Randstad Roissy","location":"Villeurbanne, Lyon"},
+{"ref":"ft:214CYPB","title":"Agent de maintenance Technique CDD 35h Lyon (69) (H/F)","company":"L'HACIENDA","location":"69 - RILLIEUX LA PAPE"},
+{"ref":"adzuna:5888729244","title":"Développeur Front-end Angular 22 – JAVA / Spring boot (F/H) (IT)","company":"Free-Work","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5890003351","title":"Développeur Sénior Web C# .Net H/F","company":"Elcia","location":"Mornant, Lyon"},
+{"ref":"adzuna:5890001814","title":"Analyste Développeur - COBOL H/F","company":"EURO INFORMATION","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5890003335","title":"Technicien Support Informatique N1- Hotline H/F","company":"Elcia","location":"Mornant, Lyon"},
+{"ref":"adzuna:5890558047","title":"Assistant(e) syndic F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Lyon, Rhône"},
+{"ref":"adzuna:5890546718","title":"Développeur Front-end Angular 22 – JAVA / Spring boot F/H","company":"CELAD-Lyon","location":"Lyon, Rhône"},
+{"ref":"adzuna:5890003442","title":"Technicien Informatique Systemes et Reseaux H/F","company":"Ecotic","location":"Saint-Genis-Laval, Lyon"},
+{"ref":"adzuna:5890800016","title":"Assistant(e) commerciale et gestion – Région Sud-Est (F/H)","company":"Nepsen","location":"4ème-Arrondissement, Lyon"},
+{"ref":"adzuna:5890805727","title":"Technicien supervision industrielle (Datacenter) - H/F","company":"Skaelia","location":"Jonage, Lyon"},
+{"ref":"adzuna:5889852341","title":"69 - TECHNICIEN INFORMATIQUE HOTLINE (F/H) (Basé à Lyon 01)","company":"Randstad Roissy","location":"Ecully, Lyon"},
+{"ref":"adzuna:5893860054","title":"Dessinateur(trice) projeteur(se) électrique - Machines spéciales (H/F)","company":"KALIXENS RH LYON","location":"Décines-Charpieu, Lyon"},
+{"ref":"ft:7093198","title":"Développeur/euse Expérimenté/e - Java & Angular - Lyon (H/F)","company":"","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:7093196","title":"Lead Developer-euse - Java & Angular - Lyon (H/F)","company":"","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"adzuna:5893529968","title":"Développeur crm f/h (CDI)","company":"SYNAPSUN","location":"Sainte-Foy-lès-Lyon, Lyon"},
+{"ref":"ft:7070596","title":"Technicien en programmation de machines-outils CNC (H/F)","company":"DLSI","location":"69 - Meyzieu"},
+{"ref":"adzuna:5893878973","title":"Ingénieur Data Azure / Data Engineer F/H","company":"SCC France","location":"Lyon, Rhône"},
+{"ref":"adzuna:5893879246","title":"Gestionnaire Administration des Ventes F/H","company":"ACTUAL TALENT","location":"Ecully, Lyon"},
+{"ref":"ft:7066714","title":"Cegid - Développeur / Développeuse back-end (H/F)","company":"Cegid","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"adzuna:5893410226","title":"Gestionnaire Paie H/F","company":"Winsearch","location":"Champagne-au-Mont-d'Or, Lyon"},
+{"ref":"adzuna:5887000576","title":"Gestionnaire Back Office H/F","company":"Rosen et Beaumont","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5894171308","title":"Ingénieur avant-vente logiciel","company":"Adsearch","location":"Ecully, Lyon"},
+{"ref":"adzuna:5893530561","title":"Développeur Full-Stack Java F/H (CDI)","company":"AKKODIS France SAS","location":"Villeurbanne, Lyon"},
+{"ref":"adzuna:5893855988","title":"Chargé d'affaires Industrie H/F","company":"CRIT EXPERTS ET CADRES VILLENEUVE D ASCQ","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5893881427","title":"Ingénieur d'Affaires F/H","company":"OMEA","location":"Lyon, Rhône"},
+{"ref":"adzuna:5890546616","title":"Commercial Sédentaire F/H","company":"FULLL","location":"Lyon, Rhône"},
+{"ref":"adzuna:5890190671","title":"Gestionnaire Back-Office contrats - financement","company":"ACJ Services","location":"Champagne-au-Mont-d'Or, Lyon"},
+{"ref":"adzuna:5890190666","title":"Gestionnaire Back-Office contrats - financement","company":"ACJ Services","location":"Ecully, Lyon"},
+{"ref":"adzuna:5894079308","title":"Technicien(-ienne) Informatique F/H","company":"Groupe JTI","location":"Ecully, Lyon"},
+{"ref":"adzuna:5893882936","title":"Ingénieur commercial cybersécurité F/H","company":"Hexanet","location":"Limonest, Lyon"},
+{"ref":"adzuna:5890549022","title":"Assistant Juridique F/H","company":"TAM Recrutement","location":"Lyon, Rhône"},
+{"ref":"adzuna:5893882688","title":"Juriste droit des affaires F/H","company":"ID SEARCH FINANCE","location":"Vénissieux, Lyon"},
+{"ref":"ft:214FZHN","title":"TECHNICIEN INFORMATIQUE domicile / atelier (H/F)","company":"","location":"69 - TASSIN LA DEMI LUNE"},
+{"ref":"adzuna:5893834888","title":"CHARGE(E) DE COMPTES ENTREPRISES - CDD - F/H - LYON","company":"Groupe Satec","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5889107776","title":"Assistant(e) Chargé(e) d'Affaires Tuyauterie (H/F)","company":"KALIXENS RH LYON","location":"Décines-Charpieu, Lyon"},
+{"ref":"ft:214FPQL","title":"Agent(e) admisnistratif(ve) (H/F)","company":"AU-DELA DE ...","location":"69 - LYON"},
+{"ref":"adzuna:5894088722","title":"Une magistrate ou un magistrat rapporteur","company":"Choisir le Service Public","location":"Lyon, Rhône"},
+{"ref":"ft:7071451","title":"Spécialiste Support Applicatif Back Office - ERP - Grande Distribution (H/F)","company":"DLSI","location":"69 - Lyon 5e Arrondissement"},
+{"ref":"adzuna:5894116158","title":"Une magistrate ou un magistrat rapporteur (secteur sanitaire et médico social)","company":"Choisir le Service Public","location":"Lyon, Rhône"},
+{"ref":"adzuna:5893876339","title":"Chargé d'études financement (Lyon/6959) F/H","company":"MAÏKI","location":"Lyon, Rhône"},
+{"ref":"adzuna:5893876328","title":"Ingénieur Assistance Technique F/H","company":"OMEA","location":"Lyon, Rhône"},
+{"ref":"adzuna:5895160478","title":"Ingénieur électronique F/H","company":"EFOR LYON","location":"Champagne-au-Mont-d'Or, Lyon"},
+{"ref":"ft:7113005","title":"Hôte / hôtesse d'accueil standardiste (H/F)","company":"PHONE REGIE","location":"69 - Lyon 7e Arrondissement"},
+{"ref":"ft:214HTMM","title":"Assistant(e) ménager(e) LYON (H/F)","company":"SK SERVICES LYON","location":"69 - LYON 02"},
+{"ref":"adzuna:5893591709","title":"Conseiller Clientèle Particuliers H/F","company":"FINAÏA","location":"Sainte-Foy-lès-Lyon, Lyon"},
+{"ref":"adzuna:5895374583","title":"Assistant commercial - Vaulx-en-Velin H/F H/F","company":"Aftral","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"adzuna:5895094084","title":"Chargé d'affaires H/F/X","company":"FIDERIM FRANCHEVILLE - MORNANT","location":"Mornant, Lyon"},
+{"ref":"ft:214GXLG","title":"Assistant ADV secteur informatique (H/F)","company":"IT PARTNER","location":"69 - LYON"},
+{"ref":"adzuna:5894610434","title":"CHARGÉ DE CLIENTÈLE DE BANQUE","company":"Expectra","location":"Ecully, Lyon"},
+{"ref":"ft:7132407","title":"Développeur Senior / Lead Dev .NET (C#, ASP.NET Core, Blazor) (H/F)","company":"Cabinet EKINOX","location":"69 - Tassin-la-Demi-Lune"},
+{"ref":"ft:7133889","title":"Tech Lead Java Angular H/F","company":"","location":"69 - Lyon"},
+{"ref":"adzuna:5894791854","title":"Développeur Sénior - Java / VueJS (H/F)","company":"France Travail","location":"Villeurbanne, Lyon"},
+{"ref":"adzuna:5894604804","title":"Préparateur en Pharmacie H/F","company":"LIP Tertiaire","location":"Villeurbanne, Lyon"},
+{"ref":"ft:214GYRZ","title":"Gestionnaire ADV (H/F)","company":"INNOV8 CONNECT","location":"69 - DECINES CHARPIEU"},
+{"ref":"adzuna:5893591897","title":"Conseiller Clientèle Particuliers H/F","company":"FINAÏA","location":"Ecully, Lyon"},
+{"ref":"ft:214GTHG","title":"Chargé(e) d'appui administratif - Dérogations Espèces protégées (H/F)","company":"DREAL - EHN","location":"69 - Lyon 6e Arrondissement"},
+{"ref":"adzuna:5894610422","title":"GESTIONNAIRE BACK OFFICE (BANQUE)","company":"Expectra","location":"Ecully, Lyon"},
+{"ref":"adzuna:5894604823","title":"Préparateur en Pharmacie H/F","company":"LIP Tertiaire","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"adzuna:5895408627","title":"Gestionnaire ADV et approvisionnement F/H","company":"Potager City","location":"1er-Arrondissement, Lyon"},
+{"ref":"ft:214GXRX","title":"Agent d'entretien (H/F)","company":"A D N ALPES DAUPHINE NETTOYAGE","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"ft:7115086","title":"Technicien support N2 (H/F)","company":"Sincrone IT","location":"69 - Bron"},
+{"ref":"adzuna:5895169199","title":"Assistant(e) commercial et gestion – Région Sud-Est F/H","company":"NEPSEN","location":"Lyon, Rhône"},
+{"ref":"ft:214HRPX","title":"Ingénieur Avant-Ventes Logiciel WMS (H/F)","company":"CRESCENDO LYON","location":"69 - GENAS"},
+{"ref":"ft:214HNWS","title":"Chargé de mecenat et de partenariats H/F","company":"OPERA DE LYON","location":"69 - LYON"},
+{"ref":"ft:7114948","title":"Chargé de Projet Marketing Opérationnel H/F","company":"STRADA Marketing","location":"69 - Lyon 3e Arrondissement"},
+{"ref":"adzuna:5894604806","title":"Préparateur en Pharmacie H/F","company":"LIP Tertiaire","location":"Mornant, Lyon"},
+{"ref":"ft:214GXPW","title":"Commercial IT (H/F)","company":"IT PARTNER","location":"69 - Lyon 9e Arrondissement"},
+{"ref":"adzuna:5895160421","title":"Contrôleur(se) de gestion F/H","company":"SAMSE","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"ft:7106876","title":"Assistanat commercial (H/F)","company":"","location":"69 - Saint-Priest"},
+{"ref":"adzuna:5894617871","title":"Boucher (F/H)","company":"Carrefour","location":"Chaponost, Lyon"},
+{"ref":"adzuna:5895103667","title":"Assistant commercial h/f","company":"Talents ADV & Supply","location":"Saint-Priest, Lyon"},
+{"ref":"adzuna:5896712274","title":"Ingénieur Etudes - Electricité nucléaire F/H","company":"VALIANCE","location":"Colombier-Saugnieu, Genas"},
+{"ref":"adzuna:5895161398","title":"Technicien informatique datacenter / Anglais courant - F/H","company":"Skaelia","location":"Meyzieu, Lyon"},
+{"ref":"ft:7160385","title":"Gestionnaire ADV H/F","company":"TAM Recrutement","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:214JKZT","title":"Chargé d'affaires (H/F)","company":"SERPE","location":"69 - FEYZIN"},
+{"ref":"adzuna:5896692084","title":"Contrôleur Qualité en métrologie (H/F)","company":"KALIXENS RH LYON","location":"Beynost, Ain"},
+{"ref":"ft:214JCGQ","title":"Assistant(e) de gestion de Pôle - Facturation (H/F)","company":"ALERYS","location":"69 - LYON"},
+{"ref":"adzuna:5896708872","title":"Ingénieur Conception & Développement Électronique F/H","company":"AS Recrutement & Interim","location":"Vénissieux, Lyon"},
+{"ref":"adzuna:5896331631","title":"Chargé(e) de coordination et de développement - Formation Secrétaire Médicale","company":"Formation & Santé","location":"Lyon, Rhône"},
+{"ref":"adzuna:5895972173","title":"Expert Technique Ferroviaire H/F","company":"Expleo","location":"Vénissieux, Lyon"},
+{"ref":"adzuna:5896712665","title":"Chef d'atelier poids lourds F/H","company":"FID RH","location":"Décines-Charpieu, Lyon"},
+{"ref":"ft:214JVHX","title":"Secrétaire médical diplômé en Chirurgie ORL (H/F)","company":"CENTRE LEON BERARD","location":"69 - Lyon 8e Arrondissement"},
+{"ref":"adzuna:5896019590","title":"Coordinateur Production Vrac H/F","company":"Supplay","location":"Marcy-l'Étoile, Lyon"},
+{"ref":"adzuna:5896005465","title":"Technicien Maintenance & Expertise SAV - Régulation Industrielle. H/F","company":"Effektiv","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"adzuna:5896005187","title":"Hotliner H/F","company":"ADH","location":"Saint-Genis-Laval, Lyon"},
+{"ref":"adzuna:5895986883","title":"Chargé d'Études Construction Bois et Charpente Métalique H/F","company":"Brawo","location":"Mornant, Lyon"},
+{"ref":"adzuna:5897073639","title":"Coordinateur Logistique H/F","company":"Jacky Perrenot recrute","location":"Jonage, Lyon"},
+{"ref":"adzuna:5896311410","title":"Web & Online Programmer Assistant (F/H/NB) – The Crew Motorfest","company":"Direct Emploi","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5896022030","title":"Technicien d'Atelier SAV H/F","company":"Achil","location":"Décines-Charpieu, Lyon"},
+{"ref":"adzuna:5895982281","title":"Chargé d'Affaires Façades Ite Bardage H/F","company":"LIP Tertiaire","location":"Vaulx-en-Velin, Lyon"},
+{"ref":"adzuna:5896728752","title":"Gestionnaire d'application / Production – secteur bancaire F/H","company":"CELAD-Lyon","location":"Tassin-la-Demi-Lune, Lyon"},
+{"ref":"adzuna:5896004150","title":"Coordinateur SAV - Engins TP H/F","company":"Mercato de l'emploi","location":"Décines-Charpieu, Lyon"},
+{"ref":"ft:214JFRL","title":"Chauffeur-livreur Chassieu à vélo H/F (H/F)","company":"FRANCE COLIS SANTE","location":"69 - CHASSIEU"},
+{"ref":"adzuna:5896010856","title":"Chef d'Equipe Production H/F","company":"TIMTARGETT","location":"Oullins, Lyon"},
+{"ref":"adzuna:5896005364","title":"Opérateur Téléphonique Support Technique - Amplitude 6H-21H H/F","company":"Manpower","location":"Vénissieux, Lyon"},
+{"ref":"adzuna:5896005056","title":"Technicien SAV Support Technique H/F","company":"Randstad","location":"Jonage, Lyon"},
+{"ref":"adzuna:5896703209","title":"Technicien de maintenance en Analyse service clients /X F/H","company":"ACASS LYON","location":"Feyzin, Lyon"},
+{"ref":"adzuna:5896708651","title":"Chargé ADV department Store F/H","company":"KELTIS","location":"Lyon, Rhône"},
+{"ref":"ft:214JKDG","title":"Assistant administratif de la logistique / Assistante administrat (H/F)","company":"TEA HERITAGE","location":"69 - VAULX EN VELIN"},
+{"ref":"adzuna:5896698810","title":"Chargé d'Études - Traitement d'Air (H/F)","company":"KALIXENS RH LYON","location":"Oullins, Lyon"},
+{"ref":"adzuna:5896728764","title":"Buisness Analyst – secteur bancaire F/H","company":"CELAD-Lyon","location":"Limonest, Lyon"},
+{"ref":"ft:7352447","title":"Gestionnaire de scolarité (H/F)","company":"Université Claude Bernard Lyon 1","location":"69 - Villeurbanne"},
+{"ref":"ft:214KKYD","title":"Technicien / Technicienne en diagnostic et réparation automobile (H/F)","company":"FORD GL AUTOMOTIVE","location":"69 - OULLINS"},
+{"ref":"ft:214KXCH","title":"Chargé-e de Clientèle F/H","company":"INSTITUT LYFE","location":"69 - Lyon 2e Arrondissement"},
+{"ref":"ft:214KYXP","title":"Conducteur livreur installateur / Conductrice livreuse installatr (H/F)","company":"H.B.T","location":"69 - VILLEURBANNE"},
+{"ref":"ft:214KZDF","title":"Technicien support applicatif (H/F)","company":"MATEN","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:214KMSB","title":"Développeur Java/Angular (H/F)","company":"WINSIDE TECHNOLOGY LYON","location":"69 - Lyon 2e Arrondissement"},
+{"ref":"adzuna:5898247021","title":"Gestionnaire Administratif(ve) et Financier(ère) des Affaires F/H","company":"setec énergie environnement","location":"Lyon, Rhône"},
+{"ref":"adzuna:5898250255","title":"Assistant Gestion Locative R F/H","company":"Le Recrutement Autrement","location":"Lyon, Rhône"},
+{"ref":"ft:214JXCL","title":"CDI - Assistant(e) ADV (H/F)","company":"COSPIRIT","location":"69 - LYON"},
+{"ref":"adzuna:5898260046","title":"Spécialiste Support Technique F/H","company":"MASIMO EUROPE LIMITED","location":"Limonest, Lyon"},
+{"ref":"ft:214KWKL","title":"Téléconseiller en recouvrement amiable (H/F)","company":"ALP EMPLOI","location":"69 - CALUIRE ET CUIRE"},
+{"ref":"adzuna:5898224167","title":"Coordinateur ADV export F/H","company":"Hays France","location":"Vénissieux, Lyon"},
+{"ref":"ft:214KKNK","title":"Secrétaire administratif polyvalent (H/F)","company":"SCE MAINTIEN DOMICILE LYON PENTES PRESQU","location":"69 - LYON"},
+{"ref":"adzuna:5898251492","title":"COMPTABLE GENERAL - CHAPONNAY F/H","company":"Tertiaire","location":"Rillieux-la-Pape, Lyon"},
+{"ref":"adzuna:5898220311","title":"Technicien support Helpdesk N2 (H/F)","company":"Lynx RH Lyon Sud Est","location":"1er-Arrondissement, Lyon"},
+{"ref":"ft:7354619","title":"Développeur confirmé full stack Java Springboot/Angular (H/F)","company":"Forums Talents Handicap","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:7396409","title":"Animateur commercial H/F","company":"OPNR","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"adzuna:5898250108","title":"Technicien Maintenance Machine Outils - Sédentaire F/H","company":"Adito RH","location":"Lyon, Rhône"},
+{"ref":"ft:214KTZM","title":"Technicien de maintenance (H/F)","company":"MANPOWER FRANCE","location":"69 - Saint-Fons"},
+{"ref":"adzuna:5898520326","title":"Technicien.ne Après-Vente","company":"KION","location":"Mions, Lyon"},
+{"ref":"ft:214KPXN","title":"Conducteur livreur poids lourds (H/F)","company":"POMONA PASSIONFROID","location":"69 - ST PRIEST"},
+{"ref":"adzuna:5898467414","title":"Gestionnaire de Paie H/F","company":"Réseau Talents","location":"Bron, Lyon"},
+{"ref":"ft:214KZKF","title":"Vendeur Vendeuse Magasin Traiteur (H/F)","company":"CHARCUTERIE BONNARD","location":"69 - LYON"},
+{"ref":"adzuna:5896310730","title":"Développeur web et ia F/H","company":"Direct Emploi","location":"1er-Arrondissement, Lyon"},
+{"ref":"adzuna:5896715131","title":"Comptable général confirmé F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Lyon, Rhône"},
+{"ref":"ft:7362776","title":"Chauffeur-livreur PL H/F","company":"SYSCO FRANCE","location":"69 - Lyon"},
+{"ref":"adzuna:5898248270","title":"Chargé d'affaires CVC F/H","company":"KALIXENS RH LYON","location":"Colombier-Saugnieu, Genas"},
+{"ref":"adzuna:5898260049","title":"Chef d'équipe plaquiste F/H","company":"ECLIPSE - Cabinet de recrutement","location":"Caluire-et-Cuire, Lyon"},
+{"ref":"ft:7380947","title":"Développeur backend Java (H/F)","company":"KLANIK","location":"69 - Lyon 1er Arrondissement"},
+{"ref":"ft:214LHFJ","title":"Conseiller Clientèle Bancaire (H/F)","company":"BRUCE","location":"69 - Lyon 1er Arrondissement"}
 ]
