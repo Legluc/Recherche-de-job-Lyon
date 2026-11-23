@@ -36,12 +36,14 @@ export function normalize(s: string): string {
  * Ramène un libellé de lieu à une commune canonique : "Lyon 1er",
  * "1er-Arrondissement, Lyon" et "Lyon, Rhône" donnent tous "lyon".
  * On retient la commune connue la plus longue trouvée dans le libellé, pour que
- * "Meyzieu, Lyon" donne bien "meyzieu" et non "lyon".
+ * "Meyzieu, Lyon" donne bien "meyzieu" et non "lyon". Les communes hors zone
+ * comptent aussi : "Jonage, Lyon" doit rester "jonage" pour être reconnu comme
+ * la même annonce que "Jonage".
  */
 export function canonicalCommune(location: string, city: CityConfig): string {
   const n = normalize(location);
   let best = "";
-  for (const c of city.communesWhitelist) {
+  for (const c of [...city.communesWhitelist, ...city.communesExcluded]) {
     const cn = normalize(c);
     if (cn && n.includes(cn) && cn.length > best.length) best = cn;
   }

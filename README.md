@@ -1,12 +1,12 @@
 # job-hunter-lyon
 
-Collecte automatisée d'offres d'emploi (**France Travail** + **Adzuna**, plus une passe navigateur pour Indeed et Welcome to the Jungle) vers une base **Notion**, ciblée sur **Lyon et sa première couronne** (≤ 45 min en transport, sans voiture).
+Collecte automatisée d'offres d'emploi (**France Travail** + **Adzuna**, plus une passe navigateur pour Indeed, HelloWork, Choisir le service public et Jobs That Make Sense) vers une base **Notion**, ciblée sur **Lyon et les communes desservies par le métro ou le tramway** (sans voiture : Villeurbanne, Caluire, Vénissieux, Bron, Vaulx-en-Velin, Oullins-Pierre-Bénite, Saint-Genis-Laval, Décines, Meyzieu, Saint-Priest).
 
-**Profil unique : emploi alimentaire, week-ends libres, temps plein.** Le poste lui-même compte moins que les conditions : on accepte des métiers jamais exercés — une passe de tri IA arbitre en aval — et on refuse les mauvaises conditions.
+**Profil unique : emploi alimentaire, temps plein, dimanche libre, CDI** (CDD d'au moins 12 mois accepté dans le public et l'associatif). Domaines visés : bureau et relation client, administration publique, associatif, commerce alimentaire, retail. Le poste lui-même compte moins que les conditions : on accepte des métiers jamais exercés dans ces domaines — une passe de tri IA arbitre en aval — et on refuse les mauvaises conditions.
 
 Tourne tout seul via **GitHub Actions** (cron du soir, en semaine), sans serveur à maintenir.
 
-> **Historique des cibles.** Août 2026 : Lyon + Annecy, dev + alimentaire. Septembre 2026 : Annecy retirée (poste trouvé sur place) ; le secret GitHub `NOTION_DATABASE_ID_ANNECY` et sa base Notion peuvent être supprimés. **Octobre 2026 : le profil Dev est abandonné.** La recherche ne porte plus que sur l'emploi alimentaire lyonnais. Ne pas réintroduire ces pistes sans décision explicite — plusieurs règles (requêtes, quotas, seuils) ont été simplifiées en conséquence.
+> **Historique des cibles.** Août 2026 : Lyon + Annecy, dev + alimentaire. Septembre 2026 : Annecy retirée (poste trouvé sur place) ; le secret GitHub `NOTION_DATABASE_ID_ANNECY` et sa base Notion peuvent être supprimés. **Octobre 2026 : le profil Dev est abandonné.** La recherche ne porte plus que sur l'emploi alimentaire lyonnais. **Novembre 2026 : critères revus** — samedi accepté mais dimanche libre exigé, CDI exigé (sauf CDD public / associatif ≥ 12 mois), horaires coupés rejetés, informatique, logistique et propreté exclues, commerce alimentaire et retail réintégrés, WTTJ remplacé par HelloWork, Choisir le service public et Jobs That Make Sense. Ne pas réintroduire ces pistes sans décision explicite — plusieurs règles (requêtes, quotas, seuils) ont été simplifiées en conséquence.
 
 ## Architecture
 
@@ -24,10 +24,18 @@ src/
     adzuna.ts         Recherche via clés app_id/app_key
   notion.ts           Dédup (lecture "Réf source") + insertion des pages
   main.ts             Run automatique (APIs) : collecte -> pipeline -> insertion
-  ingest-file.ts      Ingestion d'un JSON collecté via navigateur (Indeed, WTTJ)
+  ingest-file.ts      Ingestion d'un JSON collecté via navigateur
   select-web.ts       Sélection de la passe navigateur quand Notion n'est joignable que par le connecteur
+  browser-script.ts   Prépare le code à exécuter dans le navigateur, fusionne les lots collectés
   cleanup.ts          Archivage des offres "À traiter" (nettoyage)
   selftest.ts         Tests hors-ligne (scoring, salaires, dédup, pipeline)
+browser/
+  sources.json        Requêtes et plafonds de la passe navigateur, par source
+  common.js           Outils partagés (fetch même origine, JSON-LD, condensé de description)
+  hellowork.js        Extracteur HelloWork (recherche + annonce complète)
+  indeed.js           Extracteur d'une page de résultats Indeed (cartes seules)
+  csp.js              Extracteur Choisir le service public (Rhône, annonce complète)
+  jtms.js             Extracteur Jobs That Make Sense (Lyon, annonce complète)
 .github/workflows/collect.yml   Cron GitHub Actions
 ```
 
@@ -39,13 +47,14 @@ Flux : chaque source renvoie un `NormalizedOffer[]` (format pivot). `score.ts` �
 - **Déduplication côté Notion (pas d'état local).** La source de vérité est la base elle-même : on lit les `Réf source` existantes à chaque run. Avantage : idempotence et pas de dérive d'état (contrairement à un ledger local qu'il faudrait committer). Coût : une requête paginée à chaque exécution — négligeable à l'échelle d'un suivi personnel.
 - **`CityConfig` conservé malgré la ville unique.** L'objet isole tout ce qui dépend du territoire (zone, département, base Notion, pondération des contrats). Le démonter toucherait huit fichiers pour zéro gain fonctionnel ; ajouter une ville reste une entrée dans `CITIES`.
 - **Profil unique, mais `type` conservé dans le modèle.** Le dev abandonné, `JobType` ne vaut plus que `"Alimentaire"`. Le champ reste dans le pivot parce que la propriété `Type` du tracker existe toujours et que d'anciens lots collectés portent encore `"Dev"` : `score.ts` s'en sert pour **écarter** ces restes plutôt que de les noter avec une grille qui ne leur correspond pas. Le mécanisme de quotas par profil (`INSERT_SHARE`) a disparu avec le second profil : une seule passe par score décroissant suffit.
-- **Sources sans API : le navigateur collecte, le repo décide.** Indeed et Welcome to the Jungle n'ont pas d'API exploitable ; ils sont parcourus à vitesse humaine via le navigateur, qui produit un JSON brut. Ce fichier passe ensuite par le **même** `pipeline.ts` que le run automatique. On évite ainsi une seconde implémentation du scoring qui divergerait à la première modification.
+- **Sources sans API : le navigateur collecte, le repo décide.** Indeed, HelloWork, Choisir le service public et Jobs That Make Sense n'ont pas d'API exploitable ; ils sont parcourus à vitesse humaine via le navigateur intégré de Claude Desktop, qui produit un JSON brut. Welcome to the Jungle a été abandonné en novembre 2026 : jobboard à dominante tech, il ne rendait plus rien sur les métiers visés. Ce fichier passe ensuite par le **même** `pipeline.ts` que le run automatique. On évite ainsi une seconde implémentation du scoring qui divergerait à la première modification.
 - **Deux chemins d'entrée pour la passe navigateur, un seul moteur de sélection.** `ingest-file.ts` suppose le `NOTION_TOKEN` disponible et écrit lui-même dans Notion ; il sert au lancement local. La tâche planifiée, elle, ne dispose que du connecteur Notion (le token ne vit que dans les secrets GitHub Actions) : elle passe donc par `select-web.ts`, qui lit l'existant depuis un fichier, appelle le même `selectOffers` et rend les retenues dans `data/web-selected.json`, à charge pour le connecteur de les insérer. Deux orchestrations, aucune règle de scoring dupliquée.
-- **Rejet ferme plutôt que malus quand la contrainte est matérielle.** Travail de week-end annoncé, temps partiel, encadrement dans l'intitulé, véhicule personnel exigé : ces offres ne correspondent pas à la recherche, les pondérer ne ferait que les faire remonter un jour où le vivier est maigre. Le malus de 20 points qui s'appliquait à l'encadrement et au véhicule était d'ailleurs inopérant — absorbé par le plafond de 100 sur une offre par ailleurs bien notée.
+- **Nature d'employeur distincte de la fonction.** Administration publique et associatif ne sont pas des intitulés mais des employeurs : `employerKindOf` les reconnaît (source, nom, marqueurs non ambigus du texte), ils priment sur le secteur fonctionnel dans le tracker, et ouvrent l'exception CDD. Une requête « mairie » n'aurait pas de sens ; les requêtes de bureau les ramènent.
+- **Rejet ferme plutôt que malus quand la contrainte est matérielle.** Dimanche travaillé, temps partiel, horaires coupés, CDD hors exception, encadrement hors commerce, véhicule personnel exigé : ces offres ne correspondent pas à la recherche, les pondérer ne ferait que les faire remonter un jour où le vivier est maigre. Le malus de 20 points qui s'appliquait à l'encadrement et au véhicule était d'ailleurs inopérant — absorbé par le plafond de 100 sur une offre par ailleurs bien notée.
 - **Information absente ≠ information mauvaise.** Contrat non publié, date non publiée, rythme non précisé : valeur neutre, pas zéro, et surtout pas un rejet. Sans cela, une source entière passe sous le seuil pour une lacune de format, pas pour un défaut d'offre — 45 des 46 annonces alimentaires du dernier lot Indeed ne disent rien de leur rythme.
 - **Déduplication floue à deux niveaux.** L'ID de source ne détecte pas une annonce republiée ailleurs. On compare donc des clés normalisées (accents, ponctuation et mentions H/F retirés) : `titre+entreprise+commune` toujours, et `titre+commune` uniquement quand l'un des deux côtés est un intermédiaire (intérim, jobboard). Le tri par score précède la dédup : on conserve la variante la mieux notée.
 - **`Promise.allSettled` sur les sources.** Une panne de France Travail ne doit pas empêcher Adzuna d'alimenter la base (et inversement). Résilience > atomicité ici.
-- **Zone approximée par whitelist de communes + préfixes postaux.** Compromis assumé : pas d'isochrone réel (qui demanderait une API de calcul d'itinéraire et de la maintenance) ; une liste de communes bien desservies TCL/TER couvre le « ≤ 45 min sans voiture ».
+- **Zone approximée par liste de communes + codes postaux, calée sur le réseau lourd TCL.** Compromis assumé : pas d'isochrone réel (qui demanderait une API de calcul d'itinéraire et de la maintenance). Depuis novembre 2026, une commune n'est retenue que si le métro ou le tramway dessert son centre ou ses zones d'emploi, avec un trajet direct vers le centre de Lyon en 40 min environ : les communes desservies seulement par des bus sont écartées, même proches. Une liste de communes écartées est testée avant la liste blanche, pour qu'un libellé « Sainte-Foy-lès-Lyon » ou « Tassin-la-Demi-Lune, Lyon » ne passe pas grâce au mot « Lyon ». Détail et lignes justificatives dans `src/cities.ts`.
 
 ## Installation
 
@@ -82,6 +91,8 @@ npm start              # collecte réelle -> Notion
 npm run cleanup        # archive les offres "À traiter" (corbeille) après une sur-collecte
 DRY_RUN=1 npm run ingest -- offres.json   # aperçu d'un lot collecté au navigateur
 npm run ingest -- offres.json             # puis insertion réelle
+npm run browser-script -- hellowork   # code à coller dans l'onglet HelloWork (idem csp, jtms, indeed)
+npm run browser-script -- merge       # data/web-raw-*.json -> data/web-raw.json
 npm run select-web     # sélection de la passe navigateur (sans NOTION_TOKEN) -> data/web-selected.json
 npm run selftest       # tests hors-ligne (scoring, salaires, dédup, pipeline)
 npm run typecheck      # vérification des types
@@ -101,14 +112,20 @@ La dédup s'appuie sur les `Réf source` : si la lecture Notion échoue, le run 
 
 | Motif | Détail |
 | --- | --- |
-| Hors zone | commune absente de `communesWhitelist` et code postal hors `postalPrefixes` |
+| Hors zone | commune de `communesExcluded` mentionnée, ou commune absente de `communesWhitelist` et code postal hors `postalPrefixes` |
 | Offre trop ancienne | publiée il y a plus de 14 jours (`FILTERS.maxDaysOld`) |
 | Mots d'exclusion | nuit, 2x8/3x8, postés, BTP, restauration (`FILTERS.hardExclude`) |
-| **Travail de week-end annoncé** | « travail le samedi », « 1 samedi sur 2 », « du lundi au samedi », « 7j/7 » (`WEEKEND_WORK_RE`) |
+| **Dimanche travaillé annoncé** | « 1 dimanche sur 2 », « travail le week-end », « du mardi au dimanche », « 7j/7 » (`SUNDAY_WORK_RE`) ; le samedi seul ne bloque plus |
 | **Temps partiel annoncé** | « temps partiel », « mi-temps », « 24h/semaine » (`PART_TIME_RE`) |
-| Encadrement dans l'intitulé | responsable, manager, directeur, chef de, superviseur (`MANAGEMENT_RE`) |
-| Véhicule personnel exigé | permis B oui, voiture non (`VEHICLE_REQUIRED_RE`) |
+| **Horaires coupés** | « horaires coupés », « en coupure » (`SPLIT_SHIFT_RE`) |
 | Alternance / stage / freelance | dans l'intitulé ou le type de contrat |
+| **Intérim** | type de contrat ou intitulé |
+| **CDD hors exception** | CDD privé ; CDD public ou associatif de moins de 12 mois (`CDD_MIN_MONTHS`) — durée non précisée : conservé |
+| Réservé aux titulaires | concours requis (`TITULAIRE_ONLY_RE`) |
+| **Domaine exclu** (intitulé) | informatique dont support, logistique / production, propreté (`EXCLUDED_DOMAINS`) |
+| Métier qualifié (intitulé) | boulanger, pâtissier, boucher, coiffeur, aide-soignant… (`QUALIFIED_TRADE_RE`) |
+| Encadrement dans l'intitulé | sauf petite équipe en commerce alimentaire / retail ; direction et multi-sites toujours rejetés (`MANAGEMENT_RE`, `SENIOR_MANAGEMENT_RE`) |
+| Véhicule personnel exigé | permis B oui, voiture non (`VEHICLE_REQUIRED_RE`) |
 | Profil `Dev` résiduel | reste d'un ancien lot collecté |
 
 ### Scoring (base 50)
@@ -116,12 +133,13 @@ La dédup s'appuie sur les `Réf source` : si la lecture Notion échoue, le run 
 | Critère | Points |
 | --- | --- |
 | Publiée ≤ 3 j / ≤ 7 j / date absente | +15 / +8 / +8 |
-| CDI / CDD / contrat non publié | +15 / +8 / +8 |
+| CDI / CDD (exception public-associatif) / contrat non publié | +15 / +8 / +8 |
 | Commune de Lyon / périphérie | +5 / +2 |
 | **Week-ends libres prouvés** (« du lundi au vendredi », « week-ends non travaillés ») | **+15** |
+| **Dimanche libre prouvé** (« du mardi au samedi », « fermé le dimanche ») | **+8** |
 | Salaire ≥ SMIC +30 % / +15 % / +5 % / au SMIC / sous le SMIC | +22 / +16 / +8 / +2 / −12 |
 | Salaire affiché mais non chiffré (« selon profil ») | +3 |
-| Secteur : support informatique / back-office ou banque / administratif / relation client ou accueil / retail ou logistique / manutention / propreté | +14 / +10 / +8 / +6 / +5 / +4 / +3 |
+| Secteur : administration publique / associatif, back-office, banque, administratif / call center, accueil / commerce alimentaire / retail | +14 / +12 / +10 / +6 / +5 |
 | Alternance mentionnée en description seule | −25 |
 | Commercial terrain ou B2B | −20 |
 
@@ -129,13 +147,12 @@ Seuil de sélection : **80** (`LIMITS.minScore`), relevé à **84** pour la pass
 
 Le SMIC de référence est déclaré une seule fois dans `config.ts` (`SMIC`, revalorisation du 1er juin 2026 : 12,31 €/h, 1 867,02 €/mois brut). `salary.ts` ramène tout libellé de source à un **brut mensuel équivalent 35 h** — horaire × 151,67, annuel ÷ nombre de mois de versement, net × 1,27 — en retenant la **borne basse** des fourchettes : on note ce qui est garanti, pas l'affichage. Le montant normalisé, l'écart au SMIC et le rythme détecté sont recopiés dans la propriété `Salaire` du tracker, pour la passe de tri.
 
-### Le critère week-end, en pratique
+### Le critère dimanche, en pratique
 
-Trois lignes de défense, parce qu'aucune ne suffit seule :
+Depuis novembre 2026, le samedi est accepté et seul le dimanche bloque. Le commerce alimentaire et le retail sont donc revenus dans les requêtes : ils travaillent souvent le samedi, rarement tous le dimanche. Deux lignes de défense :
 
-1. **En amont, les requêtes.** La vente en magasin, la grande distribution, la boulangerie et l'hôtellerie ont été retirées de `QUERIES` : ces métiers travaillent le samedi par construction. Les collecter revenait à remplir le tracker d'offres écartées ensuite une par une.
-2. **Au scoring, le texte.** `WEEKEND_WORK_RE` écarte les formulations affirmatives, `WEEKEND_FREE_RE` bonifie les preuves de lundi-vendredi. Les annonces muettes passent sans bonus : sur le dernier lot navigateur, 45 annonces sur 46 ne disent rien de leur rythme — les exiger explicites fermerait la collecte.
-3. **En aval, la passe de tri IA.** C'est elle qui ouvre l'annonce complète et vérifie le rythme sur preuve verbatim. Le moteur lui livre un vivier plausible ; elle tranche.
+1. **Au scoring, le texte.** `SUNDAY_WORK_RE` écarte les formulations affirmatives (« 1 dimanche sur 2 », « travail le week-end », « du mardi au dimanche ») ; les lookbehinds protègent les négations (« pas de travail le dimanche »). `WEEKDAYS_ONLY_RE` (+15) et `SUNDAY_FREE_RE` (+8) bonifient les preuves de repos. Les annonces muettes passent sans bonus : les cartes Indeed ne disent presque jamais rien de leur rythme — exiger la preuve fermerait la collecte. HelloWork, Choisir le service public et Jobs That Make Sense livrent l'annonce complète, où la règle mord vraiment.
+2. **En aval, la passe de tri IA.** C'est elle qui ouvre l'annonce complète et vérifie le rythme sur preuve verbatim. Le moteur lui livre un vivier plausible ; elle tranche.
 
 ## Limites & pistes
 

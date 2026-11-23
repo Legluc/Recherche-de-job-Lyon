@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Collecte automatisée d'offres d'emploi (France Travail + Adzuna) vers Notion, ciblée sur Lyon et sa périphérie.",
+  "description": "Collecte automatisée d'offres d'emploi (France Travail + Adzuna, plus une passe navigateur) vers Notion, ciblée sur Lyon et sa périphérie.",
   "scripts": {
     "start": "tsx src/main.ts",
     "cleanup": "tsx src/cleanup.ts",
     "ingest": "tsx src/ingest-file.ts",
     "select-web": "tsx src/select-web.ts",
     "typecheck": "tsc --noEmit",
-    "selftest": "tsx src/selftest.ts"
+    "selftest": "tsx src/selftest.ts",
+    "browser-script": "tsx src/browser-script.ts"
   },
   "engines": {
     "node": ">=20"

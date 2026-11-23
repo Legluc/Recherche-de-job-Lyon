@@ -1,11 +1,17 @@
-import type { NormalizedOffer, ScoredOffer, WorkRhythm } from "./types";
+import type { Contract, EmployerKind, NormalizedOffer, ScoredOffer, WorkRhythm } from "./types";
 import {
-  FILTERS, SECTOR_KEYWORDS,
-  UNWANTED_CONTRACT_RE, UNWANTED_CONTRACT_MALUS, MANAGEMENT_RE,
-  FIELD_SALES_RE, FIELD_SALES_MALUS, VEHICLE_REQUIRED_RE, SMIC, SALARY_TIERS, SALARY_DISPLAYED_POINTS, FRESHNESS_POINTS,
-  WEEKEND_FREE_RE, WEEKEND_WORK_RE, WEEKEND_FREE_POINTS, PART_TIME_RE
+  FILTERS, SECTOR_KEYWORDS, EMPLOYER_SECTORS, EXCLUDED_DOMAINS,
+  UNWANTED_CONTRACT_RE, UNWANTED_CONTRACT_MALUS,
+  MANAGEMENT_RE, SENIOR_MANAGEMENT_RE, MANAGEMENT_OK_SECTORS, QUALIFIED_TRADE_RE,
+  FIELD_SALES_RE, FIELD_SALES_MALUS, VEHICLE_REQUIRED_RE,
+  SMIC, SALARY_TIERS, SALARY_DISPLAYED_POINTS, FRESHNESS_POINTS,
+  SUNDAY_WORK_RE, SATURDAY_WORK_RE, WEEKDAYS_ONLY_RE, SUNDAY_FREE_RE,
+  WEEKDAYS_ONLY_POINTS, SUNDAY_FREE_POINTS, PART_TIME_RE, SPLIT_SHIFT_RE,
+  CDD_MIN_MONTHS, CONTRACT_DURATION_RE, CDD_TITLE_RE, INTERIM_TITLE_RE, TITULAIRE_ONLY_RE, PUBLIC_CATEGORY_A_RE,
+  PUBLIC_SOURCES, PUBLIC_EMPLOYER_RE, PUBLIC_TEXT_RE, ASSO_EMPLOYER_RE, ASSO_TEXT_RE
 } from "./config";
 import { parseSalary, smicRatio } from "./salary";
+import { normalize } from "./dedup";
 import type { CityConfig } from "./cities";
 
 /** Âge de l'offre en jours, ou null si la source ne publie pas de date. */
@@ -15,11 +21,26 @@ function daysAgo(iso?: string): number | null {
   return isNaN(t) ? null : (Date.now() - t) / 86_400_000;
 }
 
-/** Vérifie que l'offre est dans la zone accessible de la ville (commune OU code postal). */
+/** Le libellé normalisé contient-il ce nom de commune, en mots entiers ? */
+function mentions(locN: string, commune: string): boolean {
+  const c = normalize(commune);
+  return !!c && ` ${locN} `.includes(` ${c} `);
+}
+
+/**
+ * Vérifie que l'offre est dans la zone retenue (cf. cities.ts).
+ *
+ * Les communes écartées sont testées EN PREMIER : « Sainte-Foy-lès-Lyon » ou
+ * « Tassin-la-Demi-Lune, Lyon » contiennent « Lyon », et 69330 est aussi le code
+ * postal de Jonage. Comparaison en mots entiers sur un libellé normalisé
+ * (casse, accents, tirets) : « Décines » et « decines-charpieu » se valent, et
+ * « Bron » ne matche pas l'intérieur d'un autre mot.
+ */
 function inGeo(o: NormalizedOffer, city: CityConfig): boolean {
-  const loc = (o.location || "").toLowerCase();
+  const loc = normalize(o.location || "");
   if (!loc && !o.postalCode) return true; // pas d'info exploitable : on ne rejette pas
-  const byCommune = city.communesWhitelist.some((c) => loc.includes(c));
+  if (city.communesExcluded.some((c) => mentions(loc, c))) return false;
+  const byCommune = city.communesWhitelist.some((c) => mentions(loc, c));
   const byPostal = !!o.postalCode && city.postalPrefixes.some((p) => o.postalCode!.startsWith(p));
   return byCommune || byPostal;
 }
@@ -34,11 +55,33 @@ function stripInlineParens(s: string): string {
 }
 
 /**
- * Secteur de l'offre. On teste d'abord l'intitulé, bien plus fiable que la
+ * Nature de l'employeur. Ordre des indices : source, puis nom de l'employeur,
+ * puis marqueurs non ambigus du texte (cf. config.ts). Le nom passe avant le
+ * texte pour qu'une association qui « travaille avec la Métropole » reste une
+ * association.
+ */
+export function employerKindOf(o: NormalizedOffer): EmployerKind {
+  const company = o.company || "";
+  const full = `${o.title} ${o.description ?? ""}`;
+  if (PUBLIC_SOURCES.includes(o.source) || PUBLIC_EMPLOYER_RE.test(company)) return "Public";
+  if (ASSO_EMPLOYER_RE.test(company)) return "Associatif";
+  if (PUBLIC_TEXT_RE.test(full)) return "Public";
+  if (ASSO_TEXT_RE.test(full)) return "Associatif";
+  return "Privé";
+}
+
+/**
+ * Secteur de l'offre. La nature de l'employeur prime (Administration publique,
+ * Associatif) ; sinon on teste d'abord l'intitulé, bien plus fiable que la
  * description : un poste d'entrepôt dont l'annonce vante le « sens du service
  * client » ne doit pas être classé en relation client.
  */
-export function sectorOf(title: string, full: string): { sector: string; points: number } {
+export function sectorOf(
+  title: string,
+  full: string,
+  employer: EmployerKind = "Privé"
+): { sector: string; points: number } {
+  if (employer !== "Privé") return EMPLOYER_SECTORS[employer];
   const t = stripInlineParens(title);
   const f = stripInlineParens(full);
   for (const { sector, re, points } of SECTOR_KEYWORDS) if (re.test(t)) return { sector, points };
@@ -47,15 +90,41 @@ export function sectorOf(title: string, full: string): { sector: string; points:
 }
 
 /**
- * Rythme déduit du texte. Le travail de week-end affirmé prime sur une éventuelle
+ * Rythme déduit du texte. Le travail du dimanche affirmé prime sur une éventuelle
  * mention de repos ailleurs dans l'annonce : entre « du lundi au vendredi » en
- * en-tête et « travail 1 samedi sur 2 » dans le détail, c'est le second qui décrit
- * la réalité du poste.
+ * en-tête et « 1 dimanche sur 2 » dans le détail, c'est le second qui décrit la
+ * réalité du poste. Même logique pour le samedi : un lundi-vendredi assorti d'un
+ * samedi travaillé ne garantit plus que le repos dominical.
  */
 export function detectRhythm(full: string): WorkRhythm {
-  if (WEEKEND_WORK_RE.test(full)) return "Week-end travaillé";
-  if (WEEKEND_FREE_RE.test(full)) return "Week-ends libres";
+  if (SUNDAY_WORK_RE.test(full)) return "Dimanche travaillé";
+  const weekdays = WEEKDAYS_ONLY_RE.test(full);
+  if (weekdays && !SATURDAY_WORK_RE.test(full)) return "Week-ends libres";
+  if (weekdays || SUNDAY_FREE_RE.test(full)) return "Dimanche libre";
   return "Non précisé";
+}
+
+const NUMBER_WORDS: Record<string, number> = { un: 1, une: 1, deux: 2, trois: 3 };
+
+/** Durée annoncée du contrat, en mois, ou null si l'annonce ne la donne pas. */
+export function contractMonths(full: string): number | null {
+  const m = full.match(CONTRACT_DURATION_RE);
+  if (!m) return null;
+  const n = NUMBER_WORDS[m[1].toLowerCase()] ?? Number(m[1]);
+  if (!n) return null;
+  return /^an/i.test(m[2]) ? n * 12 : n;
+}
+
+/**
+ * Contrat effectif : celui publié par la source, à défaut celui qu'annonce
+ * l'intitulé (« CDD 6 mois – Assistant… », « Intérim – … »). La description seule
+ * n'est pas consultée : « CDD ou CDI selon profil » y est courant.
+ */
+function effectiveContract(o: NormalizedOffer, title: string): Contract | undefined {
+  if (o.contract) return o.contract;
+  if (INTERIM_TITLE_RE.test(title)) return "Intérim";
+  if (CDD_TITLE_RE.test(title)) return "CDD";
+  return undefined;
 }
 
 /**
@@ -80,65 +149,97 @@ function salaryScore(o: NormalizedOffer): { points: number; monthlyGross?: numbe
 }
 
 /**
- * Score l'offre (0–100) ou renvoie null si elle doit être écartée.
+ * Motif de rejet ferme, ou null si l'offre peut être notée.
  *
- * Profil unique depuis octobre 2026 : emploi alimentaire lyonnais, week-ends
- * libres, temps plein. Le poste lui-même compte moins que les conditions — on
- * accepte des métiers jamais exercés (le vivier est large, la passe de tri IA
- * arbitre), on refuse les mauvaises conditions.
+ * Point d'entrée unique des rejets : `scoreOffer` l'appelle, et `select-web.ts`
+ * s'en sert pour afficher un décompte par motif sans retester aucune regex. Les
+ * libellés renvoyés apparaissent tels quels dans le rapport de la tâche planifiée.
  *
- * Rejets fermes, par ordre de coût de l'erreur : hors zone, trop ancienne, mots
- * d'exclusion (nuit, postés, BTP, restauration), **travail de week-end annoncé**,
- * **temps partiel annoncé**, contrat non souhaité, encadrement, véhicule personnel
- * exigé.
+ * Ordre : du plus factuel (profil, zone, date) au plus interprétatif (domaine,
+ * encadrement), pour que le motif affiché soit le moins contestable.
  */
-export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | null {
+export function rejectReason(o: NormalizedOffer, city: CityConfig): string | null {
   const title = (o.title || "").toLowerCase();
-  const full = `${o.title} ${o.description}`.toLowerCase();
+  const full = `${o.title} ${o.description ?? ""}`.toLowerCase();
 
   // Garde-fou : un ancien lot collecté peut encore contenir des offres marquées
   // "Dev" (profil abandonné). Elles ne doivent pas être scorées avec la grille
   // alimentaire, qui les jugerait sur des critères sans rapport.
-  if (o.type !== "Alimentaire") return null;
-
-  if (!inGeo(o, city)) return null;
+  if (o.type !== "Alimentaire") return "profil abandonné (dev)";
+  if (!inGeo(o, city)) return "hors zone";
 
   // Date absente (Indeed n'en publie pas sur ses cartes) : ni rejet, ni bonus
   // maximal, mais une valeur neutre (cf. FRESHNESS_POINTS.unknown).
   const cd = daysAgo(o.createdAt);
-  if (cd !== null && cd > FILTERS.maxDaysOld) return null;
+  if (cd !== null && cd > FILTERS.maxDaysOld) return "offre trop ancienne";
 
-  if (FILTERS.hardExclude.some((k) => full.includes(k))) return null; // nuit/postés/resto/BTP
+  if (FILTERS.hardExclude.some((k) => full.includes(k))) return "nuit, postés, BTP ou restauration";
 
-  // Conditions non négociables : week-ends libres et temps plein.
+  // Conditions non négociables : dimanche libre, temps plein, pas de coupure.
+  if (detectRhythm(full) === "Dimanche travaillé") return "dimanche travaillé";
+  if (PART_TIME_RE.test(full)) return "temps partiel";
+  if (SPLIT_SHIFT_RE.test(full)) return "horaires coupés";
+
+  // Contrats. Alternance, stage, freelance dans l'intitulé ou le type : rejet.
+  // Mention en description seule : malus au scoring (« alternance possible »).
+  if (o.contract === "Alternance" || UNWANTED_CONTRACT_RE.test(title)) return "alternance, stage ou freelance";
+  const contract = effectiveContract(o, title);
+  if (contract === "Intérim") return "intérim";
+  const employer = employerKindOf(o);
+  if (contract === "CDD") {
+    // Exception public / associatif, à durée suffisante ou non précisée.
+    if (employer === "Privé") return "CDD (CDI exigé)";
+    const months = contractMonths(full);
+    if (months !== null && months < CDD_MIN_MONTHS) return `CDD de moins de ${CDD_MIN_MONTHS} mois`;
+  }
+  if (TITULAIRE_ONLY_RE.test(full)) return "réservé aux titulaires";
+  if (PUBLIC_CATEGORY_A_RE.test(full)) return "catégorie A (cadre)";
+
+  // Domaines exclus et métiers qualifiés : sur l'intitulé seulement.
+  for (const d of EXCLUDED_DOMAINS) if (d.re.test(stripInlineParens(title))) return `domaine exclu (${d.label})`;
+  if (QUALIFIED_TRADE_RE.test(stripInlineParens(title))) return "métier qualifié";
+
+  // Encadrement : accepté pour une petite équipe en commerce alimentaire et en
+  // retail (son expérience), rejeté ailleurs et pour tout grand encadrement.
+  if (MANAGEMENT_RE.test(title)) {
+    const { sector } = sectorOf(title, full, employer);
+    const allowed = MANAGEMENT_OK_SECTORS.includes(sector) && !SENIOR_MANAGEMENT_RE.test(title);
+    if (!allowed) return "encadrement";
+  }
+  if (VEHICLE_REQUIRED_RE.test(full)) return "véhicule personnel exigé";
+  return null;
+}
+
+/**
+ * Score l'offre (0–100) ou renvoie null si elle doit être écartée.
+ *
+ * Profil unique : emploi alimentaire lyonnais, dimanche libre, temps plein, CDI
+ * (ou CDD long dans le public et l'associatif). Le poste lui-même compte moins
+ * que les conditions : on accepte des métiers jamais exercés dans les domaines
+ * visés (la passe de tri IA arbitre), on refuse les mauvaises conditions.
+ */
+export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | null {
+  if (rejectReason(o, city)) return null;
+
+  const title = (o.title || "").toLowerCase();
+  const full = `${o.title} ${o.description ?? ""}`.toLowerCase();
+  const employer = employerKindOf(o);
   const rhythm = detectRhythm(full);
-  if (rhythm === "Week-end travaillé") return null;
-  if (PART_TIME_RE.test(full)) return null;
-
-  // Contrats non souhaités (alternance, stage, freelance...).
-  // - Titre ou type de contrat explicite -> rejet ferme (un malus laissait passer
-  //   certaines offres pile au seuil : filtrage plus fiable que pondération).
-  // - Mention uniquement dans la description -> simple malus, car il peut s'agir
-  //   d'un CDI qui l'évoque en passant ("alternance possible").
-  if (o.contract === "Alternance" || UNWANTED_CONTRACT_RE.test(title)) return null;
-
-  // Restrictions de compétence et de mobilité : encadrement (historique sectoriel
-  // exigé) et véhicule personnel (Lucas n'en a pas). Rejets fermes : un malus
-  // était absorbé par le plafond de 100 sur les offres par ailleurs bien notées.
-  if (MANAGEMENT_RE.test(title)) return null;
-  if (VEHICLE_REQUIRED_RE.test(full)) return null;
 
   let score = 50;
+  const cd = daysAgo(o.createdAt);
   if (cd === null) score += FRESHNESS_POINTS.unknown;
   else if (cd <= 3) score += FRESHNESS_POINTS.recent;
   else if (cd <= 7) score += FRESHNESS_POINTS.week;
   else score += FRESHNESS_POINTS.older;
 
-  if (o.contract === "CDI") score += city.contractPoints.CDI;
-  else if (o.contract === "CDD") score += city.contractPoints.CDD;
+  // Un CDD arrivé ici relève de l'exception public / associatif.
+  const contract = effectiveContract(o, title);
+  if (contract === "CDI") score += city.contractPoints.CDI;
+  else if (contract === "CDD") score += city.contractPoints.CDD;
   // Contrat non publié par la source : valeur neutre plutôt que zéro, sinon
-  // l'offre est pénalisée pour une absence d'information (cf. WTTJ).
-  else if (!o.contract) score += city.contractPoints.unknown;
+  // l'offre est pénalisée pour une absence d'information.
+  else if (!contract) score += city.contractPoints.unknown;
 
   if (UNWANTED_CONTRACT_RE.test(full)) score -= UNWANTED_CONTRACT_MALUS;
 
@@ -149,14 +250,15 @@ export function scoreOffer(o: NormalizedOffer, city: CityConfig): ScoredOffer | 
   // Bonus centre-ville : trajet plus court depuis le domicile.
   score += (o.location || "").toLowerCase().includes(city.key) ? 5 : 2;
 
-  const s = sectorOf(title, full);
+  const s = sectorOf(title, full, employer);
   score += s.points;
 
   const sal = salaryScore(o);
   score += sal.points;
 
-  if (rhythm === "Week-ends libres") score += WEEKEND_FREE_POINTS;
+  if (rhythm === "Week-ends libres") score += WEEKDAYS_ONLY_POINTS;
+  else if (rhythm === "Dimanche libre") score += SUNDAY_FREE_POINTS;
 
   score = Math.max(0, Math.min(100, Math.round(score)));
-  return { ...o, sector: s.sector, score, monthlyGross: sal.monthlyGross, rhythm };
+  return { ...o, sector: s.sector, score, monthlyGross: sal.monthlyGross, rhythm, employer };
 }

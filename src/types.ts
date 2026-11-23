@@ -10,11 +10,22 @@ export type JobType = "Alimentaire";
 export type Contract = "CDI" | "CDD" | "Alternance" | "Intérim" | "Autre";
 
 /**
- * Rythme de travail déduit du texte de l'offre. "Week-end travaillé" ne survit
- * plus au scoring (rejet ferme, cf. score.ts) : la valeur existe pour nommer le
- * motif de rejet dans les logs et les rapports.
+ * Rythme de travail déduit du texte de l'offre (critère revu en novembre 2026 :
+ * le samedi est accepté, le dimanche doit rester libre).
+ *
+ * - "Week-ends libres" : lundi-vendredi prouvé, le meilleur cas.
+ * - "Dimanche libre"   : repos dominical prouvé, samedi possiblement travaillé.
+ * - "Dimanche travaillé" ne survit pas au scoring (rejet ferme, cf. score.ts) :
+ *   la valeur existe pour nommer le motif dans les logs et les rapports.
  */
-export type WorkRhythm = "Week-ends libres" | "Week-end travaillé" | "Non précisé";
+export type WorkRhythm = "Week-ends libres" | "Dimanche libre" | "Dimanche travaillé" | "Non précisé";
+
+/**
+ * Nature de l'employeur, déduite de la source, du nom et du texte de l'offre.
+ * Sert à deux choses : le secteur affiché (Administration publique, Associatif)
+ * et l'exception au rejet des CDD (contractuels publics, postes associatifs).
+ */
+export type EmployerKind = "Public" | "Associatif" | "Privé";
 
 /** Offre normalisée, format pivot commun à toutes les sources. */
 export interface NormalizedOffer {
@@ -23,10 +34,21 @@ export interface NormalizedOffer {
    * de la passe navigateur, qui alimente le même pipeline via `ingest-file.ts` /
    * `select-web.ts`. La liste reproduit exactement les options de la propriété
    * `Source` du tracker : une valeur hors liste ferait rejeter la page entière
-   * par l'API Notion.
+   * par l'API Notion. "WTTJ" et "Agence web" ne sont plus collectées (novembre
+   * 2026) mais restent valides pour les lignes historiques du tracker.
    */
-  source: "France Travail" | "Adzuna" | "Indeed" | "WTTJ" | "HelloWork" | "Agence web";
-  ref: string; // identifiant unique stable : "ft:<id>", "adzuna:<id>", "indeed:<id>", "wttj:<slug>"
+  source:
+    | "France Travail"
+    | "Adzuna"
+    | "Indeed"
+    | "HelloWork"
+    | "Choisir le service public"
+    | "Jobs That Make Sense"
+    | "WTTJ"
+    | "Agence web";
+  // Identifiant unique stable : "ft:<id>", "adzuna:<id>", "indeed:<jk>",
+  // "hellowork:<id>", "csp:<référence>", "jtms:<slug>".
+  ref: string;
   type: JobType;
   title: string;
   company: string;
@@ -51,6 +73,7 @@ export interface ScoredOffer extends NormalizedOffer {
    * reporté dans le tracker pour la passe de tri.
    */
   monthlyGross?: number;
-  /** Toujours "Week-ends libres" ou "Non précisé" : l'autre cas est rejeté. */
+  /** Jamais "Dimanche travaillé" : ce cas est rejeté avant le scoring. */
   rhythm?: WorkRhythm;
+  employer?: EmployerKind;
 }

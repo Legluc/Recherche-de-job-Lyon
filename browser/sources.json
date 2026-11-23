@@ -1,0 +1,45 @@
+{
+  "hellowork": {
+    "origin": "https://www.hellowork.com/fr-fr/",
+    "queries": [
+      "assistant administratif",
+      "agent administratif",
+      "chargé de clientèle",
+      "conseiller clientèle",
+      "hôte d'accueil",
+      "vendeur boulangerie",
+      "vendeur traiteur",
+      "employé libre service"
+    ],
+    "maxDetails": 25,
+    "pauseMs": 1500
+  },
+  "csp": {
+    "origin": "https://choisirleservicepublic.gouv.fr/nos-offres/filtres/localisation/336/",
+    "keywords": ["administratif", "accueil", "assistant", "gestionnaire", "secretaire"],
+    "maxDetails": 20,
+    "pauseMs": 1500
+  },
+  "jtms": {
+    "origin": "https://jobs.makesense.org/fr/s/jobs/Lyon--France/all/cdi?locations=Lyon,%20France&sortBy=relevance",
+    "pages": [
+      "/fr/s/jobs/Lyon--France/all/cdi?locations=Lyon,%20France&sortBy=relevance",
+      "/fr/s/jobs/Lyon--France/all/cdi?locations=Lyon,%20France&sortBy=relevance&items_page=1",
+      "/fr/s/jobs/Lyon--France/all/cdi?locations=Lyon,%20France&sortBy=relevance&items_page=2",
+      "/fr/s/jobs/Lyon--France/all/cdd?locations=Lyon,%20France&sortBy=relevance"
+    ],
+    "maxDetails": 12,
+    "pauseMs": 1500
+  },
+  "indeed": {
+    "url": "https://fr.indeed.com/jobs?q={q}&l=Lyon+%2869%29&fromage=7&sort=date&jt=permanent",
+    "queries": [
+      "assistant administratif",
+      "chargé de clientèle",
+      "agent d'accueil",
+      "vendeur boulangerie",
+      "employé commercial",
+      "conseiller de vente"
+    ]
+  }
+}

@@ -3,7 +3,7 @@
  * des salaires (aucun réseau requis).
  * Lancer avec : npm run selftest
  */
-import { scoreOffer } from "./score";
+import { scoreOffer, rejectReason, employerKindOf, contractMonths } from "./score";
 import { LIMITS, SMIC } from "./config";
 import { CITIES } from "./cities";
 import { DedupIndex, type OfferLike } from "./dedup";
@@ -57,11 +57,13 @@ const cases: Array<{
   },
   {
     o: { ...base, ref: "a:5", title: "Hôte de caisse", company: "W", location: "Lyon", contract: "CDI", description: "travail le samedi et le dimanche par roulement", salary: "Mensuel de 2200.0 Euros sur 12 mois" },
-    expect: "drop", note: "travail de week-end annoncé -> rejet ferme, même avec un bon salaire"
+    expect: "drop", note: "dimanche par roulement -> rejet ferme, même avec un bon salaire"
   },
   {
+    // Novembre 2026 : le samedi est accepté, seul le dimanche bloque.
     o: { ...base, ref: "a:6", title: "Employé administratif", company: "W", location: "Lyon", contract: "CDI", description: "amplitude du lundi au samedi", salary: "Mensuel de 2400.0 Euros sur 12 mois" },
-    expect: "drop", note: "« du lundi au samedi » -> rejet ferme"
+    expect: "keep", note: "« du lundi au samedi » -> conservée, repos dominical prouvé",
+    test: (s) => s.rhythm === "Dimanche libre"
   },
   {
     o: { ...base, ref: "a:7", title: "Assistant administratif", company: "W", location: "Bron", contract: "CDI", description: "poste à temps partiel, 24h/semaine", salary: "Mensuel de 1200.0 Euros sur 12 mois" },
@@ -75,7 +77,7 @@ const cases: Array<{
 
   // --- Conditions et conservation des offres muettes ---
   {
-    o: { ...base, ref: "b:1", title: "Conseiller clientèle", company: "W", location: "Villeurbanne", contract: "CDD", description: "relation client, du lundi au vendredi", salary: "Mensuel de 2300.0 Euros sur 12 mois" },
+    o: { ...base, ref: "b:1", title: "Conseiller clientèle", company: "W", location: "Villeurbanne", contract: "CDI", description: "relation client, du lundi au vendredi", salary: "Mensuel de 2300.0 Euros sur 12 mois" },
     expect: "keep", note: "week-ends libres prouvés + salaire > SMIC +15 %",
     test: (s) => s.sector === "Call center" && s.rhythm === "Week-ends libres" && s.monthlyGross === 2300
   },
@@ -90,9 +92,9 @@ const cases: Array<{
     test: (s) => s.rhythm === "Non précisé"
   },
   {
+    // Novembre 2026 : l'informatique est exclue sous toutes ses formes, support compris.
     o: { ...base, ref: "b:4", title: "Technicien support informatique N1", company: "W", location: "Lyon", contract: "CDI", description: "helpdesk, du lundi au vendredi", salary: "Annuel de 27000.0 Euros sur 12 mois" },
-    expect: "keep", note: "support informatique = secteur le mieux noté",
-    test: (s) => s.sector === "Support informatique" && s.score >= 95
+    expect: "drop", note: "support informatique -> domaine exclu, malgré d'excellentes conditions"
   },
   {
     o: { ...base, ref: "b:5", title: "Conseiller clientèle", company: "W", location: "Lyon", contract: "CDI", description: "relation client, horaires de bureau", salary: "selon profil" },
@@ -100,12 +102,12 @@ const cases: Array<{
     test: (s) => s.monthlyGross === undefined
   },
   {
-    o: { ...base, ref: "b:6", title: "Préparateur de commandes", company: "W", location: "Corbas", contract: "CDD", description: "entrepôt logistique", salary: "Horaire de 11.90 Euros sur 12 mois" },
+    o: { ...base, ref: "b:6", title: "Employé libre service", company: "W", location: "Bron", description: "mise en rayon", salary: "Horaire de 11.90 Euros sur 12 mois" },
     expect: "below", note: "sous le SMIC + aucun autre atout -> sous le seuil"
   },
   {
-    o: { ...base, ref: "b:7", title: "Agent de tri", company: "W", location: "Saint-Priest", contract: "CDD", createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "tri de colis" },
-    expect: "below", note: "offre tiède, sans salaire ni rythme -> filtrée par le seuil"
+    o: { ...base, ref: "b:7", title: "Employé commercial", company: "W", location: "Saint-Priest", createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "rayon épicerie" },
+    expect: "below", note: "offre tiède, sans contrat, salaire ni rythme -> filtrée par le seuil"
   },
   {
     // Salaire volontairement proche du SMIC : au-dessus, les deux variantes
@@ -151,6 +153,181 @@ for (const c of cases) {
 check(scoreOffer(hardRejects[0].o, CITIES.lyon) === null, hardRejects[0].note);
 check(scoreOffer(hardRejects[1].o, CITIES.lyon) === null, hardRejects[1].note);
 check(scoreOffer(hardRejects[2].o, CITIES.lyon) !== null, hardRejects[2].note);
+
+// --- 1 bis. Critères de novembre 2026 --------------------------------------
+//
+// Entretien du 23/11/2026 : domaines bureau / public / associatif / commerce
+// alimentaire / retail ; samedi accepté, dimanche libre exigé ; CDI exigé sauf
+// CDD d'au moins 12 mois dans le public et l'associatif ; horaires coupés
+// rejetés ; encadrement accepté pour une petite équipe en commerce ; informatique,
+// logistique et propreté exclues. Chaque cas porte le motif attendu, pour qu'une
+// régression dise QUELLE règle a bougé, pas seulement qu'un score a changé.
+
+const ok = { ...base, location: "Lyon 3e", contract: "CDI" as const, salary: "Mensuel de 1950.0 Euros sur 12 mois" };
+const nov: Array<{ o: NormalizedOffer; reason: string | null; note: string; test?: (s: ScoredOffer) => boolean }> = [
+  // Rythme
+  {
+    o: { ...ok, ref: "n:1", title: "Vendeur en boulangerie", company: "Maison Pozzoli", description: "du mardi au samedi, fermé le dimanche" },
+    reason: null, note: "vendeur en boulangerie, samedi travaillé, dimanche fermé -> conservée",
+    test: (s) => s.sector === "Commerce alimentaire" && s.rhythm === "Dimanche libre"
+  },
+  {
+    o: { ...ok, ref: "n:2", title: "Vendeuse boulangerie", company: "W", description: "travail 1 dimanche sur 2" },
+    reason: "dimanche travaillé", note: "« 1 dimanche sur 2 » -> rejet ferme"
+  },
+  {
+    o: { ...ok, ref: "n:3", title: "Conseiller de vente", company: "W", description: "pas de travail le dimanche, fixe + commissions" },
+    reason: null, note: "CONTRE-EXEMPLE : « pas de travail le dimanche » et « commissions » ne doivent PAS écarter",
+    test: (s) => s.rhythm === "Dimanche libre"
+  },
+  {
+    o: { ...ok, ref: "n:4", title: "Employé de rayon", company: "W", description: "du lundi au vendredi mais 1 samedi sur 2" },
+    reason: null, note: "lundi-vendredi + samedi travaillé -> seul le repos dominical est acquis",
+    test: (s) => s.rhythm === "Dimanche libre"
+  },
+  {
+    o: { ...ok, ref: "n:5", title: "Employé de rayon", company: "W", description: "horaires coupés 6h-12h / 16h-19h" },
+    reason: "horaires coupés", note: "horaires coupés -> rejet ferme"
+  },
+  {
+    o: { ...ok, ref: "n:6", title: "Employé polyvalent", company: "W", description: "magasin ouvert du lundi au dimanche" },
+    reason: "dimanche travaillé", note: "« du lundi au dimanche » -> rejet ferme"
+  },
+  // Contrats
+  {
+    o: { ...ok, ref: "n:10", title: "Conseiller clientèle", company: "Assur SA", contract: "CDD", description: "CDD de 18 mois" },
+    reason: "CDD (CDI exigé)", note: "CDD dans le privé -> rejet ferme, même long"
+  },
+  {
+    o: { ...ok, ref: "n:11", title: "Assistant administratif", company: "Métropole de Lyon", contract: "CDD", description: "CDD de 12 mois renouvelable" },
+    reason: null, note: "CDD de 12 mois à la Métropole -> exception publique",
+    test: (s) => s.employer === "Public" && s.sector === "Administration publique"
+  },
+  {
+    o: { ...ok, ref: "n:12", title: "Agent d'accueil", company: "Commune d'Oullins", contract: "CDD", description: "contrat de 6 mois" },
+    reason: "CDD de moins de 12 mois", note: "CDD public de 6 mois -> sous la durée minimale"
+  },
+  {
+    o: { ...ok, ref: "n:13", title: "Gestionnaire administratif", company: "Association Le Mat", contract: "CDD", description: "poste en CDD, période d'essai de 1 mois" },
+    reason: null, note: "CDD associatif sans durée -> conservé ; la période d'essai n'est pas une durée de contrat",
+    test: (s) => s.employer === "Associatif" && s.sector === "Associatif"
+  },
+  {
+    o: { ...ok, ref: "n:14", title: "Intérim - Hôte de caisse", company: "Adecco", contract: undefined, description: "mission" },
+    reason: "intérim", note: "intérim annoncé dans l'intitulé -> rejet ferme"
+  },
+  {
+    o: { ...ok, ref: "n:15", source: "Choisir le service public", title: "Secrétaire de mairie", company: "Communes", contract: undefined, description: "Nature de l'emploi : Emploi ouvert uniquement aux titulaires" },
+    reason: "réservé aux titulaires", note: "poste réservé aux titulaires -> concours requis, rejet"
+  },
+  {
+    o: { ...ok, ref: "n:16", source: "Choisir le service public", title: "Assistant administratif", company: "EPIDE", contract: "CDD", description: "Emploi ouvert aux titulaires et aux contractuels. Catégorie C (employé). CDD de 3 ans" },
+    reason: null, note: "CONTRE-EXEMPLE : ouvert aux contractuels, CDD de 3 ans -> conservé",
+    test: (s) => s.employer === "Public"
+  },
+  {
+    o: { ...ok, ref: "n:17", source: "Choisir le service public", title: "Chargé de mission budget", company: "Région", contract: "CDD", description: "Nature de l'emploi : Emploi ouvert aux titulaires et aux contractuels. Catégorie : Catégorie A (cadre). CDD de 3 ans" },
+    reason: "catégorie A (cadre)", note: "fonction publique catégorie A -> rejet (niveau cadre)"
+  },
+  {
+    o: { ...ok, ref: "n:18", source: "Choisir le service public", title: "Secrétaire administratif(ve) et technique à temps non complet de 50 %", company: "EPCI", contract: "CDD", description: "Emploi ouvert aux titulaires et aux contractuels" },
+    reason: "temps partiel", note: "« temps non complet » (fonction publique) -> temps partiel"
+  },
+  // Domaines, métiers qualifiés, encadrement
+  {
+    o: { ...ok, ref: "n:20", title: "Boulanger H/F", company: "W", description: "fabrication du pain" },
+    reason: "métier qualifié", note: "boulanger (métier qualifié) -> rejet, à ne pas confondre avec la vente"
+  },
+  {
+    o: { ...ok, ref: "n:21", title: "Préparateur de commandes", company: "W", description: "entrepôt" },
+    reason: "domaine exclu (logistique / production)", note: "logistique -> domaine exclu"
+  },
+  {
+    o: { ...ok, ref: "n:22", title: "Assistant logistique", company: "W", description: "suivi des expéditions, bureau" },
+    reason: null, note: "CONTRE-EXEMPLE : assistant logistique (poste de bureau) n'est pas un poste d'exécution"
+  },
+  {
+    o: { ...ok, ref: "n:23", title: "Agent d'entretien", company: "W", description: "nettoyage des locaux" },
+    reason: "domaine exclu (propreté)", note: "propreté -> domaine exclu"
+  },
+  {
+    o: { ...ok, ref: "n:24", title: "Assistant administratif service informatique", company: "W", description: "" },
+    reason: "domaine exclu (informatique)", note: "poste en service informatique -> domaine exclu"
+  },
+  {
+    // Cas réels du rejeu du lot du 21/11/2026, passés entre les mailles.
+    o: { ...ok, ref: "n:24b", title: "Technicien Service Clients H/F", company: "Sogelink", description: "assistance aux utilisateurs du logiciel" },
+    reason: "domaine exclu (informatique)", note: "technicien service clients d'un éditeur -> support applicatif, exclu"
+  },
+  {
+    o: { ...ok, ref: "n:24c", title: "Déménagement H/F", company: "BH Déménagement", description: "port de charges" },
+    reason: "domaine exclu (logistique / production)", note: "déménagement -> manutention, exclu"
+  },
+  {
+    o: { ...ok, ref: "n:25", title: "Responsable de boutique", company: "Boulangerie Ange", description: "boulangerie, équipe de 4 vendeurs" },
+    reason: null, note: "encadrement d'une petite équipe en commerce -> accepté (son expérience)"
+  },
+  {
+    o: { ...ok, ref: "n:26", title: "Directeur de magasin", company: "W", description: "supermarché" },
+    reason: "encadrement", note: "direction de magasin -> grand encadrement, rejet"
+  }
+];
+
+for (const c of nov) {
+  const got = rejectReason(c.o, CITIES.lyon);
+  const s = scoreOffer(c.o, CITIES.lyon);
+  const ok2 = got === c.reason && (!c.test || (s !== null && c.test(s)));
+  check(ok2, c.note, `motif attendu « ${c.reason} », obtenu « ${got} »${s ? ` score=${s.score} secteur=${s.sector} rythme=${s.rhythm}` : ""}`);
+}
+
+// Zone resserrée sur le métro et le tramway (novembre 2026, cf. cities.ts). Les
+// pièges visés : un libellé qui contient « Lyon » sans être à Lyon, un code
+// postal partagé (69330 Meyzieu / Jonage), une rue lyonnaise qui porte le nom
+// d'une commune écartée.
+const geo: Array<{ location: string; postalCode?: string; inZone: boolean; note: string }> = [
+  { location: "LYON 03", inZone: true, note: "libellé France Travail d'arrondissement" },
+  { location: "Lyon Meyzieu", inZone: true, note: "Meyzieu, tram T3" },
+  { location: "Oullins-Pierre-Bénite", inZone: true, note: "commune fusionnée, métro B" },
+  { location: "DECINES CHARPIEU", inZone: true, note: "Décines sans accent, tram T3" },
+  { location: "Saint-Priest", postalCode: "69800", inZone: true, note: "Saint-Priest, tram T2" },
+  { location: "Route de Vienne, Lyon 8e", inZone: true, note: "rue lyonnaise, pas la ville de Vienne" },
+  { location: "", postalCode: "69330", inZone: true, note: "code postal seul, 69330 ambigu : conservé" },
+  { location: "Sainte-Foy-lès-Lyon", inZone: false, note: "contient « Lyon » mais bus seulement" },
+  { location: "Tassin-la-Demi-Lune, Lyon", inZone: false, note: "format Adzuna « commune, Lyon »" },
+  { location: "Jonage", postalCode: "69330", inZone: false, note: "Jonage partage le 69330 avec Meyzieu" },
+  { location: "Saint-Fons", inZone: false, note: "bus seulement jusqu'au tram T10" },
+  { location: "69290 Craponne", inZone: false, note: "Craponne, bus seulement" },
+  { location: "Rillieux-la-Pape", postalCode: "69140", inZone: false, note: "Rillieux, bus seulement" }
+];
+for (const g of geo) {
+  const got = rejectReason({ ...ok, ref: "g", title: "Assistant administratif", company: "W", location: g.location, postalCode: g.postalCode, description: "" }, CITIES.lyon);
+  check((got !== "hors zone") === g.inZone, `zone : ${g.note}`, `« ${g.location} » -> ${got ?? "conservée"}`);
+}
+
+// Nature de l'employeur : bornes de mot accentuées (cf. `words` dans config.ts).
+const kinds: Array<[string, string]> = [
+  ["Café Joyeux", "Privé"],
+  ["Université Lyon 1", "Public"],
+  ["Commune d'Oullins", "Public"],
+  ["Agence Régionale de Santé", "Public"],
+  ["Fondation Apprentis d'Auteuil", "Associatif"],
+  ["Cabinet Durand & Associés", "Privé"]
+];
+for (const [company, expected] of kinds) {
+  const got = employerKindOf({ ...base, ref: "k", title: "Assistant", company, location: "Lyon" });
+  check(got === expected, `employeur : « ${company} » -> ${expected}`, `obtenu ${got}`);
+}
+
+check(contractMonths("cdd de 3 ans") === 36, "durée : « CDD de 3 ans » -> 36 mois");
+check(contractMonths("contrat d'un an renouvelable") === 12, "durée : « contrat d'un an » -> 12 mois");
+check(contractMonths("cdd, période d'essai de 1 mois") === null, "durée : la période d'essai n'est pas lue comme une durée");
+
+// Priorité des secteurs : à conditions strictement égales, le bureau public passe
+// devant le commerce alimentaire (ordre décidé à l'entretien).
+const same = { ...base, location: "Lyon", contract: "CDI" as const, description: "" };
+const pub = scoreOffer({ ...same, ref: "p:1", title: "Agent administratif", company: "Ville de Lyon" }, CITIES.lyon);
+const com = scoreOffer({ ...same, ref: "p:2", title: "Vendeur traiteur", company: "Maison X" }, CITIES.lyon);
+check(pub !== null && com !== null && pub.score > com.score, "priorité : public > commerce alimentaire", `${pub?.score} vs ${com?.score}`);
 
 // --- 2. Lecture des salaires ----------------------------------------------
 
@@ -229,8 +406,8 @@ for (let i = 0; i < 12; i++) {
 }
 // Une offre sous le seuil ne doit pas consommer un slot du plafond.
 flood.push({
-  ...base, ref: "flood:faible", title: "Agent de tri", company: "Tri Express", location: "Saint-Priest",
-  createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "tri de colis"
+  ...base, ref: "flood:faible", title: "Employé commercial", company: "Super U", location: "Saint-Priest",
+  createdAt: new Date(Date.now() - 9 * 86400000).toISOString(), description: "rayon épicerie"
 });
 
 const emptyIndex = { refs: new Set<string>(), offers: [] };
